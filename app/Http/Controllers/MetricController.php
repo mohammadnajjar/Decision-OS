@@ -18,18 +18,18 @@ class MetricController extends Controller
         $user = $request->user();
         $date = $request->get('date', today()->toDateString());
 
-        // Get all metrics grouped by module
-        $metricsByModule = Metric::all()->groupBy('module');
+        // Get all metrics grouped by module (category)
+        $categories = Metric::all()->groupBy('module');
 
         // Get existing values for the date
-        $existingValues = MetricValue::where('user_id', $user->id)
+        $values = MetricValue::where('user_id', $user->id)
             ->where('date', $date)
             ->pluck('value', 'metric_id')
             ->toArray();
 
         return view('decision-os.metrics.input', compact(
-            'metricsByModule',
-            'existingValues',
+            'categories',
+            'values',
             'date'
         ));
     }

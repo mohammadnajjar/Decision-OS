@@ -20,7 +20,7 @@ class PomodoroController extends Controller
 
         // Today's task for linking
         $todayTask = Task::where('user_id', $user->id)
-            ->where('is_today_one_thing', true)
+            ->where('type', 'one_thing')
             ->where('date', $today->toDateString())
             ->first();
 
