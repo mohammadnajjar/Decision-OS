@@ -1,0 +1,17 @@
+// Mixin to Generate Blockquote Classes Based on Theme Colors
+@mixin generate-blockquote-classes($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+        // Error Handling: Ensure color is defined in the theme colors map
+        @if $color != null {
+            .blockquote-#{$name} {
+                --#{$prefix}blockquote-border: var(--#{$prefix}#{$name}-border-subtle);
+                --#{$prefix}blockquote-bg: var(--#{$prefix}#{$name}-bg-subtle);
+            }
+        } @else {
+            @warn "Skipping blockquote class for '#{$name}' as it does not have a valid color value.";
+        }
+    }
+}
+
+// Example Usage
+@include generate-blockquote-classes($theme-colors, $prefix);

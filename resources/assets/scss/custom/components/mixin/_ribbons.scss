@@ -1,0 +1,29 @@
+// Mixin for Generating ribbon Classes Based on Theme Colors
+@mixin generate-ribbon-classes($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling: Ensure color exists
+        @if not map-has-key($colors, $name) {
+            @error "Color '#{$name}' is missing in the '$colors' map. Please define it in the theme colors.";
+        }
+
+        // Warning for empty color
+        @if not $color {
+            @warn "Color for '#{$name}' is empty. Using a fallback might cause issues.";
+        }
+
+        .ribbon-#{$name} {
+            --#{$prefix}ribbon-color: #{color-contrast($color)};
+            --#{$prefix}ribbon-bg: var(--#{$prefix}#{$name});
+            --#{$prefix}ribbon-sub-bg:  #{rgba($white, 0.40)};
+            
+            @if $name =='light' {
+                --#{$prefix}ribbon-sub-bg: #{rgba(var(--#{$prefix}dark-rgb), 0.15)};
+            }
+        }
+
+    }
+}
+
+// Example Usage of the Mixin with a theme prefix
+@include generate-ribbon-classes($theme-colors, $prefix);

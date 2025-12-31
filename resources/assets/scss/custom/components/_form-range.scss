@@ -1,0 +1,142 @@
+//
+// form-range.scss
+//
+
+// Base
+.noUi-target {
+    border: 0;
+    background: $form-range-track-bg;
+    box-shadow: none;
+    @include border-radius($form-range-track-border-radius);
+
+    .noUi-handle {
+        background: var(--#{$prefix}primary);
+        box-shadow: none;
+        width: $form-range-thumb-width;
+        height: $form-range-thumb-height;
+        border: none;
+        outline: 2px solid var(--#{$prefix}secondary-bg);
+        cursor: pointer;
+
+
+        &::after,
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            height: calc($form-range-thumb-height / 2);
+            width: 1px;
+            background: var(--#{$prefix}secondary-bg);
+            left: 63%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &::after {
+            left: 34%;
+        }
+    }
+
+    &.noUi-horizontal {
+        height: $form-range-track-height;
+
+        .noUi-handle {
+            top: calc(-1 * $form-range-thumb-height / 4);
+            right: calc(-1 * $form-range-thumb-width / 2);
+        }
+    }
+
+    &.noUi-vertical {
+        height: 150px;
+        width: calc($form-range-thumb-height / 2);
+
+        .noUi-handle {
+            right: calc(-1 * $form-range-thumb-width / 4);
+            bottom: calc(-1 * $form-range-thumb-height / 2);
+        }
+    }
+
+    .noUi-connects {
+        @include border-radius($form-range-track-border-radius);
+    }
+
+    .noUi-connect {
+        background: var(--#{$prefix}primary);
+    }
+
+    &.slider-fit {
+        padding: 0 calc($form-range-thumb-width / 2);
+    }
+
+    &.no-handle-slider {
+        .noUi-handle {
+
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &.no-handle-rounded {
+        .noUi-handle {
+            @include border-radius(50%);
+        }
+    }
+
+    &.no-handle-square {
+        .noUi-handle {
+            @include border-radius(0%);
+        }
+    }
+
+}
+
+.large-slider {
+    &.noUi-horizontal {
+        height: 10px;
+
+        .noUi-handle {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+.small-slider {
+    &.noUi-horizontal {
+        height: 6px;
+
+        .noUi-handle {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+.noUi-pips-horizontal {
+    height: 0px;
+    padding: 0px;
+}
+
+.noUi-pips {
+    color: $text-muted;
+
+    .noUi-marker {
+        background: $form-range-track-bg;
+
+        &.noUi-value-sub {
+            color: $text-muted;
+        }
+    }
+}
+
+// Tooltip
+.noUi-tooltip {
+    // background: var(--#{$prefix}tooltip-bg);
+    color: var(--#{$prefix}tooltip-color);
+    @include font-size($font-size-sm);
+    padding: $tooltip-padding-y $tooltip-padding-x;
+    @include border-radius($tooltip-border-radius);
+    background-color: var(--#{$prefix}body-bg);
+    border: 1px solid var(--#{$prefix}border-color);
+}

@@ -1,0 +1,28 @@
+// Mixin for Generating Accordion Styles Based on Theme Colors
+@mixin generate-accordion-classes($colors: $theme-colors, $prefix: '') {
+    @each $color, $value in $colors {
+
+        // Error handling: Ensure color value exists
+        @if not $value {
+            @error "Color '#{$color}' is missing a value in the '$theme-colors' map. Please define it properly.";
+        }
+
+        // Accordion Button Style
+        .accordion-#{$color} {
+            .accordion-button:not(.collapsed) {
+                color: $white;
+                background-color: var(--#{$prefix}#{$color}) !important;
+
+                // Special case for 'light' color
+                @if $color =='light' {
+                    color: $body-color;
+                }
+            }
+
+            // Optionally add other accordion-specific styles here, e.g., hover, focus, etc.
+        }
+    }
+}
+
+// Example Usage of the Mixin with a theme prefix
+@include generate-accordion-classes($theme-colors, $prefix);

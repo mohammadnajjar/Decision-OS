@@ -1,0 +1,29 @@
+// Mixin for Dropdown Colors with Error and Warning Handling
+
+@mixin generate-dropdown-color($colors: $theme-colors, $prefix: '') {
+    
+    @each $name, $color in $colors {
+
+        // Error handling: Check if the color exists in the $colors map
+        @if not map-has-key($colors, $name) {
+            @error "Color '#{$name}' is missing in the '$colors' map. Please define it in the theme colors.";
+        }
+
+        // Warning for missing values (just as an example)
+        @if not $color {
+            @warn "Color for '#{$name}' is not defined. Using a fallback might cause issues.";
+        }
+
+        // Dropdown Styles
+        .dropdown-#{$name} {
+            .dropdown-menu {
+                --#{$prefix}dropdown-link-hover-color: var(--#{$prefix}#{$name});
+                --#{$prefix}dropdown-link-hover-bg: rgba(var(--#{$prefix}#{$name}-rgb), 0.1);
+                --#{$prefix}dropdown-link-active-bg: var(--#{$prefix}#{$name});
+            }
+        }
+    }
+}
+
+// Example usage of the mixin with the theme colors and prefix
+@include generate-dropdown-color($theme-colors, 'bs');

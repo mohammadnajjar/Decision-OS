@@ -1,0 +1,24 @@
+//
+// Alert
+//
+
+.alert {
+    hr {
+        border-color: inherit;    
+    }
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.86rem 1rem;
+    background: none;
+    color: var(--#{$prefix}alert-link-color);
+    &::after {
+        position: absolute;
+        inset: 0;
+        padding: 0.55rem 1rem;
+        @include font-size(20px);
+        content: "\f62a";
+        font-family: bootstrap-icons;
+        @include transition();
+    }  
+}

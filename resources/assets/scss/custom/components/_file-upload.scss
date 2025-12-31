@@ -1,0 +1,57 @@
+//
+// file-upload.scss
+//
+
+.file-upload {
+    position: relative;
+    display: inline-block;
+
+    .file-upload-item {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        cursor: pointer;
+        color: transparent;
+    }
+
+    input[type=file]::file-selector-button {
+        border: none;
+        padding: 0;
+        @include border-radius(0);
+        color: transparent;
+        background-color: transparent;
+        height: 0;
+    }
+}
+
+.dropzone {
+    border: 1px dashed var(--#{$prefix}border-color);
+    @include border-radius($border-radius);
+    background-color: rgba(var(--#{$prefix}light-bg-subtle), 0.8);
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .dz-message {
+        @include font-size(1rem);
+        color: var(--#{$prefix}dark);
+        font-size: 14px;
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .dz-preview {
+        margin-inline-end: 0;
+
+        &.dz-image-preview {
+            background-color: transparent;
+        }
+    }
+}

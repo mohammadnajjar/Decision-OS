@@ -1,0 +1,30 @@
+// Mixin for Generating popover Classes
+@mixin generate-popover-mixin($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling: Ensure `$name` and `$color` exist
+        @if map-has-key($colors, $name) {
+            .popover-#{$name} {
+                --#{$prefix}popover-bg: var(--#{$prefix}#{$name});
+                --#{$prefix}popover-border-color: var(--#{$prefix}#{$name}-border-subtle);
+        
+                @if $name =='light' {
+                    --#{$prefix}popover-header-color: var(--#{$prefix}black);
+                    --#{$prefix}popover-body-color: var(--#{$prefix}black);
+                }
+        
+                @else {
+                    --#{$prefix}popover-header-color: var(--#{$prefix}white);
+                    --#{$prefix}popover-body-color: var(--#{$prefix}white);
+                }
+            }
+        }
+
+        @else {
+            @error "Color `#{$name}` is not defined in `$theme-colors`. Please add it to the map.";
+        }
+    }
+}
+
+// Include the Mixin
+@include generate-popover-mixin($theme-colors, $prefix);

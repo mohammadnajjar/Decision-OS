@@ -1,0 +1,116 @@
+[data-sidebar="icon"] {
+  body{
+    min-height: 1700px;
+    position: relative;
+  }
+  .#{$customPrefix}-app-sidebar {
+    width: var(--#{$prefix}app-sidebar-sm-width);
+    position: absolute;
+    .#{$customPrefix}-app-sidebar-logo {
+      position: fixed !important;
+      top: 0;
+      background-color: var(--#{$prefix}app-sidebar-bg);
+      width: var(--#{$prefix}app-sidebar-sm-width);
+      border-right: 1px solid var(--#{$prefix}border-color);
+      z-index: 1; 
+    }
+
+    .#{$customPrefix}-main-menu {
+      .#{$customPrefix}-menu-title {
+        display: none;
+      }
+      .#{$customPrefix}-slide {
+        position: relative;
+        &:hover {
+          .#{$customPrefix}-slide-menu {
+            display: block;
+            height: auto;
+          }
+        }
+        &.#{$customPrefix}-has-sub {
+          .#{$customPrefix}-nav-link {
+            .#{$customPrefix}-nav-icon {
+              margin: 0 auto;
+            }
+            :is(.pe-nav-content, .pe-nav-arrow) {
+              display: none;
+            }
+          }
+          .#{$customPrefix}-slide-menu{
+            position: absolute;
+            top: 0.9375rem;
+            left: var(--#{$prefix}app-sidebar-sm-width);
+            width: 11.7rem;
+            background: var(--#{$prefix}app-sidebar-bg);
+            border-radius: var(--#{$prefix}border-radius);
+            box-shadow: var(--#{$prefix}box-shadow-sm);
+            list-style: none;
+
+            .#{$customPrefix}-slide {
+              .#{$customPrefix}-slide-menu {
+                left: 11.7rem;
+                top: 12px;
+                opacity: 0;
+                visibility: hidden;
+                .#{$customPrefix}-slide{
+                  .#{$customPrefix}-slide-menu{
+                    left: 11.7rem;
+                    top: 12px;
+                    opacity: 0;
+                    visibility: hidden;
+                    .#{$customPrefix}-slide{
+                      .#{$customPrefix}-slide-menu{
+                        left: 11.7rem;
+                        top: 12px;
+                        opacity: 0;
+                        visibility: hidden;
+                      }
+                      &:hover {
+                        .#{$customPrefix}-slide-menu{
+                          opacity: 1;
+                          visibility: visible;
+                        }
+                      }
+                    }
+                  }
+                  &:hover {
+                    .#{$customPrefix}-slide-menu{
+                      opacity: 1;
+                      visibility: visible;
+                    }
+                  }
+                }
+              }
+              &:hover {
+                .#{$customPrefix}-slide-menu{
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+            }
+            .#{$customPrefix}-menu-title {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .app-wrapper{
+    min-height: 1830px;
+  }
+  @include media-breakpoint-down(lg) {
+    .header-sidebar-logo-default {
+      display: block;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    .app-header {
+      left: var(--#{$prefix}app-sidebar-sm-width);
+    }
+    .app-wrapper,
+    .footer {
+      margin-inline-start: var(--#{$prefix}app-sidebar-sm-width);
+    }
+  }
+}

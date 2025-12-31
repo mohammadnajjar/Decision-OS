@@ -1,0 +1,46 @@
+// Mixin for Block UI Overlay
+@mixin overlay($bg-color: rgba($white, 0.5), $text-color: $black, $z-index: $zindex-modal) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $bg-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: $z-index;
+    color: $text-color;
+}
+
+// Mixin for Generating card Classes Based on Theme Colors
+@mixin generate-card-classes($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling: Ensure color exists
+        @if not map-has-key($colors, $name) {
+            @error "Color '#{$name}' is missing in the '$colors' map. Please define it in the theme colors.";
+        }
+
+        // Warning for empty color
+        @if not $color {
+            @warn "Color for '#{$name}' is empty. Using a fallback might cause issues.";
+        }
+
+        .card-#{$name} {
+            --#{$prefix}card-color: #{color-contrast($color)};
+            --#{$prefix}card-bg: var(--#{$prefix}#{$name});
+            --#{$prefix}card-border-color:  #{rgba($white, 0.20)};
+            --#{$prefix}card-title-color: #{color-contrast($color)};
+            
+            @if $name =='light' {
+                --#{$prefix}card-border-color: #{rgba(var(--#{$prefix}dark-rgb), 0.15)};
+            }
+        }
+
+    }
+}
+
+// Example Usage of the Mixin with a theme prefix
+@include generate-card-classes($theme-colors, $prefix);

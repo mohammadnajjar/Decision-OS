@@ -1,0 +1,79 @@
+//
+// Sitemap
+//
+
+.sitemap-wrapper {
+    .sitemap-wrapper-main-title {
+        border: 1px solid var(--#{$prefix}primary);
+        background-color: var(--#{$prefix}primary);
+        color: $white;
+        display: inline-block;
+        padding: 8px 14px;
+        @include border-radius();
+        position: relative;
+    }
+
+    .sitemap-wrapper-ul {
+        padding-left: 35px;
+        position: relative;
+        padding-top: 10px;
+        margin-bottom: 0;
+
+        li {
+            position: relative;
+
+            &:not(:last-child) {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: -16px;
+                    top: -10px;
+                    bottom: -25px;
+                    border: 1px solid var(--#{$prefix}border-color);
+                }
+            }
+        }
+
+        .main-title {
+            padding: 16px 18px;
+            display: inline-block;
+            position: relative;
+
+            i {
+                color: var(--#{$prefix}primary);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: -15px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 20px;
+                border: 1px solid var(--#{$prefix}border-color);
+            }
+
+            &::after {
+                content: "\f234";
+                font-family: bootstrap-icons !important;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: var(--#{$prefix}border-color);
+            }
+
+        }
+    }
+
+    &.sitemap-long-content-wrapper {
+        li {
+            &:not(:last-child) {
+                &::before {
+                    top: -10px;
+                    bottom: -36px;
+                }
+            }
+        }
+    }
+}

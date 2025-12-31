@@ -1,0 +1,51 @@
+// Mixin for Form Control Styles (Checkbox, Radio, Switch) with Error Handling
+@mixin generate-form-control-color($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling for missing color names in the map
+        @if not map-has-key($colors, $name) {
+            @error "Color '#{$name}' is missing in the '$colors' map.";
+        }
+
+        // Form Check (Checkbox) Styles
+        .form-check-#{$name} {
+            .form-check-input {
+                &:checked {
+                    background-color: var(--#{$prefix}#{$name});
+                    border-color: var(--#{$prefix}#{$name});
+                }
+            }
+        }
+
+        // Form Radio Styles
+        .form-radio-#{$name} {
+            .form-check-input {
+                &:checked {
+                    border-color: var(--#{$prefix}#{$name});
+                    background-color: var(--#{$prefix}#{$name});
+
+                    &:after {
+                        background-color: var(--#{$prefix}#{$name});
+                    }
+                }
+            }
+        }
+
+        // Form Switch Styles
+        .form-switch-#{$name} {
+            .form-check-input {
+                &:checked {
+                    background-color: var(--#{$prefix}#{$name});
+                    border-color: var(--#{$prefix}#{$name});
+                }
+
+                &:focus {
+                    box-shadow: 0 0 0 0.25rem rgba(var(--#{$prefix}#{$name}-rgb), 0.5);
+                }
+            }
+        }
+    }
+}
+
+// Include the mixin with the theme colors and prefix
+@include generate-form-control-color($theme-colors, $prefix);

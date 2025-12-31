@@ -1,0 +1,62 @@
+// 
+// root.scss
+//
+
+@import './mixin/primary-color';
+@import './mixin/sidebar-color';
+
+:root,
+[data-bs-theme="light"] {
+  // sidebar
+  --#{$prefix}app-sidebar-width: #{$app-sidebar-base-width};
+  --#{$prefix}app-sidebar-sm-width: #{$app-sidebar-sm-width};
+  --#{$prefix}app-sidebar-bg: #{$app-sidebar-bg};
+  --#{$prefix}app-sidebar-border-color: #{$app-sidebar-border-color};
+  --#{$prefix}app-sidebar-caption-color: #{$app-sidebar-caption-color};
+  --#{$prefix}app-sidebar-color: #{$app-sidebar-color};
+  --#{$prefix}app-sidebar-menu-item-color: #{$app-sidebar-menu-item-color};
+  --#{$prefix}app-sidebar-menu-item-color-hover: #{$app-sidebar-menu-item-color-hover};
+  --#{$prefix}app-sidebar-menu-item-color-active: #{$app-sidebar-menu-item-color-active};
+
+  //header
+  --#{$prefix}app-header-height: #{$app-header-base-height};
+  --#{$prefix}app-header-bg: #{$app-header-bg};
+  --#{$prefix}app-header-border-color: #{$app-header-border-color};
+
+  // Footer
+  --#{$prefix}app-footer-height: #{$app-footer-height};
+
+  // Semibox
+  --#{$prefix}semibox-width: #{$semibox-width};
+
+  // Boxed
+  --#{$prefix}boxed-width: #{$boxed-width};
+  --#{$prefix}boxed-width-sm: #{$boxed-width-sm};
+
+  // Loop through each color variation and create CSS variables for data-colors attributes
+  @each $name, $color-variation in $color-variations {
+    $primary: map-get($color-variation, primary);
+
+    &[data-theme-colors="#{$name}"] {
+      --#{$prefix}primary: #{$primary};
+      --#{$prefix}primary-rgb: #{hex-to-rgb($primary)};
+      --#{$prefix}primary-text-emphasis: #{darken-text($primary)};
+      --#{$prefix}primary-bg-subtle: rgba(#{hex-to-rgb($primary)}, 0.1);
+      --#{$prefix}primary-border-subtle: rgba(#{hex-to-rgb($primary)}, 0.50);
+      --#{$prefix}app-sidebar-menu-item-color-hover: #{$primary};
+      --#{$prefix}app-sidebar-menu-item-color-active: #{$primary};
+      --#{$prefix}link-color-rgb: #{hex-to-rgb($primary)};
+      --#{$prefix}link-hover-color-rgb: #{hex-to-rgb(darken($primary, 9%))};
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  @each $name, $color-variation in $color-variations {
+    $primary: map-get($color-variation, primary);
+
+    &[data-theme-colors="#{$name}"] {
+      --#{$prefix}primary-bg-subtle: #{shade-color($primary, 80%)};
+    }
+  }
+}

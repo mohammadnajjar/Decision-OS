@@ -1,0 +1,107 @@
+
+/* Import Google Font - Poppins */
+.filter-accordion {
+    .slider {
+        position: relative;
+        height: 5px;
+        background: var(--#{$prefix}body-bg);
+        border-radius: 5px;
+        .progress {
+            height: 100%;
+            left: 25%;
+            right: 25%;
+            position: absolute;
+            border-radius: 5px;
+            background: $primary;
+        }
+    }
+    .range-input {
+        input {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            top: -5px;
+            background: none;
+            pointer-events: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 17px;
+            width: 17px;
+            border-radius: 50%;
+            background: $primary;
+            pointer-events: auto;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+    }
+}
+
+.card-style-2 {
+
+        overflow: hidden;
+        &:hover {
+            .btns-container-1 {
+                bottom: 30%;
+                z-index: 2;
+            }
+        }
+
+    .top-left-badge {
+        padding: .45rem .65rem;
+        position: absolute;
+        z-index: 1;
+        top: 1rem;
+        display: grid;
+        inset-inline-end: 1rem;
+        justify-items: end;
+    }
+
+    .card-img-top {
+        position: relative;
+        .btns-container-1 {
+            position: absolute;
+            inset-inline-start: 0;
+            text-align: center;
+            justify-content: center;
+            bottom: -10%;
+            display: flex;
+            width: 100%;
+            z-index: -1;
+            transition: all .5s;
+            .btn-icon {
+                width: 2.1rem;
+                height: 2.1rem;
+                font-size: .95rem;
+                padding: .375rem;
+                flex-shrink: 0;
+                i {
+                    padding: 0rem;
+                    margin: 0 -.5rem;
+                }
+            }
+        }
+        .img-box-2 {
+            transition: transform ease 1.5s;
+            display: flex;
+            justify-content: center;
+            &::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                inset-inline-start: 0;
+                inset-block-start: 0;
+            }
+        }
+    }
+    .color-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.3rem;
+        height: 1.3rem;
+        padding: 0px;
+    }
+}
+

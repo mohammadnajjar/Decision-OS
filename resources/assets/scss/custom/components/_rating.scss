@@ -1,0 +1,127 @@
+// 
+// _rating.scss
+// 
+
+:root {
+    --gl-star-empty: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'rgba(204,204,204,1)\'%3E%3Cpath d=\'M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z\'%3E%3C/path%3E%3C/svg%3E');
+    --gl-star-full: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'rgba(255,184,41,1)\'%3E%3Cpath d=\'M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z\'%3E%3C/path%3E%3C/svg%3E');
+    --gl-star-size: 30px;
+
+    .heart-rating-main {
+        --gl-star-empty: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'rgba(204,204,204,1)\'%3E%3Cpath d=\'M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z\'%3E%3C/path%3E%3C/svg%3E') !important;
+        --gl-star-full: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'rgba(255,184,41,1)\'%3E%3Cpath d=\'M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z\'%3E%3C/path%3E%3C/svg%3E') !important;
+    }
+}
+
+.gl-star-rating-prebuilt .gl-star-rating--stars {
+
+    svg {
+        pointer-events: none;
+        transition: transform 0.3s ease, fill 0.3s ease;
+
+        circle {
+            fill: #ECEAF3;
+            transition: fill 0.5s ease; // Smooth transition for color change
+        }
+    }
+
+    span.gl-active,
+    span.gl-selected {
+        &:nth-child(1) svg circle {
+            fill: #FFA98D; // Color for 1st star
+        }
+
+        &:nth-child(2) svg circle {
+            fill: #FFC385; // Color for 2nd star
+        }
+
+        &:nth-child(3) svg circle {
+            fill: #FFD885; // Color for 3rd star
+        }
+
+        &:nth-child(4) svg circle {
+            fill: #FFD69A; // Color for 4th star
+        }
+
+        &:nth-child(5) svg circle {
+            fill: #FFD02E; // Color for 5th star
+        }
+
+        transition: fill 0.5s ease; // Smooth transition for color change
+    }
+
+    .gl-selected {
+        svg {
+            animation: shake 0.8s linear forwards;
+        }
+    }
+
+    // Shake animation keyframes
+    @keyframes shake {
+        0% {
+            transform: translateY(0);
+        }
+
+        25% {
+            transform: translateY(-2px);
+        }
+
+        50% {
+            transform: translateY(2px);
+        }
+
+        75% {
+            transform: translateY(-2px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+}
+
+.custom-rating {
+    --fill: #FFB829;
+    --fillbg: #CCCCCC;
+    --heart: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'rgba(204,204,204,1)\'%3E%3Cpath d=\'M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z\'%3E%3C/path%3E%3C/svg%3E');
+    --star: var(--gl-star-empty);
+    --stars: 5;
+    --starsize: 30px;
+    --symbol: var(--star);
+    --value: 1;
+    --w: calc(var(--stars) * var(--starsize));
+    --x: calc(100% * (var(--value) / var(--stars)));
+    block-size: var(--starsize);
+    inline-size: var(--w);
+    position: relative;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.custom-rating {
+    &::-moz-range-track {
+        background: linear-gradient(to right, var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+    }
+
+    &::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+        -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+    }
+
+    &::-moz-range-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+    }
+
+    &::-webkit-slider-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+        -webkit-appearance: none;
+    }
+}

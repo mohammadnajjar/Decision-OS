@@ -1,0 +1,46 @@
+// 
+// _player.scss
+// 
+
+// Custom Plyr Overrides
+.plyr {
+
+    // Change the primary color of controls
+    .plyr__control {
+        background-color: transparent;
+
+        &:hover {
+            background-color: var(--#{$prefix}primary);
+            background-color: var(--#{$prefix}primary);
+        }
+
+        &[aria-expanded=true] {
+            background-color: var(--#{$prefix}primary);
+        }
+
+        &[role=menuitemradio][aria-checked=true]:before {
+            background-color: var(--#{$prefix}primary);
+        }
+    }
+
+    // Example of changing the color of the play button
+    .plyr__controls {
+        .plyr__play {
+            color: var(--#{$prefix}primary);
+        }
+
+        .plyr__controls__item {
+            background-color: transparent;
+
+            &:hover:where(button) {
+                background-color: var(--#{$prefix}primary);
+            }
+
+            input {
+                color: var(--#{$prefix}primary);
+            }
+        }
+    }
+
+    // Add any additional custom styles needed
+}

@@ -1,0 +1,379 @@
+//
+// _tagify.scss
+//
+
+.tagify__tag img {
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.tagify__tag img,
+.tagify__dropdown__item img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.tagify__dropdown--rtl-example {
+    max-width: none !important;
+}
+
+/* each suggestion item in the dropdown should be rendered as a single line of text */
+.tagify__dropdown--rtl-example .tagify__dropdown__item {
+    white-space: nowrap;
+}
+
+/* just for fun */
+.tagify__dropdown--rtl-example .tagify__dropdown__item>em {
+    font-weight: 700;
+}
+
+/* in this example the tagify itself is narrower than the other examples */
+.tagify--rtl-exmaple {
+    min-width: 300px;
+}
+
+
+
+
+.tagify__dropdown.users-list .tagify__dropdown__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1em;
+    grid-template-areas: "avatar name"
+        "avatar email";
+}
+
+.tagify__dropdown.users-list header.tagify__dropdown__item {
+    grid-template-areas: "add remove-tags"
+        "remaning .";
+}
+
+.tagify__dropdown.users-list .tagify__dropdown__item:hover .tagify__dropdown__item__avatar-wrap {
+    transform: scale(1.2);
+}
+
+.tagify__dropdown.users-list .tagify__dropdown__item__avatar-wrap {
+    grid-area: avatar;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #EEE;
+    transition: .1s ease-out;
+}
+
+.tagify__dropdown.users-list img {
+    width: 100%;
+    vertical-align: top;
+}
+
+.tagify__dropdown.users-list header.tagify__dropdown__item>div,
+.tagify__dropdown.users-list .tagify__dropdown__item strong {
+    grid-area: name;
+    width: 100%;
+    align-self: center;
+}
+
+.tagify__dropdown.users-list span {
+    grid-area: email;
+    width: 100%;
+    font-size: .9em;
+    opacity: .6;
+}
+
+.tagify__dropdown.users-list .tagify__dropdown__item__addAll {
+    border-bottom: 1px solid #DDD;
+    gap: 0;
+}
+
+.tagify__dropdown.users-list .remove-all-tags {
+    grid-area: remove-tags;
+    justify-self: self-end;
+    font-size: .8em;
+    padding: .2em .3em;
+    border-radius: 3px;
+    user-select: none;
+}
+
+.tagify__dropdown.users-list .remove-all-tags:hover {
+    color: white;
+    background: salmon;
+}
+
+
+/* Tags items */
+.tagify__tag {
+    white-space: nowrap;
+}
+
+.tagify__tag img {
+    width: 100%;
+    vertical-align: top;
+    pointer-events: none;
+}
+
+.tagify__tag .tagify__tag__avatar-wrap {
+    width: 20px;
+    height: 20px;
+    white-space: normal;
+    border-radius: 50%;
+    background: silver;
+    margin-right: 5px;
+    transition: .12s ease-out;
+}
+
+.users-list .tagify__dropdown__itemsGroup:empty {
+    display: none;
+}
+
+.users-list .tagify__dropdown__itemsGroup::before {
+    content: attr(data-title);
+    display: inline-block;
+    font-size: .9em;
+    padding: 4px 6px;
+    margin: var(--tagify-dd-item-pad);
+    font-style: italic;
+    border-radius: 4px;
+    background: #00ce8d;
+    color: white;
+    font-weight: 600;
+}
+
+.users-list .tagify__dropdown__itemsGroup:not(:first-of-type) {
+    border-top: 1px solid #DDD;
+}
+
+// Bootstrap .form-control sizing integration
+$tagify-tag-padding-y-sm: $input-padding-y-sm;
+$tagify-tag-padding-x-sm: $input-padding-x-sm;
+$tagify-input-padding-y-sm: #{$input-padding-y-sm - $tagify-tag-padding-y-sm};
+
+$tagify-tag-padding-y: $input-padding-y;
+$tagify-tag-padding-x: $input-padding-x;
+$tagify-input-padding-y: $input-padding-y - $tagify-tag-padding-y;
+
+$tagify-tag-padding-y-lg: $input-padding-y-lg;
+$tagify-tag-padding-x-lg: $input-padding-x-lg;
+$tagify-input-padding-y-lg: $input-padding-y-lg - $tagify-tag-padding-y-lg;
+
+.tagify {
+    --tags-border-color : var(--#{$prefix}border-color);
+    --tags-hover-border-color : #{$input-border-color};
+    --tags-focus-border-color : #{$input-focus-border-color};
+    --tagMargin: 5px;
+    --tag-pad: 0 0.5rem;
+    --tag-min-width: 1ch;
+    --tag-max-width: 100%;
+    --tag-text-color : var(--#{$prefix}gray-700);
+    --tag-text-color--edit : var(--#{$prefix}gray-700);
+    --tag-bg : var(--#{$prefix}primary-bg-subtle);
+    --tag-hover : var(--#{$prefix}gray-200);
+    --tag-remove: transparent;
+    --tag-remove-btn-color: transparent;
+    --tag-remove-btn-bg: transparent;
+    --tag-remove-btn-bg--hover: transparent;
+    --tag-invalid-color : var(--#{$prefix}danger);
+    --tag-invalid-bg : var(--#{$prefix}danger-light);
+    --tag-inset-shadow-size: none;
+    --tag-hide-transition: .3s;
+    --placeholder-color : var(--#{$prefix}gray-400);
+    --placeholder-color-focus : var(--#{$prefix}gray-500);
+    --input-color : var(--#{$prefix}gray-700);
+    --tagify-dd-bg-color : var(--#{$prefix}body-bg);
+
+
+    --tagify-dd-color-primary: rgb(53, 149, 246); // should be same as "$tags-focus-border-color"
+    --tagify-dd-text-color: black;
+    --tagify-dd-max-height: 300px;
+    --loader-size: .8em;
+    --readonly-striped: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .tagify__tag {
+        background-color: var(--tag-bg);
+        margin: 0;
+        line-height: 1;
+        border: 1px solid var(--#{$prefix}primary);
+        @include border-radius($border-radius-pill);
+
+        div {
+            border-radius: inherit;
+            padding: 0;
+            align-items: center;
+        }
+
+        .tagify__tag-text {
+            overflow: visible;
+            color: var(--#{$prefix}primary);
+        }
+
+        .tagify__tag__removeBtn {
+            color: var(--#{$prefix}body-color);
+            margin: 0 -4px -2px 8px;
+
+            &:after {
+                font-family: 'remixicon', sans-serif; // Use Remix font family
+                content: "\eb99";
+                font-size: $font-size-sm;
+                vertical-align: middle;
+                transition: none;
+                height: $font-size-sm;
+                width: $font-size-sm;
+                color: var(--#{$prefix}primary);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        // Not allowed state
+        &.tagify--notAllowed {
+            div {
+                .tagify__tag-text {
+                    color: var(--#{$prefix}danger);
+                    opacity: 1;
+                }
+            }
+
+            .tagify__tag__removeBtn {
+                opacity: .5;
+
+                &:hover {
+                    background: transparent;
+                    opacity: .75;
+
+                }
+            }
+        }
+    }
+
+    .tagify__tag__removeBtn:hover+div>span {
+        opacity: 1;
+    }
+
+    .tagify__input {
+        margin: 0;
+
+        &:before {
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+        }
+    }
+
+    // Sizing
+    &.form-control {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    &.form-control-sm {
+        .tagify__tag {
+            padding: $tagify-tag-padding-y-sm $tagify-tag-padding-x-sm;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size-sm;
+            }
+
+            .tagify__tag__removeBtn {
+                margin: 0px -4px -2px 0px;
+            }
+        }
+    }
+
+    &:not(.form-control-sm):not(.form-control-lg) {
+        .tagify__tag {
+            padding: $tagify-tag-padding-y $tagify-tag-padding-x;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size;
+            }
+        }
+    }
+
+    &.form-control-lg {
+        .tagify__tag {
+            padding: $tagify-tag-padding-y-lg $tagify-tag-padding-x-lg;
+
+            .tagify__tag-text {
+                font-size: $input-btn-font-size-lg;
+            }
+
+            .tagify__tag__removeBtn {
+                margin: 0px -4px -2px 8px;
+            }
+        }
+    }
+}
+
+// Dropdown
+.tagify__dropdown {
+    box-shadow: var(--#{$prefix}dropdown-box-shadow);
+    border: 0 !important;
+    outline: none !important;
+    padding: 0.75rem 0;
+    z-index: $zindex-dropdown;
+    background-color: var(--#{$prefix}body-bg);
+    @include border-radius($border-radius);
+
+    // Wrapper
+    ._wrapper {
+        max-height: none;
+        @include border-radius($border-radius);
+    }
+
+    // In modal
+    .modal-open & {
+        z-index: $zindex-modal + 1;
+    }
+
+    .tagify__dropdown__wrapper {
+        background-color: var(--#{$prefix}body-bg);
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none;
+    }
+
+    .tagify__dropdown__item {
+        color: var(--#{$prefix}gray-700);
+        border-radius: 0;
+        padding: 0.75rem 1.5rem;
+        margin: 0;
+        box-shadow: none;
+        font-weight: $font-weight-semibold;
+
+        &:hover,
+        &.tagify__dropdown__item--active {
+            background-color: var(--#{$prefix}component-hover-bg);
+            color: var(--#{$prefix}component-hover-color);
+        }
+    }
+
+    // Suggestions
+    &.tagify__inline__suggestions {
+        padding: $input-padding-y $input-padding-x;
+
+        .tagify__dropdown__item {
+            display: inline-block;
+            font-size: $font-size-sm;
+            padding: 0.35rem 0.5rem;
+            margin: 0.25rem 0.5rem 0.25rem 0;
+            background-color: var(--#{$prefix}gray-200);
+            color: var(--#{$prefix}gray-700);
+            @include border-radius($border-radius);
+
+            &:hover,
+            &.tagify__dropdown__item--active {
+                background-color: var(--#{$prefix}component-hover-bg);
+                color: var(--#{$prefix}component-hover-color);
+            }
+        }
+    }
+}

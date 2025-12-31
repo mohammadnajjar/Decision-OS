@@ -1,0 +1,27 @@
+//
+// separator.scss
+//
+
+.center-hr {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 0;
+    text-align: center;
+
+    &::before,
+    &::after {
+        content: " ";
+        width: 50%;
+        border-top: 1px solid;
+        border-color: $hr-border-color;
+    }
+
+    &::before {
+        margin-right: 1.25rem;
+    }
+
+    &::after {
+        margin-left: 1.25rem;
+    }
+}

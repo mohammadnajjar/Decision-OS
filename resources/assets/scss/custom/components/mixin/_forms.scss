@@ -1,0 +1,24 @@
+// Mixin for Generating Form Control Styles
+@mixin generate-form-control-styles($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+        .form-control-#{$name} {
+            // Custom properties for form control styles
+            --#{$prefix}input-bg-custom: var(--#{$prefix}#{$name}-bg-subtle);
+            --#{$prefix}input-color: var(--#{$prefix}#{$name});
+            --#{$prefix}border-color: var(--#{$prefix}#{$name}-bg-subtle);
+
+            // Placeholder styles
+            &::placeholder {
+                color: var(--#{$prefix}#{$name});
+            }
+
+            // Focus state styles
+            &:focus {
+                border-color: var(--#{$prefix}#{$name});
+            }
+        }
+    }
+}
+
+// Include the mixin
+@include generate-form-control-styles($theme-colors, $prefix);

@@ -1,0 +1,8 @@
+
+.address-content {
+    border: 1px dashed var(--#{$prefix}border-color) !important;
+    &.selected {
+        border: 1px solid $primary !important;
+        border-radius: 6px;
+    }
+}

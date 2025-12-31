@@ -1,0 +1,90 @@
+//
+//  Swiper
+//
+
+.swiper-button-next,
+.swiper-button-prev {
+    height: 32px;
+    width: 32px;
+    border: 1px solid var(--#{$prefix}primary);
+    cursor: pointer;
+    background-color: rgba($light, 0.3);
+    backdrop-filter: blur(2px);
+    border-radius: 100px;
+    transition: opacity 0.3s ease, transform 0.3s ease; // Added transition for opacity and transform
+
+    &::after {
+        font-family: remixicon !important;
+        font-size: 20px;
+        color: var(--#{$prefix}primary);
+        transition: all 0.3s ease;
+    }
+}
+
+.swiper-button-prev {
+    transform: translateX(-100px);
+
+    &::after {
+        content: "\ea64" !important;
+    }
+}
+
+.swiper-button-next {
+    transform: translateX(100px);
+
+    &::after {
+        content: "\ea6e" !important;
+    }
+}
+
+.swiper:hover {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        opacity: 1;
+        transform: translateY(-5px); // Added a slight upward movement on hover
+
+        &.swiper-button-disabled {
+            opacity: .35;
+        }
+    }
+}
+
+.swiper-pagination-bullets {
+    overflow: visible;
+    margin-bottom: 4px;
+}
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+    background: var(--#{$prefix}primary);
+}
+.swiper-pagination-bullet {
+    background-color: $white;
+    opacity: 0.6;
+
+    &.swiper-pagination-bullet-active {
+        outline: 2px solid $white;
+        outline-offset: 2px;
+        opacity: 1;
+    }
+}
+
+.parallax-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.swiper-thumbs {
+    .swiper-slide {
+        opacity: 0.6;
+    }
+
+    .swiper-slide-thumb-active {
+        opacity: 1;
+    }
+}

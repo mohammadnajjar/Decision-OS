@@ -1,0 +1,165 @@
+[data-layout="horizontal"] {
+  .#{$customPrefix}-app-sidebar {
+    right: 0;
+    top: var(--pe-app-header-height);
+    bottom: auto;
+    border-right: 0;
+    width: auto;
+    display: none;
+    &.horizontal-sidebar{
+      @include media-breakpoint-up(xl) {
+        display: block;
+      }
+      &.show {
+        display: block;
+      }
+      &.show ~ .sidebar-backdrop {
+        opacity: 1;
+        visibility: visible;
+      }
+    .#{$customPrefix}-menu-title {
+      display: none !important;
+    }
+    .#{$customPrefix}-app-sidebar-logo {
+      display: none !important;
+    }
+    .#{$customPrefix}-app-sidebar-menu {
+      height: 20rem;
+      &.nav{
+        display: block;
+      }
+      @include media-breakpoint-down(xl) {
+        overflow-y: scroll;
+      }
+      @include media-breakpoint-up(xl) {
+        width: 97%;
+        height: 3rem;
+      }
+
+      .#{$customPrefix}-main-menu {
+        display: none;
+      }
+      .#{$customPrefix}-horizontal-menu {
+        display: block !important;
+        @include media-breakpoint-up(xl) {
+          display: flex !important;
+          align-items: center;
+          margin-bottom: 0;
+
+          .#{$customPrefix}-slide {
+            position: relative;
+            &:hover {
+              .#{$customPrefix}-slide-menu{
+                display: block;
+                height: auto;
+              }
+            }
+          }
+          .#{$customPrefix}-nav-link {
+            padding: 12px 10px 12px 34px;
+            &::before {
+              left: 16px;
+            }
+          }
+          .#{$customPrefix}-slide-menu{
+            position: absolute;
+            top: 44px;
+            left: 0;
+            width: 11.7rem;
+            background: var(--#{$prefix}app-sidebar-bg);
+            border-radius: var(--#{$prefix}border-radius);
+            box-shadow: var(--#{$prefix}box-shadow-sm);
+            list-style: none;
+            &::after {
+              left: 18px;
+            }
+            .#{$customPrefix}-slide {
+              .#{$customPrefix}-slide-menu {
+                position: absolute;
+                left: 11.7rem;
+                top: 12px;
+                opacity: 0;
+                visibility: hidden;
+                .#{$customPrefix}-slide{
+                  .#{$customPrefix}-slide-menu{
+                    position: absolute;
+                    left: 11.7rem;
+                    top: 12px;
+                    opacity: 0;
+                    visibility: hidden;
+                    .#{$customPrefix}-slide{
+                      .#{$customPrefix}-slide-menu{
+                        position: absolute;
+                        left: 11.7rem;
+                        top: 12px;
+                        opacity: 0;
+                        visibility: hidden;
+                      }
+                      &:hover {
+                        .#{$customPrefix}-slide-menu{
+                          opacity: 1;
+                          visibility: visible;
+                        }
+                      }
+                    }
+                  }
+                  &:hover {
+                    .#{$customPrefix}-slide-menu{
+                      opacity: 1;
+                      visibility: visible;
+                    }
+                  }
+                }
+              }
+              &:hover {
+                .#{$customPrefix}-slide-menu{
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+            }
+            .#{$customPrefix}-menu-title {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  }
+  .app-header {
+    left: 0;
+    z-index: 1006;
+    .vertical-toggle {
+      display: none;
+    }
+    @include media-breakpoint-down(xl) {
+      .horizontal-toggle{
+        display: block !important;
+      }
+    }
+  }
+  .app-wrapper {
+    margin-inline-start: auto;
+    margin-block-start: calc(var(--#{$prefix}app-header-height) * 1);
+
+    @include media-breakpoint-up(xl) {
+      margin-block-start: calc(var(--#{$prefix}app-header-height) * 1.65);
+    }
+  }
+  .footer {
+    margin-inline-start: auto;
+  }
+  @include media-breakpoint-up(lg) {
+    &[data-bs-theme="dark"] {
+      .header-sidebar-logo-light {
+        display: block !important;
+      }
+    }
+    &[data-bs-theme="light"] {
+      .header-sidebar-logo-default {
+        display: block !important;
+      }
+    }
+  }
+}

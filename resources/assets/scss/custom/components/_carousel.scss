@@ -1,0 +1,103 @@
+//
+// carousel.scss
+//
+
+.carousel-custom {
+    // Indicators
+    .carousel-indicators {
+        align-items: center;
+        position: static;
+        z-index: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    }
+}
+
+.carousel {
+    .carousel-indicators-dots {
+        button {
+            @include border-radius(50%);
+            background-color: transparent !important;
+            height: 12px;
+            width: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 4px;
+            border: none;
+
+            &:after {
+                content: " ";
+                @include border-radius(100%);
+                background-color: var(--#{$prefix}gray-300);
+                height: 10px;
+                width: 10px;
+            }
+
+            &.active {
+                background-color: transparent;
+                outline: 1px solid var(--#{$prefix}primary);
+                outline-offset: 2px;
+
+                &:after {
+                    background-color: var(--#{$prefix}primary);
+                }
+            }
+        }
+    }
+
+    // Bullet
+    .carousel-indicators-bullet {
+        button {
+            background-color: transparent !important;
+            @include transition();
+            @include border-radius(6px);
+            height: 10px;
+            width: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            &:after {
+                display: inline-block;
+                content: " ";
+                background-color: var(--#{$prefix}gray-300);
+                @include transition();
+                @include border-radius(6px);
+                height: 10px;
+                width: 10px;
+            }
+
+            &.active {
+                @include transition();
+                background-color: transparent;
+                height: 10px;
+                width: 20px;
+
+                &:after {
+                    @include transition();
+                    height: 10px;
+                    width: 20px;
+                    background-color: var(--#{$prefix}primary);
+                }
+            }
+        }
+    }
+}
+
+
+// Theme colors
+@each $name, $value in $theme-colors {
+    .carousel-indicators-#{$name} {
+        button.active {
+            outline-color: var(--#{$prefix}#{$name}) !important;
+
+            &:after {
+                background-color: var(--#{$prefix}#{$name}) !important;
+            }
+        }
+    }
+}

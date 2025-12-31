@@ -1,0 +1,62 @@
+// 
+// _datatable.scss
+// 
+
+table.dataTable {
+    margin: 0 !important;
+
+    >thead {
+        .sorting {
+
+            &::before,
+            &::after {
+                top: 60%;
+                transform: translateY(-50%);
+                bottom: auto;
+            }
+
+            &::before {
+                right: .5em;
+                font-family: 'remixicon', sans-serif; // Use Remix font family
+                content: "\ea4e";
+            }
+
+            &::after {
+                font-family: 'remixicon', sans-serif; // Use Remix font family
+                content: "\ea78";
+                margin-top: -8px;
+            }
+        }
+    }
+}
+
+div.dataTables_wrapper {
+    .dt-buttons {
+        float: left;
+        margin-bottom: 1rem;
+    }
+
+    .dataTables_filter {
+        float: right;
+        margin-bottom: 1rem;
+    }
+
+    div.dataTables_info {
+        color: $text-muted;
+        line-height: 42px;
+        float: left;
+    }
+
+    .dataTables_length {
+        margin-top: 1rem;
+    }
+
+    div.dataTables_paginate {
+        float: right;
+        margin-top: 1rem;
+
+        ul.pagination {
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,118 @@
+/****************************************************
+Template Name: Fabkin - Admin & Dashboard Template
+Author: Pixeleyez
+Version: 1.0.0
+File: Main Css File
+****************************************************/
+
+//Fonts
+@import "custom/fonts/fonts";
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "variables";
+@import "variables-dark";
+@import "custom-variables";
+@import "custom-variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import 'custom/components/map';
+@import 'custom/components/mixin';
+@import 'custom/components/utilities';
+
+// Import structure
+@import './custom/components/root';
+@import './custom/structure/header';
+@import './custom/structure/sidebar';
+@import './custom/structure/horizontal';
+@import './custom/structure/semibox';
+@import './custom/structure/box';
+@import './custom/structure/icon';
+@import './custom/structure/sidebar-color';
+@import './custom/structure/switcher';
+@import './custom/structure/footer';
+@import './custom/structure/main';
+
+// Import Components
+@import './custom/components/animation';
+@import './custom/components/accordion';
+@import './custom/components/alert';
+@import './custom/components/avatar';
+@import './custom/components/badge';
+@import './custom/components/buttons';
+@import './custom/components/breadcrumb';
+@import './custom/components/card';
+@import './custom/components/chartjs';
+@import './custom/components/carousel';
+@import './custom/components/dropdown';
+@import './custom/components/helper';
+@import './custom/components/forms';
+@import './custom/components/form-check';
+@import './custom/components/form-range';
+@import './custom/components/file-upload';
+@import './custom/components/forms-input-spin';
+@import './custom/components/list';
+@import './custom/components/nav';
+@import './custom/components/modal';
+@import './custom/components/offcanvas';
+@import './custom/components/pagination';
+@import './custom/components/progress';
+@import './custom/components/placeholders';
+@import './custom/components/separator';
+@import './custom/components/tooltip';
+@import './custom/components/table';
+@import './custom/plugins/treeview';
+@import './custom/components/ribbons';
+@import './custom/components/print';
+@import './custom/components/scroll-top';
+
+//pages
+@import './custom/pages/faqs';
+@import './custom/pages/blog-list';
+@import './custom/pages/sitemap';
+
+// App
+@import './custom/app/logistic-overview';
+@import './custom/app/logistic-create';
+@import './custom/app/academy-courses-category';
+@import './custom/app/academy-single-category';
+@import './custom/app/academy-user-instructor';
+@import './custom/app/crm-deal';
+
+//Dashboard
+@import './custom/dashboard/dashboard-project';
+@import './custom/dashboard/dashboard-logistic';
+@import './custom/dashboard/dashboard-ecommerce';
+@import './custom/dashboard/dashboard-crm';
+
+// Plugins
+@import './custom/plugins/sweetalert2';
+@import './custom/plugins/choice';
+@import './custom/plugins/air-datapicker.scss';
+@import './custom/components/apexcharts';
+@import './custom/plugins/listjs';
+@import './custom/components/datatable';
+@import './custom/components/file-editor';
+@import './custom/components/fullcalendar';
+@import './custom/components/gridjs';
+@import './custom/components/icons';
+@import './custom/components/player';
+@import './custom/plugins/swiper';
+@import './custom/components/tagify';
+@import './custom/components/rating';
+@import './custom/plugins/prismjs';
+
+// Pages
+@import './custom/pages/timeline';
+@import './custom/pages/gallery';
+@import './custom/pages/sitemap';
+@import './custom/pages/search';
+@import './custom/pages/authentication';
+@import './custom/pages/chat';
+@import './custom/pages/mail';
+@import './custom/pages/products';
+@import './custom/pages/order-details';
+@import './custom/pages/products-details';
+@import './custom/pages/pricing';
+@import './custom/pages/checkout';

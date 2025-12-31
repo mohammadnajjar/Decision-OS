@@ -1,0 +1,206 @@
+.app-header {
+  height: var(--#{$prefix}app-header-height);
+  background-color: var(--#{$prefix}secondary-bg);
+  transition: none;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--#{$prefix}app-header-border-color);
+  z-index: 1001;
+  position: fixed;
+  left: var(--#{$prefix}app-sidebar-width);
+  right: 0;
+  top: 0;
+  padding: 0 0.75rem;
+  @include transition($transition-base);
+  .dark-mode-btn {
+    .header-btn {
+      &.active {
+        &:hover {
+          border: 1px solid var(--pe-primary);
+        }
+      }
+    }
+  }
+  .header-btn {
+    width: 44px;
+    height: 44px;
+    background-color: var(--#{$prefix}body-bg);
+    border-color: var(--#{$prefix}body-bg);
+    color: $body-secondary-color;
+    @include font-size(1rem);
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:is(:hover, :focus, :active, :focus-within) {
+      color: var(--#{$prefix}primary);
+      background-color: var(--#{$prefix}secondary-bg);
+      border: 1px solid var(--#{$prefix}primary);
+    }
+  }
+  @include media-breakpoint-down(xl) {
+    .header-dropdown {
+      display: none !important;
+    }
+  }
+  .dark-mode-btn {
+    height: 44px;
+    background-color: var(--#{$prefix}body-bg);
+    border-color: var(--#{$prefix}body-bg);
+    @include font-size(1.0625rem);
+    padding: 2px;
+    border-radius: 20rem;
+    display: flex;
+    align-items: center;
+
+    .header-btn {
+      height: 40px;
+      width: 40px;
+      background-color: transparent;
+      border-color: transparent;
+
+      &.active {
+        background-color: var(--#{$prefix}secondary-bg);
+      }
+    }
+  }
+
+  .header-profile-btn {
+    @extend .dark-mode-btn;
+
+    .badge {
+      padding: 0;
+      height: 10px;
+      width: 10px;
+      right: -5px;
+      top: 6px;
+    }
+
+    &:is(:hover, :focus, :active, .active, .show, :focus-within) {
+      background-color: var(--#{$prefix}body-bg);
+      border-color: var(--#{$prefix}body-bg);
+    }
+  }
+
+  &.sticky-scroll {
+    background-color: var(--#{$prefix}secondary-bg);
+
+    .dark-mode-btn {
+      background-color: var(--#{$prefix}tertiary-bg);
+      border-color: var(--#{$prefix}tertiary-bg);
+      // color: var(--#{$prefix}tertiary-color);
+
+      .header-btn {
+        background-color: transparent;
+        border-color: transparent;
+        &.active {
+          background-color: var(--#{$prefix}secondary-bg);
+        }
+      }
+    }
+  }
+
+  .pe-dropdown-mega {
+    .pe-dropdown-button {
+      height: var(--#{$prefix}app-header-height);
+    }
+
+    :is(
+        .dropdown-menu.dropdown-mega-xl,
+        .dropdown-menu.dropdown-mega-lg,
+        .dropdown-menu.dropdown-mega-md,
+        .dropdown-menu,
+        .dropdown-mega-sm
+      ) {
+      --#{$prefix}dropdown-item-padding-x: 1rem;
+      --#{$prefix}dropdown-item-padding-y: 0.45rem;
+      max-height: calc(100vh - 90px);
+      overflow-y: auto;
+
+      .dropdown-item {
+        border-radius: $border-radius;
+      }
+    }
+
+    .header-dropdown-menu {
+      top: 24px !important;
+    }
+
+    .dropdown-menu.dropdown-mega-xl {
+      width: 52rem;
+    }
+
+    .dropdown-menu.dropdown-mega-lg {
+      width: 38rem;
+    }
+
+    .dropdown-menu.dropdown-mega-md {
+      width: 28rem;
+    }
+
+    .dropdown-menu.dropdown-mega-sm {
+      width: 18rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      &.pe-dropdown-hover:hover {
+        .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .pe-noti-dropdown-menu {
+    .noti-item {
+      position: relative;
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--#{$prefix}border-color);
+      padding: 12px 0;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .link {
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+
+      &:hover {
+        .link {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  
+  .offcanvas {
+    .card-radio {
+      padding: 0;
+      .form-check-input {
+        display: none;
+      }
+    }
+  }
+}
+@include media-breakpoint-down(lg) {
+  [data-bs-theme="dark"] {
+    .header-sidebar-logo-small-light {
+      display: block !important;
+    }
+  }
+  [data-bs-theme="light"] {
+    .header-sidebar-logo-small {
+      display: block !important;
+    }
+  }
+}

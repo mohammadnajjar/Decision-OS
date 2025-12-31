@@ -1,0 +1,143 @@
+//
+// Forms.scss
+//
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    height: auto;
+}
+
+.form-control {
+    &:disabled {
+        cursor: not-allowed;
+    }
+    &:focus {
+        border-color: var(--#{$prefix}primary);
+    }
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    &::placeholder {
+        color: var(--#{$prefix}form-invalid-color);
+    }
+}
+
+.form-icon {
+    position: relative;
+    i {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(0.9rem * 3);
+    }
+
+    .form-control-icon {
+        padding-left: calc(#{$input-padding-x} * 3);
+    }
+
+    &.right {
+        .form-control-icon {
+            padding-right: calc(#{$input-padding-x} * 3);
+            padding-left: $input-padding-x;
+        }
+
+        i {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
+.form-img {
+    position: relative;
+
+    img {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-control-img {
+        padding-left: calc(#{$input-padding-x} * 3);
+    }
+
+    &.right {
+        .form-control-img {
+            padding-right: calc(#{$input-padding-x} * 3);
+            padding-left: $input-padding-x;
+        }
+
+        img {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
+.floating-input {
+    position: relative;
+
+    input {
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:focus,
+        &:not(:placeholder-shown) {
+            +label {
+                left: calc($input-padding-x);
+                line-height: 1rem;
+                @include font-size($font-size-sm);
+                font-weight: $font-weight-medium;
+                margin: 0 -4px;
+                padding: 0 4px;
+                color: var(--#{$prefix}primary);
+                background-color: $input-bg;
+            }
+        }
+
+        &.form-control {
+            +label {
+                top: 0.5rem;
+            }
+
+            &:focus,
+            &:not(:placeholder-shown) {
+                +label {
+                    top: -0.5rem;
+                }
+            }
+        }
+
+        &.form-control-sm {
+            +label {
+                top: 0.2rem;
+            }
+        }
+
+        &.form-control-lg {
+            +label {
+                top: 0.9rem;
+            }
+        }
+
+    }
+
+    label {
+        position: absolute;
+        top: 1rem;
+        left: $input-padding-x;
+        transition: top 0.2s, font-size 0.2s, color 0.2s;
+        pointer-events: none;
+        color: $input-placeholder-color;
+    }
+}

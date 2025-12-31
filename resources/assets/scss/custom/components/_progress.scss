@@ -1,0 +1,102 @@
+// 
+// _progress.scss
+// 
+
+.progress {
+    cursor: pointer;
+
+    &:hover {
+        --#{$prefix}progress-bg: var(--#{$prefix}body-bg);
+    }
+}
+
+// Size map for circular progress
+.circular-progress {
+    --progress: 40;
+    --progress-bg-color: var(--#{$prefix}tertiary-bg);
+
+    --stroke-width: 10px;
+    --progress-size: 90px;
+
+    --half-size: calc(var(--progress-size) / 2);
+    --radius: calc((var(--progress-size) - var(--stroke-width)) / 2);
+    --circumference: calc(var(--radius) * pi * 2);
+    --dash: calc((var(--progress) * var(--circumference)) / 100);
+
+    position: relative;
+    width: var(--progress-size);
+    height: var(--progress-size);
+
+    &:hover {
+        cursor: pointer;
+
+        .bg-circular-progress {
+            stroke: var(--#{$prefix}body-bg);
+        }
+
+        .circular-text {
+            color: var(--#{$prefix}primary);
+        }
+    }
+}
+
+.circular-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.circular-inner {
+    width: var(--progress-size);
+    height: var(--progress-size);
+    display: inline-block;
+
+    circle {
+        cx: var(--half-size);
+        cy: var(--half-size);
+        r: var(--radius);
+        stroke-width: var(--stroke-width);
+        fill: none;
+        stroke-linecap: round;
+    }
+
+    .bg-circular-progress {
+        stroke: var(--progress-bg-color);
+        transition: $transition-base;
+    }
+
+    .fg-circular-progress {
+        stroke: var(--#{$prefix}primary);
+        transform: rotate(-90deg);
+        transform-origin: var(--half-size) var(--half-size);
+        stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+        transition: stroke-dasharray 0.6s ease-in-out;
+    }
+}
+
+.circular-progress.circular-sm {
+    --stroke-width: 4px;
+    --progress-size: 56px;
+
+    .circular-text {
+        font-size: 12px;
+    }
+}
+
+.circular-progress.circular-md {
+    --stroke-width: 8px;
+    --progress-size: 76px;
+}
+
+.circular-progress.circular-xl {
+    --stroke-width: 12px;
+    --progress-size: 110px;
+}
+
+.circular-progress.circular-xxl {
+    --stroke-width: 14px;
+    --progress-size: 130px;
+}

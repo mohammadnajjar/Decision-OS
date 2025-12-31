@@ -1,0 +1,98 @@
+//
+// stepper.scss
+//
+
+.custom-stepper {
+    position: relative;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    z-index: 1;
+
+    @include rtl {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .progress {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        z-index: -1;
+    }
+
+    .nav {
+        margin-right: -1rem;
+        margin-left: -1rem;
+        justify-content: space-between;
+
+        @include rtl {
+            margin-right: 0;
+            padding-right: 0;
+            margin-left: 0;
+        }
+
+        .nav-item {
+            .nav-link {
+                width: 2rem;
+                height: 2rem;
+                background-color: var(--#{$prefix}light);
+                padding: 0;
+                color: var(--#{$prefix}body-color);
+                font-weight: $font-weight-medium;
+                border: 1px solid transparent;
+
+                &.active {
+                    border-color: var(--#{$prefix}primary);
+                    color: var(--#{$prefix}primary);
+                    background-color: var(--#{$prefix}body-bg);
+                }
+
+                &.activeComplete {
+                    border-color: var(--#{$prefix}primary);
+                    background-color: var(--#{$prefix}primary);
+                    color: color-contrast($primary);
+                }
+            }
+        }
+
+    }
+}
+
+.form-steps-vertical {
+    .progress {
+        left: -3px;
+
+        @include rtl {
+            left: auto;
+            right: 12px;
+        }
+    }
+
+    .nav {
+        .nav-item {
+            min-height: 70px;
+            display: flex;
+            gap: 8px;
+
+            &:last-child {
+                min-height: 0;
+            }
+
+            h6 {
+                margin: 0;
+                line-height: 11px;
+            }
+        }
+    }
+
+    .progress {
+        height: 100%;
+        width: 6px;
+
+        .progress-bar {
+            width: 100%;
+        }
+    }
+}

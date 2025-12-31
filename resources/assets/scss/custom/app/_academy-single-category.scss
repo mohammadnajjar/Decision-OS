@@ -1,0 +1,17 @@
+.day-item{
+	height: 36px;
+	width: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@include border-radius(100%);
+	&.active{
+		color: #fff;
+		background-color: var(--#{$prefix}primary);
+	}
+}
+.alaram-img{
+	position: absolute;
+	bottom: -40px;
+	right: 0;
+}

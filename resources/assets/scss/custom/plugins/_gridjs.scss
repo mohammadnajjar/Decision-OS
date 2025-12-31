@@ -1,0 +1,212 @@
+// 
+// _gridjs.scss
+// 
+
+.gridjs-container {
+    color: $table-color;
+    padding: 0;
+    display: block;
+
+    .gridjs-head {
+        padding-top: 0;
+    }
+
+    .gridjs-wrapper {
+        box-shadow: none;
+        border: 1px solid $table-border-color;
+        border-radius: 0px;
+    }
+
+    .gridjs-footer {
+        border: none;
+        padding: 12px 0 0;
+        box-shadow: none;
+        background-color: $table-bg;
+    }
+}
+
+.gridjs-tbody,
+td.gridjs-td {
+    background-color: $table-bg;
+}
+
+th.gridjs-th,
+td.gridjs-td {
+    border: 1px solid $table-border-color;
+    padding: $table-cell-padding-y $table-cell-padding-x;
+}
+
+th {
+    &.gridjs-th {
+        border-top: 0;
+        color: $table-color;
+        background-color: rgba(var(--#{$prefix}light-rgb), .75);
+    }
+}
+
+
+.gridjs-pagination {
+    color: var(--#{$prefix}secondary-color);
+
+    .gridjs-summary {
+        margin-top: 8px !important;
+    }
+
+    .gridjs-pages button {
+        margin-left: 0.3rem;
+        border-radius: $border-radius !important;
+        border: 1px solid $pagination-border-color;
+        background-color: $pagination-bg;
+        color: $pagination-color;
+        box-shadow: none;
+
+        &:last-child {
+            border-right: 1px solid $pagination-border-color;
+        }
+
+        &:disabled,
+        &:hover:disabled,
+        &[disabled] {
+            color: $pagination-disabled-color;
+            background-color: $pagination-bg;
+            cursor: not-allowed;
+        }
+
+        &:hover {
+            background-color: $pagination-hover-bg;
+            color: $pagination-hover-color;
+        }
+
+        &:focus {
+            box-shadow: none;
+            margin-right: inherit;
+            border: 1px solid $pagination-border-color;
+        }
+
+        &:last-child,
+        &:first-child {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        &.gridjs-currentPage {
+            background-color: $pagination-active-bg;
+            color: $pagination-active-color;
+            border-color: $pagination-active-border-color;
+            font-weight: $font-weight-medium;
+        }
+    }
+}
+
+.gridjs-search {
+    position: relative;
+
+    &::before {
+        content: "\f0d1";
+        font-family: "remixicon";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+        font-size: 14px;
+        color: var(--#{$prefix}secondary-color);
+    }
+}
+
+input.gridjs-input {
+    border-color: $input-border-color;
+    background-color: $input-bg;
+    color: $input-color;
+    line-height: $input-line-height;
+    padding: $input-padding-y $input-padding-x $input-padding-y $input-padding-x*2.25;
+    border-radius: $input-border-radius;
+    @include font-size($input-font-size);
+
+    &:focus {
+        box-shadow: none;
+        border-color: $input-focus-border-color;
+        background-color: $input-focus-bg;
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+}
+
+th.gridjs-th {
+    .gridjs-th-content {
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: $font-weight-semibold;
+    }
+}
+
+button.gridjs-sort {
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 20px;
+}
+
+button {
+
+    &.gridjs-sort-asc,
+    &.gridjs-sort-desc {
+        background-size: 7px;
+    }
+}
+
+// gridjs selection
+.gridjs-tr-selected {
+    td {
+        background-color: $table-active-bg;
+    }
+
+    .gridjs-td .gridjs-checkbox[type=checkbox] {
+        background-color: $form-check-input-checked-bg-color;
+        border-color: $form-check-input-checked-border-color;
+
+        @if $enable-gradients {
+            background-image: escape-svg($form-check-input-checked-bg-image),
+            var(--#{$prefix}gradient);
+        }
+
+        @else {
+            background-image: escape-svg($form-check-input-checked-bg-image);
+        }
+    }
+}
+
+.gridjs-td {
+    .gridjs-checkbox {
+        width: $form-check-input-width;
+        height: $form-check-input-width;
+        vertical-align: top;
+        background-color: $form-check-input-bg;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: $form-check-input-border;
+        appearance: none;
+        color-adjust: exact; // Keep themed appearance for print
+        @include transition($form-check-transition);
+
+        &[type="checkbox"] {
+            @include border-radius($form-check-input-border-radius);
+        }
+    }
+}
+
+.gridjs-loading-bar {
+    background-color: var(--#{$prefix}secondary-bg);
+}
+
+[data-bs-theme="dark"] {
+    button {
+        &:is(.gridjs-sort-neutral, .gridjs-sort-asc, .gridjs-sort-desc) {
+            filter: $btn-close-white-filter;
+        }
+    }
+}

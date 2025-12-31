@@ -1,0 +1,60 @@
+//
+// _placeholders.scss
+//
+
+@mixin skeleton-animation {
+    background-image: linear-gradient(90deg,
+            var(--#{$prefix}gray-100) 0%,
+            var(--#{$prefix}gray-100) 40%,
+            var(--#{$prefix}gray-200) 50%,
+            var(--#{$prefix}gray-200) 55%,
+            var(--#{$prefix}gray-100) 65%,
+            var(--#{$prefix}gray-100) 100%);
+    background-size: 400%;
+    animation: skeleton 2000ms infinite;
+}
+
+.placeholder-body {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    .placeholder-start {
+        &.square {
+            width: 60px;
+            height: 60px;
+        }
+
+        &.circle {
+            width: 60px;
+            height: 60px;
+            @include border-radius($border-radius-pill);
+            overflow: hidden;
+        }
+
+        @include skeleton-animation;
+    }
+
+    .placeholder-end {
+        flex: 1;
+
+        .placeholder-line {
+            @include skeleton-animation;
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+        }
+    }
+}
+
+// Skeleton Loading Animation
+@keyframes skeleton {
+    from {
+        background-position: 100% 100%;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}

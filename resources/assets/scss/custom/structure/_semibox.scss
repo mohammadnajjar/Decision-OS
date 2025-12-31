@@ -1,0 +1,76 @@
+[data-layout="semibox"] {
+  .#{$customPrefix}-app-sidebar {
+    margin: var(--#{$prefix}semibox-width);
+    border-right: 0;
+    border-radius: var(--#{$prefix}border-radius);
+  }
+  .app-header {
+    border-bottom: 0;
+    border-radius: var(--#{$prefix}border-radius);
+    top: var(--#{$prefix}semibox-width);
+    right: var(--#{$prefix}semibox-width);
+    left: var(--#{$prefix}semibox-width);
+
+    @include media-breakpoint-up(lg) {
+      left: calc( var(--#{$prefix}app-sidebar-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+    }
+
+    &::after {
+      content: "";
+      height: var(--#{$prefix}semibox-width);
+      position: fixed;
+      left: var(--#{$prefix}semibox-width);
+      right: var(--#{$prefix}semibox-width);
+      width: 100%;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(var(--#{$prefix}body-bg-rgb), 0.5);
+      z-index: -1;
+      @include media-breakpoint-up(lg) {
+        left: calc( var(--#{$prefix}app-sidebar-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+      }
+    }
+  }
+  .app-wrapper {
+    @include media-breakpoint-up(lg) {
+      padding-top: 1rem;
+      padding-left: calc(var(--#{$prefix}semibox-width) * 1.7);
+    }
+    @include media-breakpoint-down(lg) {
+      margin-block-start: calc(var(--#{$prefix}app-header-height) * 1.20);
+    }
+  }
+  .footer {
+    margin-inline-start: var(--#{$prefix}semibox-width);
+    margin-inline-end: var(--#{$prefix}semibox-width);
+    border-radius: var(--#{$prefix}border-radius) var(--#{$prefix}border-radius)
+      0 0;
+
+    @include media-breakpoint-up(lg) {
+      margin-inline-start: calc(var(--#{$prefix}app-sidebar-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+      margin-inline-end: var(--#{$prefix}semibox-width);
+    }
+  }
+  //sidebar size small
+  &[data-sidebar="icon"] {
+    @include media-breakpoint-up(lg) {
+    .app-header {
+        left: calc(var(--#{$prefix}app-sidebar-sm-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+        &::after{
+          left: calc( var(--#{$prefix}app-sidebar-sm-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+        }
+    }
+    .#{$customPrefix}-app-sidebar {
+      margin: var(--pe-semibox-width);
+      border-radius: 0;
+      .#{$customPrefix}-app-sidebar-logo {
+        top: var(--#{$prefix}semibox-width);
+        border-right: 0;
+      }
+    }
+    .footer{
+        margin-inline-start: calc(var(--#{$prefix}app-sidebar-sm-width) + var(--#{$prefix}semibox-width) + var(--#{$prefix}semibox-width));
+      }
+    }
+  }
+}

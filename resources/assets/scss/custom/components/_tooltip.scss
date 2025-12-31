@@ -1,0 +1,37 @@
+//
+//  Tooltip
+//
+
+// Base
+.tooltip {
+    .tooltip-inner {
+        box-shadow: 3px 3px 100px 0px rgba(82, 63, 105, 0.5);
+    }
+
+    &.tooltop-auto-width {
+        .tooltip-inner {
+            white-space: nowrap;
+            max-width: none;
+        }
+    }
+}
+
+.tooltip-white {
+    --#{$prefix}tooltip-bg: var(--#{$prefix}white);
+    --#{$prefix}tooltip-color: var(--#{$prefix}black);
+}
+
+.custom-tooltip {
+    --#{$prefix}tooltip-bg: var(--#{$prefix}purple);
+    --#{$prefix}tooltip-color: var(--#{$prefix}white);
+}
+
+.popover {
+    box-shadow: $box-shadow;
+
+    &.popover-no-arrow {
+        .popover-arrow {
+            display: none;
+        }
+    }
+}

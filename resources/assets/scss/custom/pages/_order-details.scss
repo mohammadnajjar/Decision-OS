@@ -1,0 +1,12 @@
+.timeline2 {
+  &.profile-timeline {
+    ul {
+      .box {
+        > span {
+          left: -25px;
+          top: 0;
+        }
+      }
+    }
+  }
+}

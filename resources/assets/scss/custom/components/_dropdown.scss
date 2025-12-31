@@ -1,0 +1,131 @@
+//
+// _dropdown.scss
+//
+
+.btn-group,
+.dropdown {
+    line-height: 1;
+    &.dropdown-hover {
+        &:hover {
+            .dropdown-menu {
+                display: block;
+                
+            }
+        }
+    }
+}
+
+.dropup .dropdown-toggle,
+.dropend .dropdown-toggle,
+.dropdown-toggle {
+    &::after {
+        font-family: 'remixicon', sans-serif; // Use Remix font family
+        content: "\ea4e";
+        border: none;
+        vertical-align: middle;
+        font-size: 16px;
+        line-height: 0;
+        margin-inline-end: -4px;
+        // @include position-align(relative, -2px);
+    }
+
+    &.arrow-none {
+        &::after {
+            display: none;
+        }
+    }
+
+    &.show {
+        &::after {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.dropup .dropdown-toggle {
+    &::after {
+        transform: rotate(180deg);
+    }
+
+    &.show {
+        &::after {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.dropstart .dropdown-toggle {
+    &::before {
+        font-family: 'remixicon', sans-serif; // Use Remix font family
+        content: "\ea4e";
+        border: none;
+        vertical-align: middle;
+        @include font-size(1rem);
+        line-height: 0;
+        margin-inline-start: -4px;
+        @include position-align(relative, -2px);
+    }
+
+    &.arrow-none {
+        &::before {
+            display: none;
+        }
+    }
+
+    &.show {
+        &::before {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.dropdown-menu {
+    box-shadow: 0 4px 24px 0 rgba(62, 57, 107, 0.18);
+    background-color: var(--#{$prefix}dropdown-bg);
+
+    .dropdown-header {
+        @include font-size(0.875rem);
+        font-weight: 600;
+    }
+
+    .dropdown-item {
+        @include flex-align(flex, null, center, null);
+        @include border-radius(var(--#{$prefix}dropdown-border-radius));
+        line-height: $line-height-base;
+        // @include line-height($line-height-base);
+
+        i {
+            @include font-size(1rem);
+            margin-right: 10px;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            fill: #f2f2f2;
+        }
+
+        .float-right {
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .dropdown-divider {
+        margin: 8px -8px;
+    }
+}
+
+.dropdown-menu-dark {
+    .dropdown-item {
+
+        &.active,
+        &:active {
+            color: var(--bs-dropdown-link-hover-color);
+            background-color: var(--bs-dropdown-link-hover-bg);
+        }
+    }
+}

@@ -1,0 +1,44 @@
+// Define Avatar Sizes Map
+$avatar-sizes: (
+  xs: 20px,
+  sm: 24px,
+  md: 36px,
+  lg: 48px,
+  xl: 72px,
+  xxl: 84px,
+  3xl: 100px,
+);
+
+// Mixin to Generate Avatar Classes Dynamically
+/// - `$sizes`: Map of sizes to generate classes for (required).
+/// - `$radius`: Optional default border-radius (defaults to 50% for circular avatars).
+/// - `$base-class`: Optional base class for avatars (defaults to `.avatar`).
+@mixin generate-avatar-classes($sizes, $radius: 50%, $base-class: avatar) {
+  @each $size, $value in $sizes {
+    .#{$base-class}-#{$size} {
+      height: $value;
+      width: $value;
+      min-width: $value;
+      min-height: $value;
+    }
+  }
+}
+
+// Mixin for Individual Avatar Styling
+/// Use this for individual cases or overriding defaults.
+@mixin avatar-size($size, $radius: 50%) {
+  $size-value: map-get($avatar-sizes, $size);
+
+  @if $size-value {
+    height: $size-value;
+    width: $size-value;
+    min-width: $size-value;
+    min-height: $size-value;
+    border-radius: $radius;
+  } @else {
+    @error "Invalid size `#{$size}`. Valid sizes: #{map-keys($avatar-sizes)}.";
+  }
+}
+
+// Generate Avatar Classes
+@include generate-avatar-classes($avatar-sizes);

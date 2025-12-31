@@ -1,0 +1,28 @@
+//
+// Custom Variables
+//
+
+[data-bs-theme=dark] {
+    --#{$prefix}app-sidebar-border-color: #383838 !important;
+    --#{$prefix}app-sidebar-caption-color: #ffffff !important;
+    --#{$prefix}app-sidebar-menu-item-color: #f0e8e8 !important;
+    --#{$prefix}app-sidebar-bg: #1c1b1b !important;
+    --app-sidebar-border-color: #383838 !important;
+    --#{$prefix}light-rgb: 47, 50, 52;
+    --#{$prefix}light: #2f3234;
+    --#{$prefix}secondary-bg: #1c1b1b;
+    --#{$prefix}primary-bg-subtle: #322721;
+    --#{$prefix}app-header-border-color: #383838 !important;
+}
+[data-bs-theme=dark] .btn-light, .list-group,
+[data-bs-theme=dark] .btn-outline-light {
+    --#{$prefix}list-group-disabled-bg: #2f3234;
+    --#{$prefix}btn-color: #8d8e90;
+    --#{$prefix}btn-active-color: #fff;
+    --#{$prefix}btn-hover-color: #fff;
+    --#{$prefix}btn-hover-color: #fff;
+    --#{$prefix}btn-bg: 47, 50, 52;
+    --#{$prefix}btn-border-color: 47, 50, 52;
+    --#{$prefix}btn-hover-bg: 47, 50, 52;
+    --#{$prefix}btn-active-bg: 47, 50, 52;
+}

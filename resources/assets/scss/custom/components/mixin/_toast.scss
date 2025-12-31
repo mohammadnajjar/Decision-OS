@@ -1,0 +1,31 @@
+// Mixin for Generating Toast Classes
+@mixin generate-toast-colored($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling: Ensure `$name` and `$color` exist
+        @if map-has-key($colors, $name) {
+            .toast.toast-#{$name} {
+                --#{$prefix}toast-color: #{color-contrast($color)};
+                --#{$prefix}toast-bg: var(--#{$prefix}#{$name});
+                --#{$prefix}toast-border-color: var(--#{$prefix}#{$name});
+                --#{$prefix}toast-header-color: #{color-contrast($color)};
+                --#{$prefix}toast-header-bg: var(--#{$prefix}#{$name});
+
+                // Default border color
+                --#{$prefix}toast-header-border-color: rgba(var(--#{$prefix}secondary-bg-rgb), 0.2);
+
+                // Special case for 'light'
+                @if $name == 'light' {
+                    --#{$prefix}toast-header-border-color: rgba(var(--#{$prefix}dark-rgb), 0.1);
+                }
+            }
+        }
+
+        @else {
+            @error "Color `#{$name}` is not defined in `$theme-colors`. Please add it to the map.";
+        }
+    }
+}
+
+// Include the Mixin
+@include generate-toast-colored($theme-colors, $prefix);

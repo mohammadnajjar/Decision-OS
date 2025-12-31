@@ -1,0 +1,127 @@
+//
+// Email
+//
+.mail-wrapper {
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--#{$prefix}secondary-bg);
+  @include border-radius();
+
+  .mail-sidebar {
+    width: 350px;
+    border-right: 1px solid var(--#{$prefix}border-color);
+    padding: 1.25rem;
+
+    @include media-breakpoint-down(xl) {
+      display: none;
+    }
+
+    &.active {
+      @include media-breakpoint-down(xl) {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--#{$prefix}secondary-bg);
+        z-index: 2;
+      }
+    }
+
+    .email-menu-sidebar-scroll {
+      max-height: 400px;
+
+      .mail-list {
+        a {
+          padding: 10px 12px;
+          @include border-radius();
+          transition: $transition-base;
+
+          &.active,
+          &:hover {
+            background-color: var(--#{$prefix}light-bg-subtle);
+          }
+        }
+      }
+    }
+  }
+
+  .message-list-content {
+    height: calc(100vh - 255px);
+
+    .message-list {
+      padding: 0;
+
+      .inbox-data {
+        &:hover {
+          background-color: var(--#{$prefix}body-bg);
+          transition: $transition-base;
+        }
+      }
+
+      .important-mail {
+        &.active {
+          color: $warning;
+        }
+      }
+    }
+  }
+
+  .mail-preview {
+    padding: 20px;
+
+    .mail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--#{$prefix}border-color);
+      padding-bottom: 16px;
+    }
+
+    .mail-body {
+      margin-top: 15px;
+    }
+
+    .attachment {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px;
+      border: 1px solid var(--#{$prefix}border-color);
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .attachment:hover {
+      background: var(--#{$prefix}body-bg);
+    }
+
+    .mail-actions {
+      margin-top: 15px;
+    }
+
+    .quick-reply {
+      margin-top: 20px;
+    }
+  }
+
+  @include media-breakpoint-down(xl) {
+    .app-chat-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      background-color: #11182766;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .mail-sidebar.active~.app-chat-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

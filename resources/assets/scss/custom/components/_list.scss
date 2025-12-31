@@ -1,0 +1,20 @@
+//
+// lists.scss
+//
+
+.bullet {
+    display: inline-block;
+    background-color: var(--#{$variable-prefix}primary);
+    @include border-radius(6px);
+    width: 7px;
+    height: 7px;
+}
+
+.list-borderless {
+    --#{$prefix}list-group-border-width: 0px;
+    --#{$prefix}list-group-item-padding-x: 0px;
+}
+
+.list-group-sm {
+    --#{$prefix}list-group-item-padding-y: 6px;
+}

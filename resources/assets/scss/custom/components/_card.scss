@@ -1,0 +1,72 @@
+// 
+// _card.scss
+// 
+
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-bottom:map-get($spacers, 6);
+    @include box-shadow($card-box-shadow);
+    border: 0;
+    position: relative;
+}
+
+.card-title {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--#{$prefix}body-color);
+}
+.card-light {
+  .card-header {
+    border-bottom: 1px solid var(--#{$prefix}border-color);
+  }
+  .card-title {
+    color: var(--#{$prefix}body-color);
+}
+  .card-text {
+      color: var(--#{$prefix}body-color);
+  }
+}
+
+.card {
+    position: relative;
+
+    .card-header {
+        .card-actions a {
+            @include font-size(1rem);
+            color: inherit;
+            font-weight: 500;
+
+            .ri-drag-move-2-fill {
+                cursor: move;
+            }
+
+            .ri-close-line {
+                @include font-size(1.125rem);
+            }
+        }
+    }
+}
+
+.card-overlay {
+  @include overlay(); // Default overlay styles
+}
+
+.custom-overlay {
+  @include overlay(rgba($primary, 0.15)); // Custom overlay with primary color
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  margin-bottom: 0;
+  height: 100vh;
+  z-index: 1050; // Ensure it's above other content
+  overflow: auto;
+  background-color: var(--#{$prefix}white); // Optional: Background color for fullscreen mode
+}
+
+.card-h-100 {
+  height: calc(100% - map-get($spacers, 6));
+}

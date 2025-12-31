@@ -1,0 +1,51 @@
+//
+// Air Datapicker.scss
+//
+
+// Container
+.air-datepicker {
+    width: 280px !important;
+    font-family: inherit;
+    border: 1px solid var(--#{$prefix}border-color) !important;
+    background-color: $dropdown-bg;
+    color: var(--#{$prefix}body-color);
+    z-index: 9999;
+
+    // Remow arrows
+    &:before,
+    &:after {
+        display: none;
+    }
+
+    // Week numbers
+    &.hasWeeks {
+        width: 325px !important;
+    }
+}
+.air-datepicker-nav--title {
+    i {
+        color: var(--#{$prefix}body-color);
+    }
+}
+.air-datepicker-nav--action,
+.air-datepicker-nav--title {
+    &:hover,
+    &:focus {
+        background-color: var(--#{$prefix}body-bg) !important;
+    }
+}
+.air-datepicker-nav {
+    border-bottom-color: var(--#{$prefix}border-color);
+}
+.-other-month- {
+    color: var(--#{$prefix}tertiary-color) !important;
+}
+.air-datepicker-cell {
+    &:hover {
+        background-color: var(--#{$prefix}body-bg);
+    }
+}
+
+.air-datepicker {
+    --adp-day-cell-height: 38px !important;
+}

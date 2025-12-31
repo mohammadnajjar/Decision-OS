@@ -1,0 +1,28 @@
+//
+// leaflet-maps.scss
+//
+
+.leaflet-container {
+    z-index: 0;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    background: var(--#{$prefix}secondary-bg);
+
+    a.leaflet-popup-close-button {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: $tooltip-border-radius;
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    box-shadow: $box-shadow-lg;
+    padding: $tooltip-padding-y $tooltip-padding-x * 1.75 $tooltip-padding-y $tooltip-padding-x;
+
+    .leaflet-popup-content {
+        margin: 0;
+    }
+}

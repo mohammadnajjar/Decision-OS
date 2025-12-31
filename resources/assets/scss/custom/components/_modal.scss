@@ -1,0 +1,218 @@
+// 
+// _modal.scss
+// 
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flipHorizontal {
+    0% {
+        transform: perspective(400px) rotateY(90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: perspective(400px) rotateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flipVertical {
+    0% {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: perspective(400px) rotateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateIn {
+    0% {
+        transform: rotate(90deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(-5px);
+    }
+
+    50% {
+        transform: translate(5px);
+    }
+
+    75% {
+        transform: translate(-5px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(2deg);
+    }
+
+    40% {
+        transform: rotate(-2deg);
+    }
+
+    60% {
+        transform: rotate(1deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// Reusable modal animation classes
+.modal {
+    &.scale-in {
+        animation: scaleIn 0.5s forwards;
+    }
+
+    &.slide-in-right {
+        animation: slideInRight 0.5s forwards;
+    }
+
+    &.slide-in-bottom {
+        animation: slideInBottom 0.5s forwards;
+    }
+
+    &.flip-horizontal {
+        animation: flipHorizontal 0.5s forwards;
+    }
+
+    &.flip-vertical {
+        animation: flipVertical 0.5s forwards;
+    }
+
+    &.zoom-in {
+        animation: zoomIn 0.4s forwards;
+    }
+
+    &.slide-in-left {
+        animation: slideInLeft 0.4s forwards;
+    }
+
+    &.slide-in-top {
+        animation: slideInTop 0.4s forwards;
+    }
+
+    &.rotate-in {
+        animation: rotateIn 0.4s forwards;
+    }
+
+    &.shake {
+        animation: shake 0.5s forwards;
+    }
+
+    &.swing {
+        animation: swing 0.5s forwards;
+    }
+
+    &.zoom-out {
+        animation: zoomOut 0.4s forwards;
+    }
+}

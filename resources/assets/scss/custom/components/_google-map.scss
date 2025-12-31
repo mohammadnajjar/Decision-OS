@@ -1,0 +1,41 @@
+//
+// google-map.scss
+//
+
+
+.gmaps {
+    background: $gray-100;
+    border-radius: 3px;
+}
+
+.gmaps-overlay {
+    display: block;
+    text-align: center;
+    color: $white;
+    font-size: $tooltip-font-size;
+    background: $primary;
+    border-radius: 4px;
+    padding: $tooltip-padding-y $tooltip-padding-x;
+}
+
+.gmaps-overlay_arrow {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    &.above {
+        bottom: -8px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid $primary;
+    }
+
+    &.below {
+        top: -8px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid $primary;
+    }
+}

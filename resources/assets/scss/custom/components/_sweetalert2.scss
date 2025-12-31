@@ -1,0 +1,176 @@
+//
+//  sweetalert2.scss
+//
+
+// Container Styles
+.swal2-container {
+    overflow-y: hidden !important;
+
+    &.swal2-shown {
+        background-color: rgba($black, 0.2);
+    }
+
+    .swal2-popup {
+        background-color: $modal-content-bg;
+        padding: 1rem 2rem;
+        border-radius: $modal-content-border-radius;
+
+        .swal2-html-container,
+        .swal2-content {
+            font-weight: normal;
+            font-size: $font-size-base;
+            margin-top: 1.5rem;
+            color: var(--#{$prefix}body-color);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .btn {
+            margin: 15px 5px 0;
+        }
+
+        .swal2-actions {
+            margin: 1.5rem auto 1rem auto;
+
+            button {
+                min-width: 80px;
+            }
+        }
+
+        .swal2-loader {
+            border-color: $primary transparent $primary transparent;
+        }
+
+        // Validation message
+        .swal2-validation-message {
+            background-color: transparent;
+        }
+    }
+}
+
+.swal2-icon-success {
+    .swal2-timer-progress-bar {
+        background-color: rgba($success, 0.4);
+    }
+}
+
+.swal2-icon-warning {
+    .swal2-timer-progress-bar {
+        background-color: rgba($warning, 0.4);
+    }
+}
+
+.swal2-icon-info {
+    .swal2-timer-progress-bar {
+        background-color: rgba($info, 0.4);
+    }
+}
+
+.swal2-icon-error {
+    .swal2-timer-progress-bar {
+        background-color: rgba($danger, 0.4);
+    }
+}
+
+// Title Styles
+.swal2-title {
+    padding: $alert-padding-y $alert-padding-x;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: var(--#{$prefix}body-color);
+}
+
+// Footer Styles
+.swal2-footer {
+    border-top: 1px solid var(--#{$prefix}border-color);
+    color: var(--#{$prefix}body-color);
+}
+
+// Input Styles
+.swal2-file,
+.swal2-input,
+.swal2-textarea {
+    // @include form-control;
+
+    &:focus {
+        box-shadow: none;
+        border-color: $input-focus-border-color;
+    }
+}
+
+// Close Button Styles
+.swal2-close {
+    font-family: $font-family-base;
+    font-weight: $font-weight-light;
+    font-size: 1.75rem;
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+// Icon Styles
+.swal2-icon {
+    margin: 10px auto 0 auto;
+
+    &.swal2-warning {
+        border-color: var(--#{$prefix}warning);
+        color: var(--#{$prefix}warning);
+    }
+
+    &.swal2-error {
+        border-color: var(--#{$prefix}danger);
+        color: var(--#{$prefix}danger);
+
+        [class^=swal2-x-mark-line] {
+            background-color: rgba(var(--#{$prefix}danger-rgb), 0.75);
+        }
+    }
+
+    &.swal2-success {
+        border-color: var(--#{$prefix}success);
+        color: var(--#{$prefix}success);
+
+        [class^=swal2-success-line] {
+            background-color: var(--#{$prefix}success);
+        }
+
+        .swal2-success-ring {
+            border-color: rgba(var(--#{$prefix}success-rgb), 0.3);
+        }
+    }
+
+    &.swal2-info {
+        border-color: var(--#{$prefix}info);
+        color: var(--#{$prefix}info);
+    }
+
+    &.swal2-question {
+        border-color: var(--#{$prefix}primary);
+        color: var(--#{$prefix}primary);
+    }
+}
+
+// Progress Steps
+.swal2-progress-steps {
+    .swal2-progress-step {
+        background: $primary;
+
+        &.swal2-active-progress-step {
+            background: $primary;
+
+            &~.swal2-progress-step,
+            &~.swal2-progress-step-line {
+                background: rgba($primary, 0.3);
+            }
+        }
+    }
+
+    .swal2-progress-step-line {
+        background: $primary;
+    }
+}

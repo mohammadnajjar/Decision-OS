@@ -1,0 +1,26 @@
+// Mixin to Generate Tooltip Classes Based on Theme Colors
+@mixin generate-tooltip-classes($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error Handling: Ensure color is defined in the theme colors map
+        @if not $color {
+            @warn "Skipping tooltip class for '#{$name}' as it does not have a valid color value.";
+        }
+
+        .tooltip-#{$name} {
+            --#{$prefix}tooltip-bg: var(--#{$prefix}#{$name});
+
+            // Set tooltip text color based on light or other colors
+            @if $name =='light' {
+                --#{$prefix}tooltip-color: var(--#{$prefix}black);
+            }
+
+            @else {
+                --#{$prefix}tooltip-color: var(--#{$prefix}white);
+            }
+        }
+    }
+}
+
+// Example Usage
+@include generate-tooltip-classes($theme-colors, $prefix);

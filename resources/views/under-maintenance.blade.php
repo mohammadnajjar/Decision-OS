@@ -1,0 +1,60 @@
+@extends('partials.layouts.master_auth')
+
+@section('title', 'Under Maintenance| FabKin Admin & Dashboards Template')
+
+@section('content')
+
+    <!-- START -->
+    <div class="py-5 min-vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="justify-content-center row gy-0">
+                <div class="col-lg-8">
+                    <div class="position-relative justify-content-center py-10">
+                        <div class="mb-5 text-center">
+                            <h2 class="fw-normal">Welcome to <span class="fw-bold text-primary">Fabkin</span></h2>
+                            <p class="text-muted mb-0">We're working on an additional feature for you; give us some time, and
+                                we'll notify you soon.</p>
+                        </div>
+                        <img class="max-h-320px mx-auto d-block" src="assets/images/vector/under-maintenance.svg"
+                            alt="Under Maintenance Image">
+                        <form class="form-custom mt-16">
+                            <div id="countdown">
+                                <ul class="list-inline text-center d-flex flex-column flex-md-row gap-1">
+                                    <li class="list-inline-item p-4 w-100 min-w-100px rounded-2">
+                                        <h2 class="mb-1 fs-45" id="days"></h2>
+                                        <span>days</span>
+                                    </li>
+                                    <li class="list-inline-item p-4 w-100 min-w-100px rounded-2">
+                                        <h2 class="mb-1 fs-45" id="hours"></h2>
+                                        <span>hours</span>
+                                    </li>
+                                    <li class="list-inline-item p-4 w-100 min-w-100px rounded-2">
+                                        <h2 class="mb-1 fs-45" id="minutes"></h2>
+                                        <span>minutes</span>
+                                    </li>
+                                    <li class="list-inline-item p-4 w-100 min-w-100px rounded-2">
+                                        <h2 class="mb-1 fs-45" id="seconds"></h2>
+                                        <span>seconds</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="position-relative subscribe-btn max-w-500px mt-10 mx-auto">
+                                <input type="text"
+                                    class="form-control form-control-lg fs-14 min-h-56px form-control-icon"
+                                    id="companyNameLayout4" placeholder="Enter Your Email" required>
+                                <button class="btn btn-primary ">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+
+    <script src="assets/js/auth/coming-soon.init.js"></script>
+
+    <script type="module" src="assets/js/app.js"></script>
+@endsection

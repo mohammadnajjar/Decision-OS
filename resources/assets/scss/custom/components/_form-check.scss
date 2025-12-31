@@ -1,0 +1,85 @@
+//
+// _form-check.scss
+//
+
+.form-check {
+    position: relative;
+
+    .form-check-input {
+        cursor: pointer;
+    }
+
+    &.form-check-sm:not(.form-switch) {
+        padding-left: 1.7em;
+
+        .form-check-input {
+            margin-left: -1.7em;
+            height: 1.1rem;
+            width: 1.1rem;
+        }
+    }
+
+    &.form-check-lg:not(.form-switch) {
+        padding-left: 2.4em;
+
+        .form-check-input {
+            margin-left: -2.4em;
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    }
+
+    &.form-check-sm.form-switch {
+        padding-left: 2.6em;
+
+        .form-check-input {
+            margin-left: -2.6em;
+
+            width: 2.3em;
+            height: 1.3em;
+        }
+    }
+
+    &.form-check-lg.form-switch {
+        padding-left: 3.4em;
+
+        .form-check-input {
+            margin-left: -3.4em;
+            width: 3em;
+            height: 1.7em;
+        }
+    }
+}
+
+// img checkbox
+.main-img-checkbox {
+    .img-checkbox {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .main-img-cover {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .form-check-label {
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            @include border-radius(0.625rem);
+            border: 2px solid transparent;
+        }
+    }
+
+    input:checked+.form-check-label img {
+        border-color: var(--#{$prefix}primary);
+    }
+}

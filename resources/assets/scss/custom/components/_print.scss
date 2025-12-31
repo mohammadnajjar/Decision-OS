@@ -1,0 +1,15 @@
+// 
+// print.scss
+//
+
+// Used invoice page
+@media print {
+    .pe-app-sidebar, .app-header {
+        display: none;
+    }
+
+    .app-wrapper {
+        margin-left: 0;
+        padding: 0;
+    }
+}

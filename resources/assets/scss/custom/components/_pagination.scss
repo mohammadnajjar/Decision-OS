@@ -1,0 +1,20 @@
+// 
+// _pagination.scss
+// 
+// base
+.pagination {
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .page-link {
+        padding: 0;
+        text-align: center;
+    }
+}
+
+// Pagination rounded (Custom)
+.pagination-rounded {
+    .page-link {
+        @include border-radius($border-radius-pill);
+    }
+}

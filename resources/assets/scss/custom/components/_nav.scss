@@ -1,0 +1,98 @@
+// 
+// _nav.scss
+// 
+
+.nav-preview {
+    .nav-item {
+        .nav-link {
+            padding: 0.25rem 0.75rem;
+            font-size: 13px;
+        }
+    }
+}
+
+.arrow-pills {
+    margin-bottom: 16px;
+
+    .nav-link {
+        position: relative;
+
+        &.active {
+            &::before {
+                content: "";
+                @include position-align(absolute, null, null, -12px, 50%);
+                border: 6px solid transparent;
+                transform: translateX(-50%);
+                transition: $nav-link-transition;
+                border-top-color: var(--#{$prefix}danger);
+            }
+        }
+    }
+}
+
+.custom-verti-nav-pills {
+    .nav-link {
+        position: relative;
+        overflow: hidden;
+        border: 1px dashed var(--#{$prefix}border-color);
+        @include border-radius($border-radius-lg);
+
+        &::after {
+            content: "";
+            @include position-align(absolute, null, 0, 0, 0);
+        }
+
+        &.active {
+            border-style: solid;
+            border-color: var(--#{$prefix}nav-link-hover-color);
+            color: var(--#{$prefix}nav-link-hover-color);
+
+            &::after {
+                border-bottom: 4px solid var(--#{$prefix}nav-link-hover-color);
+            }
+        }
+    }
+}
+
+.nav-tabs-bordered {
+    border-bottom: 2px solid var(--#{$prefix}border-color);
+
+    .nav-link {
+        position: relative;
+        color: var(--#{$prefix}body-color);
+
+        &::after {
+            content: "";
+            @include position-align(absolute, null, null, -1px, 0);
+            height: 2px;
+            width: 100%;
+            transition: all 350ms ease 0s;
+            transform: scale(0);
+        }
+
+        &.active {
+            color: var(--#{$prefix}nav-link-hover-color);
+
+            &::after {
+                transform: scale(1);
+                background-color: var(--#{$prefix}nav-link-hover-color);
+            }
+        }
+    }
+}
+
+// // vertical nav
+
+.vertical-nav {
+    .nav {
+        .nav-link {
+            padding: 24px 16px;
+            text-align: center;
+            margin-bottom: 8px;
+
+            .nav-icon {
+                font-size: 24px;
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+// Mixin for Generating Pagination Colors
+@mixin generate-pagination-colors($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Base color styles
+        .pagination-#{$name} {
+            --#{$prefix}pagination-active-bg: var(--#{$prefix}#{$name});
+            --#{$prefix}pagination-focus-bg: var(--#{$prefix}#{$name});
+            --#{$prefix}pagination-active-color: #{color-contrast($color)};
+            --#{$prefix}pagination-focus-color: #{color-contrast($color)};
+
+            @if $name =='light' {
+                --#{$prefix}pagination-active-color: var(--#{$prefix}secondary-color);
+                --#{$prefix}pagination-focus-color: var(--#{$prefix}secondary-color);
+            }
+        }
+
+        // Light variant
+        .pagination-#{$name}-light {
+            --#{$prefix}pagination-active-bg: var(--#{$prefix}#{$name}-bg-subtle);
+            --#{$prefix}pagination-focus-bg: var(--#{$prefix}#{$name}-bg-subtle);
+            --#{$prefix}pagination-active-color: #{color-contrast($color)};
+            --#{$prefix}pagination-focus-color: #{color-contrast($color)};
+
+            @if $name =='light' {
+                --#{$prefix}pagination-active-color: var(--#{$prefix}secondary-color);
+                --#{$prefix}pagination-focus-color: var(--#{$prefix}secondary-color);
+            }
+        }
+    }
+}
+
+// Mixin for Generating Pagination Sizes
+@mixin generate-pagination-sizes($sizes: $pagination-sizes, $default-size: md) {
+
+    // Default size styles
+    .pagination .page-link {
+        @include pagination-size($default-size);
+    }
+
+    // Generate size-specific classes
+    @each $size, $value in $sizes {
+        .pagination-#{$size} .page-link {
+            @include pagination-size($size);
+        }
+    }
+}
+
+// Mixin for Individual Pagination Size
+@mixin pagination-size($size) {
+    $size-value: map-get($pagination-sizes, $size);
+
+    @if $size-value ==null {
+        @error "Size `#{$size}` is not defined in `$pagination-sizes`. Please add it to the map.";
+    }
+
+    height: $size-value;
+    width: $size-value;
+    line-height: $size-value;
+}
+
+// Include Mixins
+@include generate-pagination-colors($theme-colors, $prefix);
+@include generate-pagination-sizes($pagination-sizes, md);

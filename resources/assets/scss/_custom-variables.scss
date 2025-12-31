@@ -1,0 +1,29 @@
+//
+// Custom Variables
+//
+
+//sidebar variables
+$app-sidebar-base-width:                                    15rem;
+$app-sidebar-sm-width:                                      5rem;
+$app-sidebar-bg:                                            #fff;
+$app-sidebar-color:                                         #5b6b79;
+$app-sidebar-border-color:                                  $border-color;
+$app-sidebar-caption-color:                                 #3e4853;
+$app-sidebar-menu-item-color:                               $app-sidebar-color;
+$app-sidebar-menu-item-color-hover:                         $primary;
+$app-sidebar-menu-item-color-active:                        $primary;
+
+//header Variables
+$app-header-base-height:                                    74px;
+$app-header-bg:                                             $body-secondary-bg;
+$app-header-border-color:                                   #e2e8f0;
+
+
+//footer Variables
+$app-footer-height:                                         60px;
+
+//semibox layout
+$semibox-width:               1rem;
+
+$boxed-width:                 7.5rem;
+$boxed-width-sm:              1.5rem;

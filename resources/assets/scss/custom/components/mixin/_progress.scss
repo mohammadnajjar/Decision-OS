@@ -1,0 +1,58 @@
+// Define Progress Sizes
+$progress-sizes: (
+    xs: 0.375rem,
+    sm: 0.5rem,
+    md: 0.75rem,
+    // Default size
+    lg: 1rem,
+    xl: 1.25rem,
+);
+
+// Mixin for Progress Size
+@mixin progress-size($size) {
+    $size-value: map-get($progress-sizes, $size); // Get size value from map
+
+    @if $size-value !=null {
+        height: $size-value; // Apply height if size exists
+    }
+
+    @else {
+        @warn "Size `#{$size}` is not defined in `$progress-sizes`.";
+    }
+}
+
+// Mixin for Generating Progress Classes
+@mixin progress($sizes: $progress-sizes, $default-size: md) {
+
+    // Default .progress class
+    .progress {
+        @include progress-size($default-size); // Apply default size
+    }
+
+    // Generate size-specific classes
+    @each $size, $value in $sizes {
+        .progress-#{$size} {
+            @include progress-size($size); // Apply specific size
+        }
+    }
+}
+
+// Include the mixin
+@include progress();
+
+// Loop through the theme colors
+@each $name, $color in $theme-colors {
+    .circular-progress.circular-progress-#{$name} {
+        .circular-inner {
+            .fg-circular-progress {
+                stroke: var(--#{$prefix}#{$name});
+            }
+        }
+
+        &:hover {
+            .circular-text {
+                color: var(--#{$prefix}#{$name});
+            }
+        }
+    }
+}

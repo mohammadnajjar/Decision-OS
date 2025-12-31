@@ -1,0 +1,62 @@
+//
+// icons.scss
+//
+
+
+.icon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin: 0 auto;
+    gap: 10px;
+    justify-content: center;
+
+    .icon-box {
+        text-align: center;
+        padding: 1rem 0.65rem;
+        background-color: rgba(var(--#{$prefix}light-rgb), 0.3);
+        position: relative;
+        color: $text-muted;
+        @include transition();
+        @include border-radius(8px);
+        // max-width: 200px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(var(--#{$prefix}light-rgb), 0.5);
+        }
+
+        i {
+            display: block;
+            @include font-size(1.875rem);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        strong {
+            font-weight: 500;
+            max-width: 80%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        code {
+            display: inline-block;
+            max-width: 80%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 5px auto 0;
+            background-color: rgba(var(--#{$prefix}secondary), 0.1);
+            color: rgba(var(--#{$prefix}secondary), 1);
+            @include font-size(10px);
+        }
+    }
+}
+
+#copyAlert {
+    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: $app-header-base-height + 16px;
+}

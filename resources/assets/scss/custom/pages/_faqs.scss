@@ -1,0 +1,45 @@
+//
+// FAQ's
+//
+
+.faqs-menu-list {
+    a {
+        display: block;
+        padding: 12px 16px;
+        border-left: 2px solid transparent;
+        color: var(--#{$prefix}secondary-color);
+        @include transition();
+
+        &:is(:hover, .active) {
+            color: var(--#{$prefix}primary);
+            border-left-color: var(--#{$prefix}primary);
+            background-color: var(--#{$prefix}primary-bg-subtle);
+        }
+    }
+
+    li:not(:last-child) {
+        a {
+            margin-bottom: 8px;
+        }
+    }
+}
+
+.support-widgets-link {
+    a {
+        display: block;
+        color: var(--#{$prefix}body-color);
+        background-color: var(--#{$prefix}secondary-bg);
+        padding: 10px 16px;
+        @include border-radius();
+        @include transition($btn-transition);
+
+        &:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        &:is(:hover, .active) {
+            color: var(--#{$prefix}white);
+            background-color: var(--#{$prefix}primary);
+        }
+    }
+}

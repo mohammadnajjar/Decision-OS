@@ -1,0 +1,80 @@
+//
+// breadcrumb.scss
+//
+
+
+// Breadcrumb item arrow
+.breadcrumb-item {
+    >a {
+        color: var(--#{$prefix}emphasis-color);
+    }
+
+    +.breadcrumb-item {
+        &::before {
+            font-family: 'remixicon', sans-serif; // Use Remix font family
+            content: "\ea6e";
+        }
+    }
+}
+
+.colored-breadcrumb {
+    --#{$prefix}breadcrumb-divider-color : var(--#{$prefix}white);
+    --#{$prefix}breadcrumb-item-active-color: var(--#{$prefix}white);
+    padding: 12px 16px;
+    @include border-radius(4px);
+
+    .breadcrumb-item {
+        >a {
+            color: var(--#{$prefix}white);
+        }
+
+        &.active {
+            opacity: 0.8;
+        }
+    }
+
+    &.bg-light {
+        --#{$prefix}breadcrumb-divider-color : var(--#{$prefix}black);
+        --#{$prefix}breadcrumb-item-active-color: var(--#{$prefix}black);
+
+        .breadcrumb-item {
+            >a {
+                color: var(--#{$prefix}black);
+            }
+        }
+    }
+}
+
+
+// Breadcrumb line style
+.breadcrumb-line {
+    .breadcrumb-item {
+        +.breadcrumb-item {
+            &:before {
+                content: "\f1ae";
+            }
+        }
+    }
+}
+
+// Breadcrumb arrow style
+.breadcrumb-arrow {
+    .breadcrumb-item {
+        +.breadcrumb-item {
+            &:before {
+                content: "\ea6c";
+            }
+        }
+    }
+}
+
+// Breadcrumb Double Arrow style
+.breadcrumb-double-arrow {
+    .breadcrumb-item {
+        +.breadcrumb-item {
+            &:before {
+                content: "\f2e5";
+            }
+        }
+    }
+}

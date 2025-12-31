@@ -1,0 +1,55 @@
+// 
+// _table.scss
+// 
+
+.table>:not(:first-child) {
+    border-top: 0;
+}
+
+.table-box {
+    overflow-x: auto;
+    th,
+    td {
+        &:first-child {
+            padding-left: 1.5rem !important;
+        }
+
+        &:last-child {
+            padding-right: 1.5rem !important;
+        }
+    }
+}
+.table {
+    margin-bottom: 0;
+    thead>:not(:last-child) {
+        border-style: none;
+    }
+}
+
+.table-nowrap {
+    th,
+    td {
+        white-space: nowrap;
+    }
+}
+
+.table {
+    th,
+    td {
+        vertical-align: middle;
+    }
+}
+
+.table-card {
+    margin: -1.3rem -1.3rem;
+}
+
+.table-light {
+    tr {
+        th {
+            background-color: var(--#{$prefix}light-bg-subtle);
+            color: var(--#{$prefix}body-color);
+            border: 1px solid var(--#{$prefix}border-color);
+        }
+    }   
+}

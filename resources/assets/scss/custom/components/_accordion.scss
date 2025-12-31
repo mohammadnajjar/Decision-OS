@@ -1,0 +1,122 @@
+//
+// accordion.scss
+//
+
+.accordion {
+    .accordion-button {
+        font-weight: $font-weight-medium;
+    }
+    .accordion-button {
+        cursor: pointer;
+
+        &::after {
+            background-image: none !important;
+            font-family: 'remixicon', sans-serif; // Use Remix font family
+            content: "\ea4e";
+            @include font-size(1.1rem);
+            vertical-align: middle;
+            line-height: 0.8;
+            transition: none;
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                background-image: none !important;
+                transform: rotate(180deg);
+                margin-inline-end: -5px;
+            }
+        }
+    }
+}
+
+.accordion-icon-none {
+    .accordion-button {
+        &::after {
+            content: "";
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                content: "";
+            }
+        }
+    }
+}
+
+// Accordion with icon
+
+.accordion-icon {
+    .accordion-button {
+        &::after {
+            content: "\ea6b";
+            @include transition($accordion-icon-transition);
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                transform: rotate(90deg);
+                margin-inline-end: 0;
+            }
+        }
+    }
+}
+
+.accordion-with-plus {
+    .accordion-button {
+        &::after {
+            content: "\ea13";
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                content: "\f1af";
+            }
+        }
+    }
+}
+
+// Accordions with Left Icon
+
+.accordion-with-left-icon {
+    .accordion-button {
+        padding-inline-start: 2.75rem;
+
+        &::after {
+            position: absolute;
+            inset-inline-start: $accordion-button-padding-x;
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                margin-inline-start: 5px;
+            }
+        }
+    }
+}
+
+.accordion-with-border {
+    .accordion-item {
+        border-left: 4px solid $accordion-border-color;
+    }
+}
+
+// border accordion
+
+.accordion-border-box {
+    .accordion-item {
+        border-top: $accordion-border-width solid $accordion-border-color;
+        @include border-radius($accordion-border-radius);
+        
+        &:not(:first-of-type) {
+            margin-top: 8px;
+        }
+        
+        .accordion-button {
+            @include border-radius($accordion-border-radius);
+
+            &:not(.collapsed) {
+                @include border-bottom-radius(0);
+            }
+        }
+    }
+}

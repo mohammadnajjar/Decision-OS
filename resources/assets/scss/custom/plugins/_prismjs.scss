@@ -1,0 +1,18 @@
+pre[class*=language-] {
+    background-color: var(--#{$prefix}secondary-bg);
+    margin: 0;
+}
+
+pre[class*=language-]>code {
+    border: 1px solid var(--#{$prefix}border-color);
+    background-color: var(--#{$prefix}body-bg);
+    box-shadow: none;
+    border-radius: 8px;
+    padding: 16px;
+}
+pre[class*=language-]:after, pre[class*=language-]:before {
+    display: none;
+}
+code[class*=language-]{
+    color: var(--#{$prefix}body-color);
+}

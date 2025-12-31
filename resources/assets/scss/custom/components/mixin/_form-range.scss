@@ -1,0 +1,23 @@
+// Mixin for Generating Form Range Styles
+@mixin generate-form-range-styles($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+        .form-range-#{$name} {
+            &::-webkit-slider-thumb, &::-webkit-slider-thumb:active {
+                background-color: var(--#{$prefix}#{$name});
+            }
+        }
+        //noui slider
+        .noUi-target-#{$name} {
+            .noUi-connect {
+                background: var(--#{$prefix}#{$name}) !important;
+            }
+    
+            .noUi-handle {
+                background: var(--#{$prefix}#{$name}) !important;
+            }
+        }
+    }
+}
+
+// Include the mixin
+@include generate-form-range-styles($theme-colors, $prefix);

@@ -1,0 +1,16 @@
+.card-gradient {
+  background: linear-gradient(130deg, rgba(var(--#{$prefix}primary-rgb), 0.9), rgba(var(--#{$prefix}primary-rgb), 0.1));
+}
+.crmactivity-height {
+  height: 389px;
+  @include media-breakpoint-up(xxl) {
+    height: 350px;
+  }
+}
+.welcome-img{
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

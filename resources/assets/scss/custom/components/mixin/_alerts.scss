@@ -1,0 +1,50 @@
+// Mixin for Generating Alert Classes Based on Theme Colors
+@mixin generate-alert-classes($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+  
+      // Error handling: Ensure color exists
+      @if not map-has-key($colors, $name) {
+        @error "Color '#{$name}' is missing in the '$colors' map. Please define it in the theme colors.";
+      }
+  
+      // Warning for empty color
+      @if not $color {
+        @warn "Color for '#{$name}' is empty. Using a fallback might cause issues.";
+      }
+  
+      // Solid Alert Class
+      .alert-solid-#{$name} {
+        --#{$prefix}alert-color: #{color-contrast($color)};
+        --#{$prefix}alert-bg: var(--#{$prefix}#{$name});
+        --#{$prefix}alert-border-color: var(--#{$prefix}#{$name});
+        --#{$prefix}alert-link-color: #{color-contrast($color)};
+      }
+  
+      // Outline Alert Class
+      .alert-outline-#{$name} {
+        --#{$prefix}alert-color: var(--#{$prefix}#{$name});
+        --#{$prefix}alert-border-color: var(--#{$prefix}#{$name});
+        --#{$prefix}alert-link-color: var(--#{$prefix}#{$name});
+      }
+  
+      // Border Alert Class
+      .alert-border-#{$name} {
+        --#{$prefix}alert-border-color: var(--#{$prefix}#{$name});
+        border-left: 4px solid var(--#{$prefix}#{$name});
+        --#{$prefix}alert-link-color: var(--#{$prefix}#{$name});
+      }
+  
+      // Subtle Alert Class
+      .alert-subtle-#{$name} {
+        --#{$prefix}alert-bg: var(--#{$prefix}#{$name}-bg-subtle);
+        --#{$prefix}alert-color: var(--#{$prefix}#{$name});
+        --#{$prefix}alert-border-color: transparent;
+        --#{$prefix}alert-link-color: var(--#{$prefix}#{$name});
+      }
+  
+    }
+  }
+  
+  // Example Usage of the Mixin with a theme prefix
+  @include generate-alert-classes($theme-colors, $prefix);
+  

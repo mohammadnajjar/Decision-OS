@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Services;
+
+/**
+ * Decision OS Services
+ *
+ * This directory contains all business logic services for Decision OS:
+ * - StatusService: Green/Yellow/Red status calculations
+ * - InsightService: Rules-based insights engine
+ * - BurnoutService: Burnout risk monitoring
+ * - LockingService: Global lock when ≥2 Reds
+ * - RunwayCalculator: Financial runway calculation
+ * - LifeDisciplineService: Life & Discipline module logic
+ * - FinancialSafetyService: Financial Safety module logic
+ * - FocusSystemService: Focus System module logic
+ */

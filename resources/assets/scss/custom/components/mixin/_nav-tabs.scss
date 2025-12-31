@@ -1,0 +1,18 @@
+// Mixin for Generating Navigation Styles
+@mixin generate-nav-styles($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+        .nav-#{$name} {
+            --#{$prefix}nav-pills-link-active-color: #{color-contrast($color)};
+            --#{$prefix}nav-pills-link-active-bg: var(--#{$prefix}#{$name});
+            --#{$prefix}nav-link-hover-color: var(--#{$prefix}#{$name});
+
+            // Optional: Additional styles for `light` color handling
+            @if $name =='light' {
+                --#{$prefix}nav-pills-link-active-color: var(--#{$prefix}secondary-color);
+            }
+        }
+    }
+}
+
+// Include the mixin
+@include generate-nav-styles($theme-colors, $prefix);

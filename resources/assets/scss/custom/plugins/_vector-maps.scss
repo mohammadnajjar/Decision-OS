@@ -1,0 +1,44 @@
+//
+// vector-maps.scss
+//
+
+.jvm-container {
+    background-color: var(--#{$prefix}secondary-bg) !important;
+
+    text {
+        font-family: $font-family-base;
+        font-size: $font-size-base;
+        fill: var(--#{$prefix}body-color);
+    }
+}
+
+.jvm-tooltip {
+    border-radius: $tooltip-border-radius;
+    background-color: var(--#{$prefix}primary);
+    font-family: $font-family-base;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    box-shadow: $box-shadow-lg;
+    padding: 5px 10px;
+}
+
+.jvm-element {
+    @include dark {
+        fill: var(--#{$prefix}gray-700);
+    }
+}
+
+.jvm-marker {
+    stroke-opacity: 1;
+    stroke-width: 2;
+}
+
+.jvm-zoom-btn {
+    line-height: 5px;
+    color: var(--#{$prefix}body-color);
+    background-color: var(--#{$prefix}gray-200);
+
+    @include dark {
+        background-color: var(--#{$prefix}gray-700);
+    }
+}

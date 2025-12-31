@@ -1,0 +1,15 @@
+.addImg{
+	margin-top: -24px;
+}
+.webGradient{
+	background: linear-gradient(130deg,var(--#{$prefix}info), rgba(var(--#{$prefix}info-rgb), 0.6), var(--#{$prefix}info));
+}
+.datascienceGradient{
+	background: linear-gradient(130deg, var(--#{$prefix}primary), rgba(var(--#{$prefix}primary-rgb), 0.6), var(--#{$prefix}primary));
+}
+.IntelligenceGradient{
+	background: linear-gradient(130deg, var(--#{$prefix}success), rgba(var(--#{$prefix}success-rgb), 0.6), var(--#{$prefix}success));
+}
+.addGradient{
+	background: linear-gradient(130deg, var(--#{$prefix}secondary), rgba(var(--#{$prefix}secondary-rgb), 0.6), var(--#{$prefix}secondary));
+}

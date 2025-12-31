@@ -1,0 +1,78 @@
+//
+// treeview.scss
+//
+
+.tree {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: relative;
+
+        ul {
+            margin-inline-start: .5em;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            width: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            border-inline-start: 1px solid $text-muted;
+        }
+
+        li {
+            &:before {
+                content: "";
+                display: block;
+                width: 10px;
+                height: 0;
+                border-top: 1px solid;
+                margin-top: -1px;
+                position: absolute;
+                top: 1em;
+                left: 0;
+            }
+        }
+    }
+
+    li {
+        margin: 0;
+        padding-inline-start: 16px;
+        line-height: 2em;
+        color: $text-muted;
+        font-weight: 500;
+        position: relative;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: inherit;
+            padding: 0 4px;
+
+            &:hover {
+                background-color: rgba($light, 0.2);
+            }
+        }
+
+        .expand {
+            display: block;
+        }
+
+        .collapse {
+            display: none;
+        }
+    }
+    .active,
+    .selected {
+        color: $primary !important;
+    }
+}

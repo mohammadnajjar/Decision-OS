@@ -1,0 +1,119 @@
+// 
+// _ribbons.scss
+// 
+
+.ribbon {
+    position: relative;
+
+    .ribbon1 {
+        position: absolute;
+        top: 15px;
+        padding: 8px 10px;
+        color: var(--#{$prefix}ribbon-color);
+        background: var(--#{$prefix}ribbon-bg);
+        box-shadow: $box-shadow;
+        left: 0;
+        border-radius: 0 $border-radius $border-radius 0;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+
+        }
+
+        &:before {
+            width: 7px;
+            height: 120%;
+            top: 0;
+            left: -6.5px;
+            padding: 0 0 7px;
+            background: inherit;
+            border-radius: $border-radius 0 0 $border-radius;
+        }
+
+        &:after {
+            width: 5px;
+            height: 5px;
+            bottom: -5px;
+            left: -4.5px;
+            background: var(--#{$prefix}ribbon-sub-bg);
+            border-radius: $border-radius 0 0 $border-radius;
+        }
+    }
+
+    .ribbon2 {
+        position: absolute;
+        top: -3px;
+        left: -3px;
+
+        span {
+            position: absolute;
+            display: block;
+            width: 165px;
+            padding: 5px 48px;
+            color: var(--#{$prefix}ribbon-color);
+            background-color: var(--#{$prefix}ribbon-bg);
+            box-shadow: $box-shadow;
+            text-align: center;
+            right: -114px;
+            top: 16px;
+            transform: rotate(-45deg);
+        }
+    }
+
+    .ribbon3 {
+        position: absolute;
+        left: 16px;
+        top: 13px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--#{$prefix}ribbon-color);
+        background-color: var(--#{$prefix}ribbon-bg);
+        border-radius: $border-radius-pill;
+        font-size: 13px;
+    }
+
+    &.right {
+
+        //ribbon 1
+        .ribbon1 {
+            right: 0;
+            left: auto;
+            border-radius: $border-radius 0 0 $border-radius;
+
+            &:before {
+                left: auto;
+                right: -6.5px;
+                border-radius: 0 $border-radius $border-radius 0;
+            }
+
+            &:after {
+                left: auto;
+                right: -4.5px;
+                border-radius: 0 $border-radius $border-radius 0;
+            }
+        }
+
+        //ribbon 1
+        .ribbon2 {
+            right: -3px;
+            left: auto;
+
+            span {
+                left: -114px;
+                top: 16px;
+                transform: rotate(45deg);
+            }
+        }
+
+        //ribbon 3
+        .ribbon3{
+            right: 16px;
+            left: auto;
+        }
+    }
+}

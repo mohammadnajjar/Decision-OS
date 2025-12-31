@@ -1,0 +1,81 @@
+//
+// dual_listboxes.scss
+//
+
+.dual-listbox {
+    .dual-listbox__buttons {
+        .dual-listbox__button {
+            border-radius: $btn-border-radius;
+            background-color: rgba(var(--#{$prefix}primary-rgb), 1);
+            padding: $btn-padding-y $btn-padding-x;
+            font-size: $font-size-sm;
+
+            &:hover {
+                background-color: rgba(var(--#{$prefix}primary-rgb), 0.9);
+                transition: $transition-base;
+            }
+        }
+    }
+
+
+    .dual-listbox__container {
+        flex-wrap: unset;
+
+        @include media-breakpoint-down(lg) {
+            flex-direction: column;
+
+            >div:not(.dual-listbox__buttons) {
+                width: 100%;
+            }
+        }
+    }
+
+    .dual-listbox__search {
+        padding: $input-btn-padding-y $input-btn-padding-x;
+        border: $input-btn-border-width solid var(--#{$prefix}border-color);
+        border-radius: var(--#{$prefix}border-radius);
+
+        @include media-breakpoint-down(xl) {
+            margin-top: 25px;
+        }
+
+        &:focus {
+            border: 1px solid var(--#{$prefix}primary);
+            outline: none;
+        }
+    }
+
+    .dual-listbox__title {
+        font-weight: $headings-font-weight;
+        font-size: $input-btn-font-size;
+        color: $headings-color;
+        padding: $input-btn-padding-y $input-btn-padding-x;
+        border-radius: var(--#{$prefix}border-radius) var(--#{$prefix}border-radius) 0 0;
+        border-color: var(--#{$prefix}border-color);
+    }
+
+    .dual-listbox__available,
+    .dual-listbox__selected {
+        border-radius: 0 0 var(--#{$prefix}border-radius) var(--#{$prefix}border-radius);
+        border: 1px solid var(--#{$prefix}border-color);
+        width: 100%;
+        max-width: 350px;
+
+        @include media-breakpoint-down(lg) {
+            max-width: 100%;
+        }
+
+        .dual-listbox__item {
+            border-bottom: 1px solid var(--#{$prefix}border-color);
+            padding: $input-btn-padding-y $input-btn-padding-x;
+            font-size: $input-btn-font-size;
+            color: $text-muted;
+
+            &:hover,
+            &.dual-listbox__item--selected {
+                background-color: $component-active-bg;
+                color: $component-active-color;
+            }
+        }
+    }
+}

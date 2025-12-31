@@ -1,0 +1,9 @@
+.footer {
+    height: var(--#{$prefix}app-footer-height);
+    background-color: var(--#{$prefix}secondary-bg);
+    color: $text-muted;
+    padding: 20px calc(#{$grid-gutter-width} * 0.5);
+    @include media-breakpoint-up(xl) {
+        margin-inline-start: var(--#{$prefix}app-sidebar-width);
+    }
+}

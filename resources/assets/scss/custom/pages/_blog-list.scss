@@ -1,0 +1,21 @@
+//
+// Blog List
+//
+
+.blogCard {
+    &:hover {
+        .blog-avatar {
+            scale: 1.1;
+            transition: $transition-base;
+        }
+        h4{
+            transition: $transition-base;
+            color: var(--#{$prefix}primary);
+        }
+    }
+
+}
+.blog-details-list{
+    position: sticky;
+    top: var(--pe-app-header-height);
+}

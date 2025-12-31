@@ -1,0 +1,19 @@
+.flower {
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+}
+.upgrade-card {
+  background: linear-gradient(
+    130deg,
+    var(--#{$prefix}secondary),
+    rgba(var(--#{$prefix}secondary-rgb), 0.5)
+  );
+}
+.datepicker-container {
+  .air-datepicker {
+    width: 100% !important;
+    box-shadow: none;
+    border: 1px solid var(--#{$prefix}light-bg-subtle);
+  }
+}

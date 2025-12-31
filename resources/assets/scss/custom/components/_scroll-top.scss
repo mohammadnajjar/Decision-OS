@@ -1,0 +1,35 @@
+//
+// scroll-top.scss
+//
+
+.progress-wrap {
+    right: 25px;
+    bottom: 25px;
+    @include border-radius($border-radius-pill);
+    backdrop-filter: blur(6px);
+    background: rgba(var(--#{$prefix}body-bg-rgb), 0.5);
+    @include box-shadow($box-shadow-sm);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 200ms linear;
+
+    &.active-progress {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    svg {
+        transform: rotate(-90deg);
+
+        .progress {
+            fill: none;
+            stroke: var(--#{$prefix}primary);
+            stroke-width: 3px;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 10ms linear;
+        }
+    }
+}

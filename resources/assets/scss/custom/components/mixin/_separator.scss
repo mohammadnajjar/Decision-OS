@@ -1,0 +1,25 @@
+// Mixin for Generating Centered HR Border Utilities
+@mixin generate-centered-hr-borders($colors: $theme-colors, $prefix: '') {
+    @each $name, $color in $colors {
+
+        // Error handling: Ensure `$name` and `$color` exist
+        @if map-has-key($colors, $name) {
+            .center-hr {
+                &.hr-#{$name} {
+
+                    &::before,
+                    &::after {
+                        border-color: var(--#{$prefix}#{$name}); // Set border color dynamically
+                    }
+                }
+            }
+        }
+
+        @else {
+            @error "Color `#{$name}` is not defined in `$theme-colors`. Please add separator it to the map.";
+        }
+    }
+}
+
+// Include Mixin to Generate Classes
+@include generate-centered-hr-borders($theme-colors, $prefix);

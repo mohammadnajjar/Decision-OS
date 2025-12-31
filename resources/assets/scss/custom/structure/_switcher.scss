@@ -1,0 +1,52 @@
+.form-check.sidebar-setting.card-radio input[value="default"] + label {
+  background-color: #f27333;
+}
+.form-check.sidebar-setting.card-radio input[value="cyan"] + label {
+  background-color: #239cb8;
+}
+.form-check.sidebar-setting.card-radio input[value="green"] + label {
+  background-color: #8bb7a2;
+}
+.form-check.sidebar-setting.card-radio input[value="blue"] + label {
+  background-color: #8d58fd;
+}
+.form-check.sidebar-setting.card-radio input[value="red"] + label {
+  background-color: #f15644;
+}
+.layout-customizer {
+  input[type="radio"] {
+    display: none;
+  }
+  .form-check-label {
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  input[type="radio"]:checked + label {
+    border: 1px solid var(--#{$prefix}primary);
+  }
+}
+#sidebar-color {
+  .form-check {
+    padding-left: 0;
+  }
+  .card-radio {
+    .form-check-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .form-check-input:checked + .form-check-label::after {
+      content: "✔";
+      font-size: 18px;
+      color: white;
+      position: absolute;
+      transform: scale(1);
+    }
+    .form-check-label::after {
+      transform: scale(0);
+    }
+  }
+}

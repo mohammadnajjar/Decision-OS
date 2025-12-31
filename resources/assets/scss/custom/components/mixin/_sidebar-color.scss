@@ -1,0 +1,19 @@
+// Define primary color variations directly
+@function hex-to-rgb($color) {
+  @return red($color), green($color), blue($color);
+}
+
+// Function to generate darker color for text emphasis
+@function darken-text($color) {
+  @return darken($color, 15%);
+}
+
+// Function to generate subtle background color
+@function light-bg($color) {
+  @return mix(white, $color, 85%);
+}
+
+// Function to generate subtle border color
+@function light-border($color) {
+  @return mix(white, $color, 70%);
+}

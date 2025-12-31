@@ -1,0 +1,67 @@
+//
+// _buttons.scss
+//
+
+:is(.btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active) {
+    border-color: transparent;
+}
+
+// Small Icon Button
+.icon-btn-sm {
+    @include icon-btn-variation(28px, 6px, 12px);
+}
+
+// Medium Icon Button (Default)
+.icon-btn {
+    @include icon-btn-variation(39px, 8px, 14px);
+}
+
+// Large Icon Button
+.icon-btn-lg {
+    @include icon-btn-variation(44px, 12px, 18px);
+}
+
+.btn-loader {
+    .indicator-progress {
+        display: none;
+    }
+
+    &.loading {
+        .indicator-progress {
+            display: flex;
+        }
+    }
+
+    i {
+        animation: loader 1500ms infinite linear;
+        display: inline-block;
+        transform: rotate(0deg);
+    }
+}
+
+// Loader Button animation
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.custom-toggle {
+    .icon-on {
+        display: none; // Hidden by default
+    }
+
+    .icon-off {
+        display: inline-flex; // Visible by default
+    }
+
+    &.active {
+        .icon-on {
+            display: inline-flex; // Show when active
+        }
+
+        .icon-off {
+            display: none; // Hide when active
+        }
+    }
+}

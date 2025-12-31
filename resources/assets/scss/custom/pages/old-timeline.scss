@@ -1,0 +1,154 @@
+
+// Mixin for common timeline section styles
+@mixin timeline-section($position: relative, $padding-bottom: 2rem) {
+    position: $position;
+    padding-bottom: $padding-bottom;
+    display: flex;
+}
+
+// Mixin for timeline content styling
+@mixin timeline-content($padding: 15px) {
+    width: 100%;
+    padding: $padding;
+    border-radius: 10px;
+    background-color: #ffffff;
+    position: relative;
+    margin: 0;
+}
+
+.timeline-block {
+    display: flex;
+    position: relative;
+    z-index: 1;
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+
+        .side-timeline-icon {
+            position: absolute;
+            z-index: 9;
+            left: -18px;
+
+            @include rtl {
+                left: 0;
+                right: -18px;
+            }
+        }
+    }
+
+}
+
+// Main timeline box
+.timeline-box {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin-inline-start: 18px;
+
+    &::before {
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 100%;
+        top: 0;
+        margin-left: -1px;
+        z-index: 1;
+        background: #4F84C4;
+    }
+
+    &.multi-timeline-box {
+        margin: 0;
+
+        @include media-breakpoint-down(md) {
+            margin-inline-start: 18px;
+        }
+
+
+        &::before {
+            left: 50%;
+
+            @include media-breakpoint-down(md) {
+                left: 0;
+
+                @include rtl {
+                    left: auto;
+                    right: 0px;
+                }
+            }
+        }
+    }
+
+    &.single-timeline-box {
+        @include media-breakpoint-down(md) {
+            left: 0;
+
+            @include rtl {
+                left: auto;
+                right: 0px;
+            }
+        }
+    }
+}
+
+.timeline-section {
+    @include timeline-section;
+
+    &:last-child {
+        border-left: 0;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        top: 0;
+        left: -20px;
+        z-index: 9;
+
+        @include rtl {
+            left: 20px;
+        }
+    }
+
+    .timeline-content {
+        @include timeline-content;
+        margin-left: 35px;
+
+        @include rtl {
+            margin-left: 0;
+        }
+    }
+}
+
+// App side timeline styles
+.side-timeline-section {
+
+    width: 100%;
+    @include timeline-section(relative, 2rem); // Reusing the timeline section mixin
+
+    @include media-breakpoint-up(md) {
+        width: 50%;
+    }
+
+    .timeline-content {
+        @include timeline-content;
+    }
+
+    &.right-side {
+        // margin-left: auto;
+
+        .timeline-content {
+            margin-inline-start: 30px;
+        }
+    }
+
+    &.left-side {
+        .timeline-content {
+            @include media-breakpoint-up(md) {
+                margin-inline-end: 30px;
+            }
+
+            @include media-breakpoint-down(md) {
+                margin-inline-start: 30px;
+            }
+        }
+    }
+}
