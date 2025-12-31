@@ -104,5 +104,5 @@ app/Http/Controllers/    # Currently only DashboardController
 - No API routes defined yet — extend in `routes/api.php` when needed
 - Default database is SQLite (created on `composer create-project`)
 
-- any edit you will make create docsfile.md file with description of the changes you made and the reason for the changes in arabic.
+- any edit you will make create docsfilewiththeanme for the edit .md  file with description of the changes you made and the reason for the changes in arabic.
 

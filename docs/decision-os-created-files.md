@@ -173,50 +173,54 @@ next_week_focus, week_start, timestamps
 
 ---
 
-## 📝 ما تبقى (Views)
+## 📝 Views المنشأة
 
-### المطلوب إنشاؤه:
+### الهيكل الكامل:
 ```
 resources/views/decision-os/
-├── dashboard.blade.php          ← الصفحة الرئيسية
+├── dashboard.blade.php              ✅ مكتمل
 ├── components/
-│   ├── today-one-thing.blade.php
-│   ├── pomodoro-timer.blade.php
-│   ├── warnings-box.blade.php
-│   ├── module-card.blade.php
-│   ├── kpi-widget.blade.php
-│   ├── weekly-review-cta.blade.php
-│   └── burnout-indicator.blade.php
+│   ├── today-one-thing.blade.php    ✅ مكتمل
+│   ├── pomodoro-timer.blade.php     ✅ مكتمل
+│   ├── warnings-box.blade.php       ✅ مكتمل
+│   ├── module-card.blade.php        ✅ مكتمل
+│   ├── kpi-widget.blade.php         ✅ مكتمل
+│   ├── burnout-indicator.blade.php  ✅ مكتمل
+│   └── weekly-review-cta.blade.php  ✅ مكتمل
 ├── metrics/
-│   ├── input.blade.php
-│   └── history.blade.php
-├── tasks/
-│   └── index.blade.php
-├── pomodoro/
-│   └── history.blade.php
+│   └── input.blade.php              ✅ مكتمل
 └── weekly-review/
-    ├── form.blade.php
-    ├── show.blade.php
-    └── index.blade.php
+    ├── form.blade.php               ✅ مكتمل
+    └── index.blade.php              ✅ مكتمل
 ```
 
-### Routes المطلوب إضافتها:
+### Routes المضافة في `routes/web.php`:
 ```php
 Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(function () {
     Route::get('/', [DecisionDashboardController::class, 'index'])->name('dashboard');
-    Route::get('metrics', [MetricController::class, 'index'])->name('metrics.index');
-    Route::post('metrics', [MetricController::class, 'store'])->name('metrics.store');
-    Route::get('tasks', [TaskController::class, 'index'])->name('tasks.index');
-    Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
-    Route::patch('tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
-    Route::delete('tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-    Route::get('pomodoro/stats', [PomodoroController::class, 'stats'])->name('pomodoro.stats');
-    Route::post('pomodoro', [PomodoroController::class, 'store'])->name('pomodoro.store');
-    Route::get('weekly-review', [WeeklyReviewController::class, 'index'])->name('weekly-review.index');
-    Route::get('weekly-review/create', [WeeklyReviewController::class, 'create'])->name('weekly-review.create');
-    Route::post('weekly-review', [WeeklyReviewController::class, 'store'])->name('weekly-review.store');
+    Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.input');
+    Route::post('/metrics', [MetricController::class, 'store'])->name('metrics.store');
+    Route::get('/tasks/today', [TaskController::class, 'today'])->name('tasks.today');
+    Route::post('/tasks/today', [TaskController::class, 'setToday'])->name('tasks.set-today');
+    Route::patch('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
+    Route::patch('/tasks/{task}/reset', [TaskController::class, 'reset'])->name('tasks.reset');
+    Route::post('/pomodoro/start', [PomodoroController::class, 'start'])->name('pomodoro.start');
+    Route::post('/pomodoro/{session}/complete', [PomodoroController::class, 'complete'])->name('pomodoro.complete');
+    Route::get('/pomodoro/stats', [PomodoroController::class, 'stats'])->name('pomodoro.stats');
+    Route::get('/weekly-review', [WeeklyReviewController::class, 'index'])->name('weekly-review.index');
+    Route::get('/weekly-review/create', [WeeklyReviewController::class, 'create'])->name('weekly-review.create');
+    Route::post('/weekly-review', [WeeklyReviewController::class, 'store'])->name('weekly-review.store');
+    Route::get('/weekly-review/{review}', [WeeklyReviewController::class, 'show'])->name('weekly-review.show');
 });
 ```
+
+---
+
+## 🎨 ملفات JavaScript
+
+| الملف | الوظيفة |
+|-------|---------|
+| `public/assets/js/decision-os/pomodoro-timer.js` | ✅ مؤقت Pomodoro كامل مع إشعارات |
 
 ---
 
@@ -227,11 +231,40 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
 | المرحلة 0: التحضير | ✅ مكتمل |
 | المرحلة 1: البيانات الأساسية | ✅ مكتمل |
 | المرحلة 2: Modules الأساسية | ✅ مكتمل |
-| المرحلة 3: Pomodoro System | ✅ مكتمل (Backend) |
+| المرحلة 3: Pomodoro System | ✅ مكتمل (Backend + JS) |
 | المرحلة 4: Status Engine | ✅ مكتمل |
 | المرحلة 5: Insights Engine | ✅ مكتمل |
 | المرحلة 6: Burnout Monitor | ✅ مكتمل |
-| المرحلة 7: Weekly Review | ✅ مكتمل (Backend) |
-| المرحلة 8: Dashboard | 🔄 جاري (Views) |
+| المرحلة 7: Weekly Review | ✅ مكتمل |
+| المرحلة 8: Dashboard Views | ✅ مكتمل |
 | المرحلة 9: Locking System | ✅ مكتمل |
-| المرحلة 10: Demo & Finalization | ⏳ قيد الانتظار |
+| المرحلة 10: Demo & Finalization | 🔄 جاري |
+
+---
+
+## 🚀 خطوات التشغيل
+
+```bash
+# 1. تشغيل Migrations
+php artisan migrate
+
+# 2. زرع المقاييس الأساسية
+php artisan db:seed --class=MetricSeeder
+
+# 3. تشغيل السيرفر
+php artisan serve
+
+# 4. زيارة Dashboard
+# http://localhost:8000/decision-os
+```
+
+---
+
+## 📌 ملاحظات مهمة
+
+1. جميع Views تستخدم template Fabkin الموجود (`@extends('partials.layouts.master')`)
+2. الأيقونات من Remixicon (`ri-*`)
+3. الألوان تتبع نمط Bootstrap 5 (`bg-success-subtle`, `text-danger`, إلخ)
+4. جميع النصوص بالعربية
+5. التصميم Responsive (Bootstrap Grid)
+
