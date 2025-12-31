@@ -47,8 +47,7 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/', [DecisionDashboardController::class, 'index'])->name('dashboard');
 
     // Metrics
-    Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.input');
-    Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.index');
+    Route::get('/metrics', [MetricController::class, 'index'])->name('metrics.index');
     Route::post('/metrics', [MetricController::class, 'store'])->name('metrics.store');
 
     // Tasks - Today One Thing

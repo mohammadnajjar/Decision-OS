@@ -164,7 +164,7 @@
 @section('js')
 <script>
     function changeDate(date) {
-        window.location.href = '{{ route("decision-os.metrics.input") }}?date=' + date;
+        window.location.href = '{{ route("decision-os.metrics.index") }}?date=' + date;
     }
 </script>
 @endsection
