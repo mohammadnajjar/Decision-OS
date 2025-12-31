@@ -27,6 +27,7 @@ const popovers = initializeBootstrapComponents(
 // Function to handle both sticky menu and button loading
 function initializeAppFeatures() {
     const stickyMenu = document.getElementById("appHeader"); // Ensure this ID matches your HTML
+    if (!stickyMenu) return; // Guard clause if header not found
     const stickyOffset = stickyMenu.offsetTop;
 
     // Function to toggle sticky class on scroll

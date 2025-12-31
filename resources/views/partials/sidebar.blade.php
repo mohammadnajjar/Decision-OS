@@ -44,9 +44,21 @@
 
             {{-- Tasks --}}
             <li class="pe-slide">
-                <a href="{{ route('decision-os.tasks.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.*') ? 'active' : '' }}">
+                <a href="{{ route('decision-os.tasks.today') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.today') ? 'active' : '' }}">
+                    <i class="ri-focus-3-line pe-nav-icon text-primary"></i>
+                    <span class="pe-nav-content">Today One Thing</span>
+                </a>
+            </li>
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.tasks.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.index') ? 'active' : '' }}">
                     <i class="ri-task-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">المهام اليومية</span>
+                    <span class="pe-nav-content">جميع المهام</span>
+                </a>
+            </li>
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.tasks.create') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.create') ? 'active' : '' }}">
+                    <i class="ri-add-circle-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">إضافة مهمة</span>
                 </a>
             </li>
 

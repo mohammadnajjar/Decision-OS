@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <meta charset="utf-8" />
 <base href="{{ url('/') }}/">
-<title>@yield('title', ' | FabKin Admin & Dashboards Template')</title>
+<title>@yield('title', ' | Decision OS Dashboard')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta content="Admin & Dashboards Template" name="description" />
-<meta content="Pixeleyez" name="author" />
+<meta content="Decision OS Dashboard - نظام القرار والتنفيذ" name="description" />
+<meta content="Decision OS" name="author" />
 
 <!-- layout setup -->
 <script type="module" src="{{ asset('assets/js/layout-setup.js') }}"></script>

@@ -54,11 +54,12 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/today', [TaskController::class, 'today'])->name('tasks.today');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-    Route::post('/tasks/today', [TaskController::class, 'setToday'])->name('tasks.set-today');
+    Route::post('/tasks/today', [TaskController::class, 'store'])->name('tasks.set-today');
     Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
     Route::patch('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
     Route::patch('/tasks/{task}/reset', [TaskController::class, 'reset'])->name('tasks.reset');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
 
     // Pomodoro API
     Route::get('/pomodoro', [PomodoroController::class, 'index'])->name('pomodoro.index');

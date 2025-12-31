@@ -112,4 +112,112 @@ class TaskController extends Controller
 
         return back()->with('success', 'تم حذف المهمة');
     }
+
+    /**
+     * Mark task as complete.
+     */
+    public function complete(Request $request, Task $task): RedirectResponse|JsonResponse
+    {
+        if ($task->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        $task->update([
+            'completed' => true,
+            'completed_at' => now(),
+        ]);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'completed' => true,
+            ]);
+        }
+
+        return back()->with('success', 'تم إكمال المهمة ✓');
+    }
+
+    /**
+     * Reset task completion.
+     */
+    public function reset(Request $request, Task $task): RedirectResponse|JsonResponse
+    {
+        if ($task->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        $task->update([
+            'completed' => false,
+            'completed_at' => null,
+        ]);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'completed' => false,
+            ]);
+        }
+
+        return back()->with('success', 'تم إعادة المهمة');
+    }
+
+    /**
+     * Get today's task.
+     */
+    public function today(Request $request): View
+    {
+        $user = $request->user();
+        $date = today()->toDateString();
+
+        $oneThing = Task::where('user_id', $user->id)
+            ->where('date', $date)
+            ->where('type', 'one_thing')
+            ->first();
+
+        $topTasks = Task::where('user_id', $user->id)
+            ->where('date', $date)
+            ->where('type', 'top_3')
+            ->orderBy('created_at')
+            ->get();
+
+        return view('decision-os.tasks.today', compact('oneThing', 'topTasks', 'date'));
+    }
+
+    /**
+     * Set today's one thing.
+     */
+    public function setToday(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $user = $request->user();
+        $date = today()->toDateString();
+
+        // Delete existing one thing for today
+        Task::where('user_id', $user->id)
+            ->where('date', $date)
+            ->where('type', 'one_thing')
+            ->delete();
+
+        Task::create([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'type' => 'one_thing',
+            'date' => $date,
+            'completed' => false,
+        ]);
+
+        return back()->with('success', 'تم تحديد Today One Thing ✓');
+    }
+
+    /**
+     * Show task creation form.
+     */
+    public function create(Request $request): View
+    {
+        $date = $request->get('date', today()->toDateString());
+        return view('decision-os.tasks.create', compact('date'));
+    }
 }

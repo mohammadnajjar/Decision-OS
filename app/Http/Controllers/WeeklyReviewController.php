@@ -89,14 +89,14 @@ class WeeklyReviewController extends Controller
     /**
      * Show a specific review.
      */
-    public function show(WeeklyReview $weeklyReview): View
+    public function show(WeeklyReview $review): View
     {
         // Authorization
-        if ($weeklyReview->user_id !== Auth::id()) {
+        if ($review->user_id !== Auth::id()) {
             abort(403);
         }
 
-        return view('decision-os.weekly-review.show', ['review' => $weeklyReview]);
+        return view('decision-os.weekly-review.show', ['review' => $review]);
     }
 
     /**
