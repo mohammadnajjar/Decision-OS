@@ -16,6 +16,9 @@
 | `2025_01_01_000004_create_tasks_table.php` | جدول المهام (Today One Thing + Top 3) |
 | `2025_01_01_000005_create_pomodoro_sessions_table.php` | جدول جلسات Pomodoro |
 | `2025_01_01_000006_create_weekly_reviews_table.php` | جدول المراجعات الأسبوعية |
+| `2025_12_31_200001_create_decisions_table.php` | ✅ **جديد** - جدول سجل القرارات (Decision Log) |
+| `2025_12_31_200002_create_projects_table.php` | ✅ **جديد** - جدول المشاريع (Time → Money) |
+| `2025_12_31_200003_create_clients_table.php` | ✅ **جديد** - جدول العملاء (Client Health) |
 
 ---
 
@@ -28,6 +31,9 @@
 | `app/Models/Task.php` | Model للمهام اليومية |
 | `app/Models/PomodoroSession.php` | Model لجلسات Pomodoro |
 | `app/Models/WeeklyReview.php` | Model للمراجعات الأسبوعية |
+| `app/Models/Decision.php` | ✅ **جديد** - Model للقرارات مع Win/Lose tracking |
+| `app/Models/Project.php` | ✅ **جديد** - Model للمشاريع مع Revenue per Hour |
+| `app/Models/Client.php` | ✅ **جديد** - Model للعملاء مع Health Status |
 
 ---
 
@@ -80,6 +86,10 @@ getLockMessage(User $user): ?string
 | `app/Http/Controllers/TaskController.php` | إدارة Today One Thing + Top 3 |
 | `app/Http/Controllers/PomodoroController.php` | API لتسجيل جلسات Pomodoro |
 | `app/Http/Controllers/WeeklyReviewController.php` | المراجعة الأسبوعية |
+| `app/Http/Controllers/DecisionController.php` | ✅ **جديد** - سجل القرارات (Decision Log) |
+| `app/Http/Controllers/ProjectController.php` | ✅ **جديد** - المشاريع (Time → Money) |
+| `app/Http/Controllers/ClientController.php` | ✅ **جديد** - العملاء (Client Health) |
+| `app/Http/Controllers/OnboardingController.php` | ✅ **جديد** - اختيار الـ Profile |
 
 ---
 
@@ -177,21 +187,35 @@ next_week_focus, week_start, timestamps
 
 ### الهيكل الكامل:
 ```
-resources/views/decision-os/
-├── dashboard.blade.php              ✅ مكتمل
-├── components/
-│   ├── today-one-thing.blade.php    ✅ مكتمل
-│   ├── pomodoro-timer.blade.php     ✅ مكتمل
-│   ├── warnings-box.blade.php       ✅ مكتمل
-│   ├── module-card.blade.php        ✅ مكتمل
-│   ├── kpi-widget.blade.php         ✅ مكتمل
-│   ├── burnout-indicator.blade.php  ✅ مكتمل
-│   └── weekly-review-cta.blade.php  ✅ مكتمل
-├── metrics/
-│   └── input.blade.php              ✅ مكتمل
-└── weekly-review/
-    ├── form.blade.php               ✅ مكتمل
-    └── index.blade.php              ✅ مكتمل
+resources/views/
+├── decision-os/
+│   ├── dashboard.blade.php              ✅ مكتمل
+│   ├── components/
+│   │   ├── today-one-thing.blade.php    ✅ مكتمل
+│   │   ├── pomodoro-timer.blade.php     ✅ مكتمل
+│   │   ├── warnings-box.blade.php       ✅ مكتمل
+│   │   ├── module-card.blade.php        ✅ مكتمل
+│   │   ├── kpi-widget.blade.php         ✅ مكتمل
+│   │   ├── burnout-indicator.blade.php  ✅ مكتمل
+│   │   └── weekly-review-cta.blade.php  ✅ مكتمل
+│   ├── metrics/
+│   │   └── input.blade.php              ✅ مكتمل
+│   ├── weekly-review/
+│   │   ├── form.blade.php               ✅ مكتمل
+│   │   └── index.blade.php              ✅ مكتمل
+│   ├── decisions/                       ✅ جديد
+│   │   ├── index.blade.php              ✅ مكتمل
+│   │   ├── create.blade.php             ✅ مكتمل
+│   │   └── review.blade.php             ✅ مكتمل
+│   ├── projects/                        ✅ جديد
+│   │   ├── index.blade.php              ✅ مكتمل
+│   │   └── create.blade.php             ✅ مكتمل
+│   └── clients/                         ✅ جديد
+│       ├── index.blade.php              ✅ مكتمل
+│       ├── create.blade.php             ✅ مكتمل
+│       └── edit.blade.php               ✅ مكتمل
+└── onboarding/                          ✅ جديد
+    └── profile-select.blade.php         ✅ مكتمل
 ```
 
 ### Routes المضافة في `routes/web.php`:
