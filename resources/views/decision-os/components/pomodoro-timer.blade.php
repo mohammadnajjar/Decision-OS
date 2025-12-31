@@ -1,5 +1,5 @@
 {{-- Pomodoro Timer Component --}}
-<div class="card h-100">
+<div class="card h-100" id="pomodoro-timer">
     <div class="card-header">
         <h5 class="card-title mb-0">
             <i class="ri-timer-line me-2 text-danger"></i>
