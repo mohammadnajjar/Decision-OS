@@ -75,17 +75,17 @@
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('metrics.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.metrics.index') }}" class="pe-nav-link">
                             <i class="ri-file-list-3-line me-1"></i> إدخال البيانات
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('tasks.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.tasks.index') }}" class="pe-nav-link">
                             <i class="ri-task-line me-1"></i> المهام اليومية
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('pomodoro.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.pomodoro.index') }}" class="pe-nav-link">
                             <i class="ri-timer-line me-1"></i> بومودورو
                         </a>
                     </li>
@@ -99,22 +99,22 @@
                 </a>
                 <ul class="pe-slide-menu collapse" id="collapseDecisionOSLogs">
                     <li class="pe-slide-item">
-                        <a href="{{ route('decisions.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.decisions.index') }}" class="pe-nav-link">
                             <i class="ri-git-commit-line me-1"></i> سجل القرارات
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('projects.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.projects.index') }}" class="pe-nav-link">
                             <i class="ri-folder-line me-1"></i> المشاريع
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('clients.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link">
                             <i class="ri-user-star-line me-1"></i> العملاء
                         </a>
                     </li>
                     <li class="pe-slide-item">
-                        <a href="{{ route('weekly-review.index') }}" class="pe-nav-link">
+                        <a href="{{ route('decision-os.weekly-review.index') }}" class="pe-nav-link">
                             <i class="ri-calendar-check-line me-1"></i> المراجعة الأسبوعية
                         </a>
                     </li>
