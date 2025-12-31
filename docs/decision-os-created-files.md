@@ -202,39 +202,87 @@ resources/views/
 │   │   └── input.blade.php              ✅ مكتمل
 │   ├── weekly-review/
 │   │   ├── form.blade.php               ✅ مكتمل
+│   │   ├── index.blade.php              ✅ مكتمل
+│   │   └── show.blade.php               ✅ مكتمل (جديد)
+│   ├── tasks/                           ✅ جديد
 │   │   └── index.blade.php              ✅ مكتمل
+│   ├── pomodoro/                        ✅ جديد
+│   │   └── history.blade.php            ✅ مكتمل
 │   ├── decisions/                       ✅ جديد
 │   │   ├── index.blade.php              ✅ مكتمل
 │   │   ├── create.blade.php             ✅ مكتمل
+│   │   ├── show.blade.php               ✅ مكتمل (جديد)
 │   │   └── review.blade.php             ✅ مكتمل
 │   ├── projects/                        ✅ جديد
 │   │   ├── index.blade.php              ✅ مكتمل
-│   │   └── create.blade.php             ✅ مكتمل
+│   │   ├── create.blade.php             ✅ مكتمل
+│   │   └── show.blade.php               ✅ مكتمل (جديد)
 │   └── clients/                         ✅ جديد
 │       ├── index.blade.php              ✅ مكتمل
 │       ├── create.blade.php             ✅ مكتمل
-│       └── edit.blade.php               ✅ مكتمل
+│       ├── edit.blade.php               ✅ مكتمل
+│       └── show.blade.php               ✅ مكتمل (جديد)
 └── onboarding/                          ✅ جديد
     └── profile-select.blade.php         ✅ مكتمل
 ```
 
 ### Routes المضافة في `routes/web.php`:
 ```php
+// Onboarding
+Route::get('/onboarding', [OnboardingController::class, 'selectProfile'])->name('onboarding.select-profile');
+Route::post('/onboarding', [OnboardingController::class, 'storeProfile'])->name('onboarding.store-profile');
+
+// Decision OS
 Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(function () {
     Route::get('/', [DecisionDashboardController::class, 'index'])->name('dashboard');
+    
+    // Metrics
     Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.input');
+    Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.index');
     Route::post('/metrics', [MetricController::class, 'store'])->name('metrics.store');
+    
+    // Tasks
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/today', [TaskController::class, 'today'])->name('tasks.today');
     Route::post('/tasks/today', [TaskController::class, 'setToday'])->name('tasks.set-today');
     Route::patch('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
     Route::patch('/tasks/{task}/reset', [TaskController::class, 'reset'])->name('tasks.reset');
+    
+    // Pomodoro
+    Route::get('/pomodoro/history', [PomodoroController::class, 'history'])->name('pomodoro.history');
     Route::post('/pomodoro/start', [PomodoroController::class, 'start'])->name('pomodoro.start');
     Route::post('/pomodoro/{session}/complete', [PomodoroController::class, 'complete'])->name('pomodoro.complete');
     Route::get('/pomodoro/stats', [PomodoroController::class, 'stats'])->name('pomodoro.stats');
+    
+    // Weekly Review
     Route::get('/weekly-review', [WeeklyReviewController::class, 'index'])->name('weekly-review.index');
     Route::get('/weekly-review/create', [WeeklyReviewController::class, 'create'])->name('weekly-review.create');
     Route::post('/weekly-review', [WeeklyReviewController::class, 'store'])->name('weekly-review.store');
     Route::get('/weekly-review/{review}', [WeeklyReviewController::class, 'show'])->name('weekly-review.show');
+    
+    // Decision Log
+    Route::get('/decisions', [DecisionController::class, 'index'])->name('decisions.index');
+    Route::get('/decisions/create', [DecisionController::class, 'create'])->name('decisions.create');
+    Route::post('/decisions', [DecisionController::class, 'store'])->name('decisions.store');
+    Route::get('/decisions/{decision}', [DecisionController::class, 'show'])->name('decisions.show');
+    Route::get('/decisions/{decision}/review', [DecisionController::class, 'review'])->name('decisions.review');
+    Route::post('/decisions/{decision}/review', [DecisionController::class, 'storeReview'])->name('decisions.store-review');
+    
+    // Projects (Time → Money)
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::post('/projects/{project}/revenue', [ProjectController::class, 'updateRevenue'])->name('projects.update-revenue');
+    Route::post('/projects/{project}/hours', [ProjectController::class, 'logHours'])->name('projects.log-hours');
+    
+    // Clients (Client Health)
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+    Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
+    Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+    Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 });
 ```
 
@@ -262,7 +310,11 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
 | المرحلة 7: Weekly Review | ✅ مكتمل |
 | المرحلة 8: Dashboard Views | ✅ مكتمل |
 | المرحلة 9: Locking System | ✅ مكتمل |
-| المرحلة 10: Demo & Finalization | 🔄 جاري |
+| المرحلة 10: Demo & Finalization | ✅ مكتمل |
+| **Decision Log** | ✅ مكتمل (جديد) |
+| **Time → Money (Projects)** | ✅ مكتمل (جديد) |
+| **Client Health** | ✅ مكتمل (جديد) |
+| **User Profiles / Onboarding** | ✅ مكتمل (جديد) |
 
 ---
 

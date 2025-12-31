@@ -75,7 +75,7 @@ class Task extends Model
     public static function getTodayOneThing(int $userId): ?self
     {
         return static::where('user_id', $userId)
-            ->whereDate('date', today())
+            ->where('date', today()->toDateString())
             ->where('type', 'one_thing')
             ->first();
     }

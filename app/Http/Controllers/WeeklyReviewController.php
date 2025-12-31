@@ -7,6 +7,7 @@ use App\Services\StatusService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class WeeklyReviewController extends Controller
 {
@@ -33,7 +34,7 @@ class WeeklyReviewController extends Controller
 
         // Get current KPI snapshot
         $kpiSnapshot = $this->getKPISnapshot($user);
-        
+
         // Get last week's review for comparison
         $lastReview = WeeklyReview::where('user_id', $user->id)
             ->orderBy('week_start', 'desc')
@@ -91,7 +92,7 @@ class WeeklyReviewController extends Controller
     public function show(WeeklyReview $weeklyReview): View
     {
         // Authorization
-        if ($weeklyReview->user_id !== auth()->id()) {
+        if ($weeklyReview->user_id !== Auth::id()) {
             abort(403);
         }
 

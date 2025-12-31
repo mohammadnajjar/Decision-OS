@@ -63,7 +63,9 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        $this->authorize('view', $client);
+        if ($client->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $client->load('projects');
 
@@ -75,7 +77,9 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        $this->authorize('update', $client);
+        if ($client->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         return view('decision-os.clients.edit', compact('client'));
     }
@@ -85,7 +89,9 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $this->authorize('update', $client);
+        if ($client->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',

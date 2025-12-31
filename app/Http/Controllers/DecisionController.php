@@ -60,7 +60,9 @@ class DecisionController extends Controller
      */
     public function show(Decision $decision)
     {
-        $this->authorize('view', $decision);
+        if ($decision->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         return view('decision-os.decisions.show', compact('decision'));
     }
@@ -70,7 +72,9 @@ class DecisionController extends Controller
      */
     public function review(Decision $decision)
     {
-        $this->authorize('update', $decision);
+        if ($decision->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         return view('decision-os.decisions.review', compact('decision'));
     }
@@ -80,7 +84,9 @@ class DecisionController extends Controller
      */
     public function storeReview(Request $request, Decision $decision)
     {
-        $this->authorize('update', $decision);
+        if ($decision->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'actual_outcome' => 'required|string',

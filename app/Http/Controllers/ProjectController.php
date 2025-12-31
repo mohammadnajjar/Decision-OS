@@ -65,7 +65,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $this->authorize('view', $project);
+        if ($project->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $project->load('client', 'pomodoroSessions');
 
@@ -77,7 +79,9 @@ class ProjectController extends Controller
      */
     public function updateRevenue(Request $request, Project $project)
     {
-        $this->authorize('update', $project);
+        if ($project->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'revenue' => 'required|numeric|min:0',
@@ -99,7 +103,9 @@ class ProjectController extends Controller
      */
     public function logHours(Request $request, Project $project)
     {
-        $this->authorize('update', $project);
+        if ($project->user_id !== Auth::id()) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'hours' => 'required|numeric|min:0.25',

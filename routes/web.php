@@ -48,15 +48,18 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
 
     // Metrics
     Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.input');
+    Route::get('/metrics', [MetricController::class, 'input'])->name('metrics.index');
     Route::post('/metrics', [MetricController::class, 'store'])->name('metrics.store');
 
     // Tasks - Today One Thing
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/today', [TaskController::class, 'today'])->name('tasks.today');
     Route::post('/tasks/today', [TaskController::class, 'setToday'])->name('tasks.set-today');
     Route::patch('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
     Route::patch('/tasks/{task}/reset', [TaskController::class, 'reset'])->name('tasks.reset');
 
     // Pomodoro API
+    Route::get('/pomodoro/history', [PomodoroController::class, 'history'])->name('pomodoro.history');
     Route::post('/pomodoro/start', [PomodoroController::class, 'start'])->name('pomodoro.start');
     Route::post('/pomodoro/{session}/complete', [PomodoroController::class, 'complete'])->name('pomodoro.complete');
     Route::get('/pomodoro/stats', [PomodoroController::class, 'stats'])->name('pomodoro.stats');
