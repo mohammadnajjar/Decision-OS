@@ -13,16 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create test user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'profile' => 'freelancer',
-        ]);
+        // Create test user (if not exists)
+        $user = User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'password' => bcrypt('password123'),
+                'profile' => 'freelancer',
+            ]
+        );
 
         // Seed metrics
         $this->call([
             MetricSeeder::class,
+            DemoDataSeeder::class,
         ]);
     }
 }
