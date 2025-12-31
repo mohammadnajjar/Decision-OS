@@ -87,9 +87,45 @@ class PomodoroTimer {
         this.updateDisplay();
     }
 
-    skip() {
+    async skip() {
         this.pause();
-        this.complete();
+
+        // إذا كانت جلسة عمل وليست استراحة، سجّلها كـ interrupted
+        if (!this.isBreak && this.currentSessionId) {
+            await this.interruptSession();
+        }
+
+        // انتقل للمرحلة التالية بدون احتساب كجلسة مكتملة
+        if (!this.isBreak) {
+            // تخطي جلسة العمل → انتقل للاستراحة
+            this.isBreak = true;
+            this.timeRemaining = this.getBreakDuration();
+        } else {
+            // تخطي الاستراحة → انتقل للعمل
+            this.isBreak = false;
+            this.timeRemaining = this.workDuration;
+        }
+
+        this.updateDisplay();
+        this.updateButtons();
+    }
+
+    async interruptSession() {
+        if (!this.currentSessionId) return;
+
+        try {
+            await fetch(`/decision-os/pomodoro/${this.currentSessionId}/interrupt`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            });
+
+            this.currentSessionId = null;
+        } catch (error) {
+            console.error('Failed to interrupt session:', error);
+        }
     }
 
     async complete() {

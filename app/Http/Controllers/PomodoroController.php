@@ -109,6 +109,29 @@ class PomodoroController extends Controller
     }
 
     /**
+     * Interrupt/skip a pomodoro session.
+     */
+    public function interrupt(Request $request, PomodoroSession $session): JsonResponse
+    {
+        // Verify session belongs to user
+        if ($session->user_id !== $request->user()->id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        // Calculate elapsed time (25 minutes - remaining time would require client to send it)
+        // For simplicity, we mark it as interrupted with 0 duration
+        $session->update([
+            'status' => 'interrupted',
+            'duration' => 0,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Session interrupted',
+        ]);
+    }
+
+    /**
      * Get pomodoro stats for today.
      */
     public function stats(Request $request): JsonResponse

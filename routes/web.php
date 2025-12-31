@@ -65,6 +65,7 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/pomodoro/history', [PomodoroController::class, 'history'])->name('pomodoro.history');
     Route::post('/pomodoro/start', [PomodoroController::class, 'start'])->name('pomodoro.start');
     Route::post('/pomodoro/{session}/complete', [PomodoroController::class, 'complete'])->name('pomodoro.complete');
+    Route::post('/pomodoro/{session}/interrupt', [PomodoroController::class, 'interrupt'])->name('pomodoro.interrupt');
     Route::get('/pomodoro/stats', [PomodoroController::class, 'stats'])->name('pomodoro.stats');
 
     // Weekly Review
