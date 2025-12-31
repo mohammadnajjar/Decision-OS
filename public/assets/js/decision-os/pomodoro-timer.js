@@ -17,14 +17,16 @@ class PomodoroTimer {
         this.currentSessionId = null;
         this.intervalId = null;
         
-        // DOM Elements
-        this.timerDisplay = document.getElementById('pomodoro-timer');
+        // DOM Elements - matching HTML IDs
+        this.timerDisplay = document.getElementById('pomodoro-display');
         this.startBtn = document.getElementById('pomodoro-start');
         this.pauseBtn = document.getElementById('pomodoro-pause');
         this.resetBtn = document.getElementById('pomodoro-reset');
         this.skipBtn = document.getElementById('pomodoro-skip');
         this.statusLabel = document.getElementById('pomodoro-status');
-        this.progressRing = document.getElementById('pomodoro-progress');
+        this.completedCount = document.getElementById('pomodoro-completed');
+        this.focusMinutes = document.getElementById('pomodoro-focus-minutes');
+        this.sessionNumber = document.getElementById('pomodoro-session-number');
         
         this.init();
     }
@@ -175,17 +177,22 @@ class PomodoroTimer {
         }
         
         if (this.statusLabel) {
-            this.statusLabel.textContent = this.isBreak ? 'استراحة' : 'تركيز';
-            this.statusLabel.className = this.isBreak ? 'badge bg-success' : 'badge bg-primary';
+            if (this.isRunning) {
+                this.statusLabel.textContent = this.isBreak ? '🧘 استراحة' : '🎯 تركيز';
+            } else {
+                this.statusLabel.textContent = 'جاهز للبدء';
+            }
         }
         
-        // Update progress ring
-        if (this.progressRing) {
-            const totalDuration = this.isBreak ? this.getBreakDuration() : this.workDuration;
-            const progress = (totalDuration - this.timeRemaining) / totalDuration;
-            const circumference = 2 * Math.PI * 45; // radius = 45
-            const offset = circumference * (1 - progress);
-            this.progressRing.style.strokeDashoffset = offset;
+        // Update stats display
+        if (this.completedCount) {
+            this.completedCount.textContent = this.sessionsCompleted;
+        }
+        if (this.focusMinutes) {
+            this.focusMinutes.textContent = this.sessionsCompleted * 25;
+        }
+        if (this.sessionNumber) {
+            this.sessionNumber.textContent = this.sessionsCompleted + 1;
         }
         
         // Update page title
@@ -194,10 +201,16 @@ class PomodoroTimer {
     
     updateButtons() {
         if (this.startBtn) {
-            this.startBtn.style.display = this.isRunning ? 'none' : 'inline-block';
+            this.startBtn.classList.toggle('d-none', this.isRunning);
         }
         if (this.pauseBtn) {
-            this.pauseBtn.style.display = this.isRunning ? 'inline-block' : 'none';
+            this.pauseBtn.classList.toggle('d-none', !this.isRunning);
+        }
+        if (this.resetBtn) {
+            this.resetBtn.classList.toggle('d-none', !this.isRunning && this.timeRemaining === this.workDuration);
+        }
+        if (this.skipBtn) {
+            this.skipBtn.classList.toggle('d-none', !this.isRunning);
         }
     }
     

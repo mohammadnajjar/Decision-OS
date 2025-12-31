@@ -9,35 +9,38 @@
     <div class="card-body text-center">
         {{-- Timer Display --}}
         <div class="pomodoro-timer mb-4">
-            <div class="display-1 fw-bold text-primary" id="timerDisplay">25:00</div>
-            <small class="text-muted" id="timerStatus">جاهز للبدء</small>
+            <div class="display-1 fw-bold text-primary" id="pomodoro-display">25:00</div>
+            <small class="text-muted" id="pomodoro-status">جاهز للبدء</small>
         </div>
 
         {{-- Timer Controls --}}
         <div class="d-flex justify-content-center gap-2 mb-4">
-            <button type="button" class="btn btn-success btn-lg" id="startBtn" onclick="pomodoroTimer.start()">
+            <button type="button" class="btn btn-success btn-lg" id="pomodoro-start">
                 <i class="ri-play-line"></i> ابدأ
             </button>
-            <button type="button" class="btn btn-warning btn-lg d-none" id="pauseBtn" onclick="pomodoroTimer.pause()">
+            <button type="button" class="btn btn-warning btn-lg d-none" id="pomodoro-pause">
                 <i class="ri-pause-line"></i> إيقاف مؤقت
             </button>
-            <button type="button" class="btn btn-danger btn-lg d-none" id="stopBtn" onclick="pomodoroTimer.stop()">
-                <i class="ri-stop-line"></i> إنهاء
+            <button type="button" class="btn btn-secondary btn-lg d-none" id="pomodoro-reset">
+                <i class="ri-restart-line"></i> إعادة
+            </button>
+            <button type="button" class="btn btn-info btn-lg d-none" id="pomodoro-skip">
+                <i class="ri-skip-forward-line"></i> تخطي
             </button>
         </div>
 
         {{-- Session Stats --}}
         <div class="row text-center border-top pt-3">
             <div class="col-4">
-                <div class="fs-4 fw-bold text-success" id="completedCount">0</div>
+                <div class="fs-4 fw-bold text-success" id="pomodoro-completed">0</div>
                 <small class="text-muted">مكتملة</small>
             </div>
             <div class="col-4">
-                <div class="fs-4 fw-bold text-primary" id="focusMinutes">0</div>
+                <div class="fs-4 fw-bold text-primary" id="pomodoro-focus-minutes">0</div>
                 <small class="text-muted">دقيقة تركيز</small>
             </div>
             <div class="col-4">
-                <div class="fs-4 fw-bold text-warning" id="sessionNumber">1</div>
+                <div class="fs-4 fw-bold text-warning" id="pomodoro-session-number">1</div>
                 <small class="text-muted">جلسة</small>
             </div>
         </div>
