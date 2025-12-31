@@ -1,5 +1,6 @@
 {{-- Module Card Component --}}
 @php
+    $status = $status ?? 'yellow';
     $statusColors = [
         'green' => ['bg' => 'bg-success', 'text' => 'text-success', 'subtle' => 'bg-success-subtle', 'icon' => 'ri-checkbox-circle-line'],
         'yellow' => ['bg' => 'bg-warning', 'text' => 'text-warning', 'subtle' => 'bg-warning-subtle', 'icon' => 'ri-error-warning-line'],

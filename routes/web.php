@@ -59,6 +59,7 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::patch('/tasks/{task}/reset', [TaskController::class, 'reset'])->name('tasks.reset');
 
     // Pomodoro API
+    Route::get('/pomodoro', [PomodoroController::class, 'index'])->name('pomodoro.index');
     Route::get('/pomodoro/history', [PomodoroController::class, 'history'])->name('pomodoro.history');
     Route::post('/pomodoro/start', [PomodoroController::class, 'start'])->name('pomodoro.start');
     Route::post('/pomodoro/{session}/complete', [PomodoroController::class, 'complete'])->name('pomodoro.complete');

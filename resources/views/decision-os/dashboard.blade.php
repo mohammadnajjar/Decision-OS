@@ -88,7 +88,16 @@
             @endforeach
         </div>
 
-        {{-- Row 6: Weekly Review CTA --}}
+        {{-- Row 6: Decisions Due --}}
+        @if($decisionsDue->isNotEmpty())
+        <div class="row">
+            <div class="col-12">
+                @include('decision-os.components.decisions-due', ['decisions' => $decisionsDue])
+            </div>
+        </div>
+        @endif
+
+        {{-- Row 7: Weekly Review CTA --}}
         <div class="row">
             <div class="col-12">
                 @include('decision-os.components.weekly-review-cta', [

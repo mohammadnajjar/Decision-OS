@@ -9,7 +9,7 @@
             <!-- FabKin -->
         </a>
         <!--end::Brand Image-->
-    </div> 
+    </div>
     <nav class="pe-app-sidebar-menu nav nav-pills" data-simplebar id="sidebar-simplebar">
         <ul class="pe-main-menu list-unstyled">
             <li class="pe-menu-title">
@@ -55,6 +55,67 @@
                     <li class="pe-slide-item">
                         <a href="dashboard-student" class="pe-nav-link">
                             Students
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pe-menu-title">
+                <span class="text-success">Decision OS</span>
+            </li>
+            <li class="pe-slide pe-has-sub">
+                <a href="#collapseDecisionOS" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseDecisionOS">
+                    <i class="ri-dashboard-3-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">لوحة التحكم</span>
+                    <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
+                </a>
+                <ul class="pe-slide-menu collapse" id="collapseDecisionOS">
+                    <li class="pe-slide-item">
+                        <a href="{{ route('decision-os.dashboard') }}" class="pe-nav-link">
+                            <i class="ri-home-5-line me-1"></i> الرئيسية
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('metrics.index') }}" class="pe-nav-link">
+                            <i class="ri-file-list-3-line me-1"></i> إدخال البيانات
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('tasks.index') }}" class="pe-nav-link">
+                            <i class="ri-task-line me-1"></i> المهام اليومية
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('pomodoro.index') }}" class="pe-nav-link">
+                            <i class="ri-timer-line me-1"></i> بومودورو
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pe-slide pe-has-sub">
+                <a href="#collapseDecisionOSLogs" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseDecisionOSLogs">
+                    <i class="ri-book-2-line pe-nav-icon text-info"></i>
+                    <span class="pe-nav-content">السجلات</span>
+                    <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
+                </a>
+                <ul class="pe-slide-menu collapse" id="collapseDecisionOSLogs">
+                    <li class="pe-slide-item">
+                        <a href="{{ route('decisions.index') }}" class="pe-nav-link">
+                            <i class="ri-git-commit-line me-1"></i> سجل القرارات
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('projects.index') }}" class="pe-nav-link">
+                            <i class="ri-folder-line me-1"></i> المشاريع
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('clients.index') }}" class="pe-nav-link">
+                            <i class="ri-user-star-line me-1"></i> العملاء
+                        </a>
+                    </li>
+                    <li class="pe-slide-item">
+                        <a href="{{ route('weekly-review.index') }}" class="pe-nav-link">
+                            <i class="ri-calendar-check-line me-1"></i> المراجعة الأسبوعية
                         </a>
                     </li>
                 </ul>
@@ -174,7 +235,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="pe-slide pe-has-sub">
                 <a href="#collapseCMS" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCMS">
                     <i class="bi bi-book pe-nav-icon"></i>
@@ -711,7 +772,7 @@
                     <li class="pe-slide-item">
                         <a href="ui-form-editor" class="pe-nav-link">Editor</a>
                     </li>
-                    <li class="pe-slide-item"> 
+                    <li class="pe-slide-item">
                         <a href="ui-form-validation" class="pe-nav-link">Form Validation</a>
                     </li>
                     <li class="pe-slide-item">

@@ -11,6 +11,104 @@ use Illuminate\View\View;
 class PomodoroController extends Controller
 {
     /**
+     * Pomodoro main page with timer.
+     */
+    public function index(Request $request): View
+    {
+        $user = $request->user();
+        $today = today();
+
+        // Today's task for linking
+        $todayTask = Task::where('user_id', $user->id)
+            ->where('is_today_one_thing', true)
+            ->where('date', $today->toDateString())
+            ->first();
+
+        // Today's stats
+        $completed = PomodoroSession::where('user_id', $user->id)
+            ->whereDate('created_at', $today)
+            ->where('status', 'completed')
+            ->count();
+
+        $focusMinutes = PomodoroSession::where('user_id', $user->id)
+            ->whereDate('created_at', $today)
+            ->where('status', 'completed')
+            ->sum('duration') / 60;
+
+        $stats = [
+            'completed_today' => $completed,
+            'focus_minutes' => round($focusMinutes),
+        ];
+
+        return view('decision-os.pomodoro.index', compact('todayTask', 'stats'));
+    }
+
+    /**
+     * Start a new pomodoro session.
+     */
+    public function start(Request $request): JsonResponse
+    {
+        $request->validate([
+            'task_id' => 'nullable|exists:tasks,id',
+            'energy_before' => 'nullable|integer|min:1|max:5',
+        ]);
+
+        $user = $request->user();
+
+        // Verify task belongs to user if provided
+        if ($request->task_id) {
+            $task = Task::find($request->task_id);
+            if ($task && $task->user_id !== $user->id) {
+                return response()->json(['error' => 'Unauthorized'], 403);
+            }
+        }
+
+        $session = PomodoroSession::create([
+            'user_id' => $user->id,
+            'task_id' => $request->task_id,
+            'status' => 'running',
+            'duration' => 0,
+            'energy_before' => $request->energy_before,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'session' => $session,
+        ]);
+    }
+
+    /**
+     * Complete a pomodoro session.
+     */
+    public function complete(Request $request, PomodoroSession $session): JsonResponse
+    {
+        // Verify session belongs to user
+        if ($session->user_id !== $request->user()->id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $request->validate([
+            'status' => 'required|in:completed,interrupted',
+            'duration' => 'required|integer|min:1',
+            'energy_after' => 'nullable|integer|min:1|max:5',
+        ]);
+
+        $session->update([
+            'status' => $request->status,
+            'duration' => $request->duration,
+            'energy_after' => $request->energy_after,
+        ]);
+
+        $stats = $this->getStats($request->user());
+
+        return response()->json([
+            'success' => true,
+            'session' => $session,
+            'stats' => $stats,
+        ]);
+    }
+
+    /**
      * Get pomodoro stats for today.
      */
     public function stats(Request $request): JsonResponse

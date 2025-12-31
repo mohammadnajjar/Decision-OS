@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Decision;
 use App\Models\WeeklyReview;
 use App\Services\StatusService;
 use App\Services\InsightService;
@@ -64,6 +65,14 @@ class DecisionDashboardController extends Controller
         $lockMessage = $this->lockingService->getLockMessage($user);
         $redStatuses = $this->lockingService->getRedStatuses($user);
 
+        // Decisions due for review
+        $decisionsDue = Decision::where('user_id', $user->id)
+            ->where('result', 'pending')
+            ->where('review_date', '<=', now())
+            ->orderBy('review_date')
+            ->limit(5)
+            ->get();
+
         return view('decision-os.dashboard', compact(
             'todayTask',
             'topTasks',
@@ -76,6 +85,7 @@ class DecisionDashboardController extends Controller
             'isLocked',
             'lockMessage',
             'redStatuses',
+            'decisionsDue',
         ));
     }
 
