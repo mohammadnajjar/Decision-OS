@@ -66,11 +66,17 @@ return [
         'weekly_review' => 'Weekly Review',
         'yearly_goals' => 'Yearly Goals',
         'decision_log' => 'Decision Log',
+        'decisions' => 'Decision Log',
+        'goals' => 'Yearly Goals',
         'account' => 'Account',
         'clients' => 'Clients',
         'profile' => 'Profile',
         'settings' => 'Settings',
         'logout' => 'Logout',
+        'career' => 'Career Growth',
+        'career_growth' => 'Career Growth',
+        'business' => 'Business & Assets',
+        'business_assets' => 'Business & Assets',
     ],
 
     /*

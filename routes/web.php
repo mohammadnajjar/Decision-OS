@@ -10,7 +10,17 @@ use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\BusinessAssetController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Language Switcher
+|--------------------------------------------------------------------------
+*/
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/', function () {
     return redirect()->route('decision-os.dashboard');
@@ -157,6 +167,22 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/adhkar', [\App\Http\Controllers\AdhkarController::class, 'index'])->name('adhkar');
     Route::get('/adhkar/morning', [\App\Http\Controllers\AdhkarController::class, 'morning'])->name('adhkar.morning');
     Route::get('/adhkar/evening', [\App\Http\Controllers\AdhkarController::class, 'evening'])->name('adhkar.evening');
+
+    // Career / Work Growth (التطور المهني)
+    Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+    Route::get('/career/create', [CareerController::class, 'create'])->name('career.create');
+    Route::post('/career', [CareerController::class, 'store'])->name('career.store');
+    Route::get('/career/{career}', [CareerController::class, 'show'])->name('career.show');
+    Route::put('/career/{career}', [CareerController::class, 'update'])->name('career.update');
+
+    // Business & Assets (الأصول والأعمال - مقفول بالبداية)
+    Route::get('/business', [BusinessAssetController::class, 'index'])->name('business.index');
+    Route::get('/business/create', [BusinessAssetController::class, 'create'])->name('business.create');
+    Route::post('/business', [BusinessAssetController::class, 'store'])->name('business.store');
+    Route::get('/business/{business}', [BusinessAssetController::class, 'show'])->name('business.show');
+    Route::get('/business/{business}/edit', [BusinessAssetController::class, 'edit'])->name('business.edit');
+    Route::put('/business/{business}', [BusinessAssetController::class, 'update'])->name('business.update');
+    Route::delete('/business/{business}', [BusinessAssetController::class, 'destroy'])->name('business.destroy');
 });
 
 require __DIR__.'/auth.php';

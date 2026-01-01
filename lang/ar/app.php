@@ -66,11 +66,17 @@ return [
         'weekly_review' => 'المراجعة الأسبوعية',
         'yearly_goals' => 'الأهداف السنوية',
         'decision_log' => 'سجل القرارات',
+        'decisions' => 'سجل القرارات',
+        'goals' => 'الأهداف السنوية',
         'account' => 'الحساب',
         'clients' => 'العملاء',
         'profile' => 'الملف الشخصي',
         'settings' => 'الإعدادات',
         'logout' => 'تسجيل الخروج',
+        'career' => 'التطور المهني',
+        'career_growth' => 'التطور المهني',
+        'business' => 'الأصول والأعمال',
+        'business_assets' => 'الأصول والأعمال',
     ],
 
     /*

@@ -75,6 +75,34 @@
             </li>
 
             {{-- ========================================= --}}
+            {{-- Career & Business --}}
+            {{-- ========================================= --}}
+            <li class="pe-menu-title">
+                التطوير والأعمال
+            </li>
+
+            {{-- Career Growth --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.career.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.career.*') ? 'active' : '' }}">
+                    <i class="ri-briefcase-line pe-nav-icon text-primary"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.career') }}</span>
+                </a>
+            </li>
+
+            {{-- Business & Assets --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.business.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.business.*') ? 'active' : '' }}">
+                    <i class="ri-building-2-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.business') }}</span>
+                    @if(!\App\Models\BusinessAsset::isModuleUnlocked(auth()->id()))
+                        <span class="badge bg-danger-subtle text-danger ms-auto">
+                            <i class="ri-lock-2-line"></i>
+                        </span>
+                    @endif
+                </a>
+            </li>
+
+            {{-- ========================================= --}}
             {{-- Finance --}}
             {{-- ========================================= --}}
             <li class="pe-menu-title">

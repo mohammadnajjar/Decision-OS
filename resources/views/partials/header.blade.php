@@ -19,6 +19,28 @@
                 </div>
             </div>
             <div class="flex-shrink-0 d-flex align-items-center gap-1">
+                {{-- Language Switcher --}}
+                <div class="dropdown">
+                    <button class="btn header-btn dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        @if(app()->getLocale() === 'ar')
+                            <span class="fi fi-sa me-1"></span> العربية
+                        @else
+                            <span class="fi fi-gb me-1"></span> English
+                        @endif
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                        <li>
+                            <a class="dropdown-item {{ app()->getLocale() === 'ar' ? 'active' : '' }}" href="{{ route('language.switch', 'ar') }}">
+                                <span class="fi fi-sa me-2"></span> العربية
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}">
+                                <span class="fi fi-gb me-2"></span> English
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <!-- زر البحث محذوف -->
                 <button class="btn header-btn d-none d-md-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                     <i class="bi bi-gear"></i>
