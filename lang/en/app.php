@@ -126,6 +126,62 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Reports
+    |--------------------------------------------------------------------------
+    */
+    'reports' => [
+        'financial_reports' => 'Financial Reports',
+        'total_income' => 'Total Income',
+        'total_expenses' => 'Total Expenses',
+        'investments' => 'Investments',
+        'net_balance' => 'Net Balance',
+        'expenses_by_category' => 'Expenses by Category',
+        'expenses_by_account' => 'Expenses by Account',
+        'income_by_account' => 'Income by Account',
+        'investment_summary' => 'Investment Summary',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accounts (Financial)
+    |--------------------------------------------------------------------------
+    */
+    'accounts' => [
+        'title' => 'Financial Accounts',
+        'all_accounts' => 'All Accounts',
+        'add_new' => 'Add New Account',
+        'add_first' => 'Add Your First Account',
+        'create_account' => 'Create New Account',
+        'account_name' => 'Account Name',
+        'account_type' => 'Account Type',
+        'current_balance' => 'Current Balance',
+        'total_balance' => 'Total Balance',
+        'bank_accounts' => 'Bank Accounts',
+        'cash' => 'Cash',
+        'bank' => 'Bank',
+        'ewallet' => 'E-Wallet',
+        'ewallets' => 'E-Wallets',
+        'name' => 'Name',
+        'type' => 'Type',
+        'balance' => 'Balance',
+        'currency' => 'Currency',
+        'icon' => 'Icon',
+        'color' => 'Color',
+        'no_icon' => 'No Icon',
+        'default' => 'Default',
+        'set_as_default' => 'Set as Default Account',
+        'default_description' => 'This account will be used automatically for expenses and income',
+        'no_accounts' => 'No financial accounts yet',
+        'start_by_adding' => 'Start by adding your first account (bank, cash, e-wallet)',
+        'name_placeholder' => 'e.g., Emirates Bank, Cash Wallet, PayPal',
+        'created_successfully' => 'Account created successfully',
+        'updated_successfully' => 'Account updated successfully',
+        'deleted_successfully' => 'Account deleted successfully',
+        'confirm_delete' => 'Are you sure you want to delete this account?',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Modules
     |--------------------------------------------------------------------------
     */
