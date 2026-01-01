@@ -94,18 +94,18 @@
                         <div class="col-md-6">
                             <label for="timezone" class="form-label">المنطقة الزمنية</label>
                             <select name="timezone" id="timezone" class="form-select">
-                                <option value="Asia/Riyadh" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Riyadh' ? 'selected' : '' }}>الرياض (GMT+3)</option>
-                                <option value="Asia/Dubai" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Dubai' ? 'selected' : '' }}>دبي (GMT+4)</option>
-                                <option value="Asia/Kuwait" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Kuwait' ? 'selected' : '' }}>الكويت (GMT+3)</option>
-                                <option value="Asia/Qatar" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Qatar' ? 'selected' : '' }}>قطر (GMT+3)</option>
-                                <option value="Asia/Bahrain" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Bahrain' ? 'selected' : '' }}>البحرين (GMT+3)</option>
-                                <option value="Asia/Baghdad" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Baghdad' ? 'selected' : '' }}>بغداد (GMT+3)</option>
-                                <option value="Africa/Cairo" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Africa/Cairo' ? 'selected' : '' }}>القاهرة (GMT+2)</option>
-                                <option value="Asia/Amman" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Amman' ? 'selected' : '' }}>عمان (GMT+3)</option>
-                                <option value="Asia/Damascus" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Damascus' ? 'selected' : '' }}>دمشق (GMT+3)</option>
-                                <option value="Asia/Beirut" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Asia/Beirut' ? 'selected' : '' }}>بيروت (GMT+3)</option>
-                                <option value="Europe/London" {{ ($user->timezone ?? 'Asia/Riyadh') === 'Europe/London' ? 'selected' : '' }}>لندن (GMT+0)</option>
-                                <option value="America/New_York" {{ ($user->timezone ?? 'Asia/Riyadh') === 'America/New_York' ? 'selected' : '' }}>نيويورك (GMT-5)</option>
+                                <option value="Asia/Dubai" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Dubai' ? 'selected' : '' }}>دبي (GMT+4)</option>
+                                <option value="Asia/Riyadh" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Riyadh' ? 'selected' : '' }}>الرياض (GMT+3)</option>
+                                <option value="Asia/Kuwait" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kuwait' ? 'selected' : '' }}>الكويت (GMT+3)</option>
+                                <option value="Asia/Qatar" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Qatar' ? 'selected' : '' }}>قطر (GMT+3)</option>
+                                <option value="Asia/Bahrain" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Bahrain' ? 'selected' : '' }}>البحرين (GMT+3)</option>
+                                <option value="Asia/Baghdad" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Baghdad' ? 'selected' : '' }}>بغداد (GMT+3)</option>
+                                <option value="Africa/Cairo" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Cairo' ? 'selected' : '' }}>القاهرة (GMT+2)</option>
+                                <option value="Asia/Amman" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Amman' ? 'selected' : '' }}>عمان (GMT+3)</option>
+                                <option value="Asia/Damascus" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Damascus' ? 'selected' : '' }}>دمشق (GMT+3)</option>
+                                <option value="Asia/Beirut" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Beirut' ? 'selected' : '' }}>بيروت (GMT+3)</option>
+                                <option value="Europe/London" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/London' ? 'selected' : '' }}>لندن (GMT+0)</option>
+                                <option value="America/New_York" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/New_York' ? 'selected' : '' }}>نيويورك (GMT-5)</option>
                             </select>
                             @error('timezone')
                                 <div class="text-danger small mt-1">{{ $message }}</div>

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('timezone')->default('Asia/Riyadh')->after('email_verified_at');
+            $table->string('timezone')->default('Asia/Dubai')->after('email_verified_at');
         });
     }
 

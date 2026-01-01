@@ -138,9 +138,7 @@ class AdhkarService
     {
         $now = $user && $user->timezone
             ? Carbon::now($user->timezone)
-            : Carbon::now('Asia/Riyadh');
-
-        $hour = $now->hour;
+            : Carbon::now('Asia/Dubai');
         // الصباح: من الفجر (4:00) حتى العصر (15:00)
         return $hour >= 4 && $hour < 15;
     }
