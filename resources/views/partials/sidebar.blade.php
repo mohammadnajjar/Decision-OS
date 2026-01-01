@@ -120,6 +120,14 @@
                 </a>
             </li>
 
+            {{-- Adhkar --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.adhkar') }}" class="pe-nav-link {{ request()->routeIs('decision-os.adhkar*') ? 'active' : '' }}">
+                    <i class="ri-hearts-line pe-nav-icon text-info"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.adhkar') }}</span>
+                </a>
+            </li>
+
             {{-- Metrics History --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.metrics.history') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.*') ? 'active' : '' }}">

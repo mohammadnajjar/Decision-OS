@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Services\TaskPdfService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -219,5 +221,38 @@ class TaskController extends Controller
     {
         $date = $request->get('date', today()->toDateString());
         return view('decision-os.tasks.create', compact('date'));
+    }
+
+    /**
+     * Export today's tasks as PDF/HTML.
+     */
+    public function exportPdf(Request $request): Response
+    {
+        $user = $request->user();
+        $pdfService = new TaskPdfService();
+
+        $data = $pdfService->prepareTodayTasksData($user->id);
+        $html = $pdfService->generateHtml($data);
+
+        // تصدير كملف HTML قابل للطباعة
+        return response($html)
+            ->header('Content-Type', 'text/html; charset=utf-8')
+            ->header('Content-Disposition', 'inline; filename="tasks-' . $data['date'] . '.html"');
+    }
+
+    /**
+     * Download today's tasks as printable HTML file.
+     */
+    public function downloadTasks(Request $request): Response
+    {
+        $user = $request->user();
+        $pdfService = new TaskPdfService();
+
+        $data = $pdfService->prepareTodayTasksData($user->id);
+        $html = $pdfService->generateHtml($data);
+
+        return response($html)
+            ->header('Content-Type', 'text/html; charset=utf-8')
+            ->header('Content-Disposition', 'attachment; filename="tasks-' . $data['date'] . '.html"');
     }
 }

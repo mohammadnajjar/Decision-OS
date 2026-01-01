@@ -6,6 +6,25 @@
 
 @section('content')
 
+{{-- تذكير الأذكار --}}
+@if(isset($adhkarReminder))
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="alert alert-{{ $adhkarReminder['color'] }} alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="{{ $adhkarReminder['icon'] }} fs-4 me-3"></i>
+            <div class="flex-grow-1">
+                <strong>{{ $adhkarReminder['title'] }}</strong>
+                <p class="mb-0 small">{{ $adhkarReminder['message'] }}</p>
+            </div>
+            <a href="{{ route('decision-os.adhkar') }}" class="btn btn-{{ $adhkarReminder['color'] }} btn-sm ms-3">
+                {{ $adhkarReminder['action_text'] }}
+            </a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row">
     {{-- البطاقة الرئيسية - الختمة الحالية --}}
     <div class="col-xl-8">
@@ -228,29 +247,131 @@
 <div class="row mt-4">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h6 class="card-title mb-0">📚 الأجزاء الثلاثين</h6>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-outline-primary active" id="viewJuz">الأجزاء</button>
+                    <button type="button" class="btn btn-outline-primary" id="viewSurah">السور</button>
+                </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    @for($juz = 1; $juz <= 30; $juz++)
-                        @php
-                            $isCompleted = $currentProgress->current_juz > $juz ||
-                                          ($currentProgress->status === 'completed');
-                            $isCurrent = $currentProgress->current_juz === $juz;
-                        @endphp
-                        <div class="col-lg-2 col-md-3 col-4 mb-2">
-                            <div class="p-2 rounded text-center {{ $isCompleted ? 'bg-success text-white' : ($isCurrent ? 'bg-warning' : 'bg-light') }}">
-                                <div class="fw-bold">{{ $juz }}</div>
-                                <small class="d-none d-md-block">{{ \App\Models\QuranProgress::JUZ_NAMES[$juz] }}</small>
-                                @if($isCompleted)
-                                    <i class="ri-check-line"></i>
-                                @elseif($isCurrent)
-                                    <i class="ri-bookmark-line"></i>
-                                @endif
+                {{-- عرض الأجزاء --}}
+                <div id="juzGrid">
+                    <div class="row">
+                        @for($juz = 1; $juz <= 30; $juz++)
+                            @php
+                                $isCompleted = $currentProgress->current_juz > $juz ||
+                                              ($currentProgress->status === 'completed');
+                                $isCurrent = $currentProgress->current_juz === $juz;
+                                $juzInfo = $juzList[$juz] ?? null;
+                            @endphp
+                            <div class="col-lg-2 col-md-3 col-4 mb-2">
+                                <div class="p-2 rounded text-center juz-card {{ $isCompleted ? 'bg-success text-white' : ($isCurrent ? 'bg-warning' : 'bg-light') }}"
+                                     style="cursor: pointer;"
+                                     data-bs-toggle="modal" data-bs-target="#juzModal{{ $juz }}">
+                                    <div class="fw-bold">{{ $juz }}</div>
+                                    <small class="d-none d-md-block">{{ \App\Models\QuranProgress::JUZ_NAMES[$juz] }}</small>
+                                    @if($isCompleted)
+                                        <i class="ri-check-line"></i>
+                                    @elseif($isCurrent)
+                                        <i class="ri-bookmark-line"></i>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    @endfor
+
+                            {{-- Modal لتفاصيل الجزء --}}
+                            <div class="modal fade" id="juzModal{{ $juz }}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">الجزء {{ $juz }} - {{ \App\Models\QuranProgress::JUZ_NAMES[$juz] }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @if($juzInfo)
+                                                <p class="text-muted">الصفحات: {{ $juzInfo['start_page'] }} - {{ $juzInfo['end_page'] }}</p>
+                                                <h6>السور في هذا الجزء:</h6>
+                                                <div class="list-group">
+                                                    @foreach($juzInfo['surahs'] as $surah)
+                                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <span class="badge bg-primary me-2">{{ $surah['number'] }}</span>
+                                                                <strong>{{ $surah['name'] }}</strong>
+                                                                <small class="text-muted ms-2">{{ $surah['english'] }}</small>
+                                                            </div>
+                                                            <span class="badge bg-light text-dark">{{ $surah['ayahs'] }} آية</span>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ route('decision-os.quran.update-position') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="current_juz" value="{{ $juz }}">
+                                                <input type="hidden" name="current_page" value="{{ $juzInfo['start_page'] ?? 1 }}">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="ri-bookmark-line"></i> الانتقال لهذا الجزء
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+
+                {{-- عرض السور --}}
+                <div id="surahGrid" style="display: none;">
+                    {{-- البحث في السور --}}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="surahSearch" placeholder="🔍 ابحث عن سورة...">
+                    </div>
+                    <div class="row" id="surahList">
+                        @foreach($surahs as $surah)
+                            <div class="col-lg-3 col-md-4 col-6 mb-2 surah-item" data-name="{{ $surah['name'] }} {{ $surah['english'] }}">
+                                <div class="p-2 rounded bg-light text-center surah-card" style="cursor: pointer;"
+                                     data-bs-toggle="modal" data-bs-target="#surahModal{{ $surah['number'] }}">
+                                    <span class="badge bg-primary">{{ $surah['number'] }}</span>
+                                    <div class="fw-bold mt-1">{{ $surah['name'] }}</div>
+                                    <small class="text-muted">{{ $surah['english'] }}</small>
+                                    <div class="small">
+                                        <span class="badge bg-{{ $surah['type'] === 'meccan' ? 'warning' : 'info' }}">
+                                            {{ $surah['type'] === 'meccan' ? 'مكية' : 'مدنية' }}
+                                        </span>
+                                        <span class="text-muted">{{ $surah['ayahs'] }} آية</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Modal لتفاصيل السورة --}}
+                            <div class="modal fade" id="surahModal{{ $surah['number'] }}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">سورة {{ $surah['name'] }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="display-6 text-primary mb-3">{{ $surah['number'] }}</div>
+                                            <h3>{{ $surah['name'] }}</h3>
+                                            <p class="text-muted">{{ $surah['english'] }}</p>
+                                            <div class="d-flex justify-content-center gap-3">
+                                                <span class="badge bg-{{ $surah['type'] === 'meccan' ? 'warning' : 'info' }} fs-6">
+                                                    {{ $surah['type'] === 'meccan' ? 'مكية' : 'مدنية' }}
+                                                </span>
+                                                <span class="badge bg-secondary fs-6">{{ $surah['ayahs'] }} آية</span>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -261,6 +382,7 @@
 
 @section('js')
 <script>
+// الأزرار السريعة لتسجيل القراءة
 document.querySelectorAll('.quick-log').forEach(btn => {
     btn.addEventListener('click', function() {
         const pages = this.dataset.pages;
@@ -273,6 +395,34 @@ document.querySelectorAll('.quick-log').forEach(btn => {
         `;
         document.body.appendChild(form);
         form.submit();
+    });
+});
+
+// التبديل بين عرض الأجزاء والسور
+document.getElementById('viewJuz').addEventListener('click', function() {
+    document.getElementById('juzGrid').style.display = 'block';
+    document.getElementById('surahGrid').style.display = 'none';
+    this.classList.add('active');
+    document.getElementById('viewSurah').classList.remove('active');
+});
+
+document.getElementById('viewSurah').addEventListener('click', function() {
+    document.getElementById('juzGrid').style.display = 'none';
+    document.getElementById('surahGrid').style.display = 'block';
+    this.classList.add('active');
+    document.getElementById('viewJuz').classList.remove('active');
+});
+
+// البحث في السور
+document.getElementById('surahSearch').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    document.querySelectorAll('.surah-item').forEach(item => {
+        const name = item.dataset.name.toLowerCase();
+        if (name.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
     });
 });
 </script>

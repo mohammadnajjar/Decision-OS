@@ -59,6 +59,8 @@ return [
         'expense_categories' => 'Expense Categories',
         'spiritual_health' => 'Spiritual & Health',
         'quran' => 'Quran Khatma',
+        'adhkar' => 'Adhkar',
+        'life_metrics' => 'Life Metrics',
         'metrics' => 'Metrics',
         'review_goals' => 'Review & Goals',
         'weekly_review' => 'Weekly Review',

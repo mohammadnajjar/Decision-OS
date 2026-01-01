@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\QuranProgress;
+use App\Services\QuranApiService;
+use App\Services\AdhkarService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class QuranProgressController extends Controller
 {
+    protected QuranApiService $quranService;
+    protected AdhkarService $adhkarService;
+
+    public function __construct(QuranApiService $quranService, AdhkarService $adhkarService)
+    {
+        $this->quranService = $quranService;
+        $this->adhkarService = $adhkarService;
+    }
+
     /**
      * عرض صفحة ختمة القرآن
      */
@@ -39,11 +50,30 @@ class QuranProgressController extends Controller
             ->where('status', 'completed')
             ->count();
 
+        // بيانات السور والأجزاء للتنقل
+        $surahs = $this->quranService->getAllSurahs();
+        $juzList = [];
+        for ($i = 1; $i <= 30; $i++) {
+            $juzList[$i] = [
+                'number' => $i,
+                'name' => $this->quranService->getJuzInfo($i)['name'],
+                'start_page' => $this->quranService->getJuzStartPage($i),
+                'end_page' => $this->quranService->getJuzEndPage($i),
+                'surahs' => $this->quranService->getSurahsInJuz($i),
+            ];
+        }
+
+        // رسالة تذكير الأذكار
+        $adhkarReminder = $this->adhkarService->getReminderMessage();
+
         return view('decision-os.quran.index', compact(
             'currentProgress',
             'history',
             'completedCount',
-            'thisYearCompleted'
+            'thisYearCompleted',
+            'surahs',
+            'juzList',
+            'adhkarReminder'
         ));
     }
 

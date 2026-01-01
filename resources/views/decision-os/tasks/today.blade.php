@@ -164,13 +164,39 @@
 {{-- Quick Actions --}}
 <div class="row mt-4">
     <div class="col-12">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between flex-wrap gap-2">
             <a href="{{ route('decision-os.dashboard') }}" class="btn btn-outline-secondary">
                 <i class="ri-arrow-right-line me-1"></i> العودة للوحة التحكم
             </a>
-            <a href="{{ route('decision-os.tasks.index') }}" class="btn btn-outline-primary">
-                <i class="ri-history-line me-1"></i> عرض جميع المهام
-            </a>
+            <div class="d-flex gap-2">
+                {{-- Export/Print Button --}}
+                <div class="dropdown">
+                    <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="ri-file-download-line me-1"></i> تصدير
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('decision-os.tasks.export') }}" target="_blank">
+                                <i class="ri-printer-line me-2"></i> طباعة
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('decision-os.tasks.download') }}">
+                                <i class="ri-download-line me-2"></i> تحميل HTML
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="javascript:window.print()">
+                                <i class="ri-printer-fill me-2"></i> طباعة الصفحة الحالية
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="{{ route('decision-os.tasks.index') }}" class="btn btn-outline-primary">
+                    <i class="ri-history-line me-1"></i> عرض جميع المهام
+                </a>
+            </div>
         </div>
     </div>
 </div>

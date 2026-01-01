@@ -59,6 +59,8 @@ return [
         'expense_categories' => 'فئات المصاريف',
         'spiritual_health' => 'الروحاني والصحة',
         'quran' => 'ختمة القرآن',
+        'adhkar' => 'الأذكار',
+        'life_metrics' => 'مقاييس الحياة',
         'metrics' => 'المقاييس',
         'review_goals' => 'المراجعة والأهداف',
         'weekly_review' => 'المراجعة الأسبوعية',

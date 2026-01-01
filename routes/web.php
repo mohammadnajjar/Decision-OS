@@ -59,6 +59,8 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     // Tasks - Today One Thing
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/today', [TaskController::class, 'today'])->name('tasks.today');
+    Route::get('/tasks/export', [TaskController::class, 'exportPdf'])->name('tasks.export');
+    Route::get('/tasks/download', [TaskController::class, 'downloadTasks'])->name('tasks.download');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::post('/tasks/today', [TaskController::class, 'store'])->name('tasks.set-today');
     Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
@@ -150,6 +152,11 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::post('/quran/update-notes', [\App\Http\Controllers\QuranProgressController::class, 'updateNotes'])->name('quran.update-notes');
     Route::post('/quran/start-new', [\App\Http\Controllers\QuranProgressController::class, 'startNewKhatma'])->name('quran.start-new');
     Route::post('/quran/reset', [\App\Http\Controllers\QuranProgressController::class, 'reset'])->name('quran.reset');
+
+    // Adhkar (الأذكار)
+    Route::get('/adhkar', [\App\Http\Controllers\AdhkarController::class, 'index'])->name('adhkar');
+    Route::get('/adhkar/morning', [\App\Http\Controllers\AdhkarController::class, 'morning'])->name('adhkar.morning');
+    Route::get('/adhkar/evening', [\App\Http\Controllers\AdhkarController::class, 'evening'])->name('adhkar.evening');
 });
 
 require __DIR__.'/auth.php';
