@@ -17,7 +17,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where('user_id', Auth::id())
-                          ->with('client')
+                          ->with(['client', 'tasks'])
+                          ->withCount('tasks')
                           ->orderBy('created_at', 'desc')
                           ->paginate(10);
 

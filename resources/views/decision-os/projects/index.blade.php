@@ -81,10 +81,10 @@
                             <tr>
                                 <th>اسم المشروع</th>
                                 <th>العميل</th>
+                                <th>المهام</th>
                                 <th>الحالة</th>
                                 <th>الأولوية</th>
                                 <th>تاريخ البدء</th>
-                                <th>تاريخ الانتهاء</th>
                                 <th>الإيراد</th>
                                 <th></th>
                             </tr>
@@ -95,12 +95,29 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <i class="ri-record-circle-fill text-{{ $project->status_color }} me-2"></i>
-                                        <a href="{{ route('decision-os.projects.show', $project) }}" class="text-body fw-medium">
-                                            {{ $project->name }}
-                                        </a>
+                                        <div>
+                                            <a href="{{ route('decision-os.projects.show', $project) }}" class="text-body fw-medium">
+                                                {{ $project->name }}
+                                            </a>
+                                            @if($project->tasks->count() > 0)
+                                                <div class="small text-muted">
+                                                    @foreach($project->tasks->take(2) as $task)
+                                                        <span class="badge bg-light text-muted me-1">{{ Str::limit($task->title, 15) }}</span>
+                                                    @endforeach
+                                                    @if($project->tasks->count() > 2)
+                                                        <span class="text-muted">+{{ $project->tasks->count() - 2 }}</span>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </td>
                                 <td>{{ $project->client?->name ?? '-' }}</td>
+                                <td>
+                                    <a href="{{ route('decision-os.projects.kanban', $project) }}" class="badge bg-primary-subtle text-primary">
+                                        <i class="ri-task-line me-1"></i>{{ $project->tasks_count }}
+                                    </a>
+                                </td>
                                 <td>
                                     <span class="badge bg-{{ $project->status_color }}-subtle text-{{ $project->status_color }}">
                                         {{ $project->status_label }}
@@ -112,7 +129,6 @@
                                     </span>
                                 </td>
                                 <td>{{ $project->start_date?->format('M d, Y') ?? '-' }}</td>
-                                <td>{{ $project->end_date?->format('M d, Y') ?? '-' }}</td>
                                 <td class="text-success fw-medium">${{ number_format($project->total_revenue) }}</td>
                                 <td>
                                     <div class="dropdown">

@@ -13,13 +13,19 @@
                     <h4 class="mb-1">أهداف السنة {{ $year }}</h4>
                     <p class="text-muted mb-0">حدد أهدافك وتابع تقدمك</p>
                 </div>
-                <div class="d-flex gap-2">
-                    <select class="form-select" onchange="window.location.href='?year='+this.value">
+                <div class="d-flex gap-2 flex-wrap">
+                    <select class="form-select form-select-sm" onchange="updateFilters('year', this.value)">
                         @foreach($years as $y)
                             <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
                         @endforeach
                     </select>
-                    <a href="{{ route('decision-os.goals.create') }}" class="btn btn-primary">
+                    <select class="form-select form-select-sm" onchange="updateFilters('month', this.value)">
+                        <option value="">كل الشهور</option>
+                        @foreach($months as $m => $label)
+                            <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <a href="{{ route('decision-os.goals.create') }}" class="btn btn-primary btn-sm">
                         <i class="bi bi-plus-lg me-1"></i> هدف جديد
                     </a>
                 </div>
@@ -67,15 +73,15 @@
     <div class="card mb-4">
         <div class="card-body py-3">
             <div class="d-flex flex-wrap gap-2">
-                <a href="{{ route('decision-os.goals.index', ['year' => $year]) }}" 
+                <button onclick="updateFilters('category', '')"
                    class="btn btn-sm {{ !$category ? 'btn-primary' : 'btn-outline-primary' }}">
                     الكل
-                </a>
+                </button>
                 @foreach($categories as $key => $label)
-                    <a href="{{ route('decision-os.goals.index', ['year' => $year, 'category' => $key]) }}" 
+                    <button onclick="updateFilters('category', '{{ $key }}')"
                        class="btn btn-sm {{ $category === $key ? 'btn-primary' : 'btn-outline-primary' }}">
                         {{ $label }}
-                    </a>
+                    </button>
                 @endforeach
             </div>
         </div>
@@ -127,7 +133,7 @@
                                     <td>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="progress flex-grow-1" style="height: 8px;">
-                                                <div class="progress-bar bg-{{ $goal->progress >= 100 ? 'success' : ($goal->progress > 50 ? 'info' : 'warning') }}" 
+                                                <div class="progress-bar bg-{{ $goal->progress >= 100 ? 'success' : ($goal->progress > 50 ? 'info' : 'warning') }}"
                                                      style="width: {{ $goal->progress }}%"></div>
                                             </div>
                                             <span class="text-muted fs-12">{{ $goal->progress }}%</span>
@@ -166,4 +172,18 @@
         </div>
     @endforelse
 </div>
+
+@section('js')
+<script>
+function updateFilters(key, value) {
+    const url = new URL(window.location.href);
+    if (value) {
+        url.searchParams.set(key, value);
+    } else {
+        url.searchParams.delete(key);
+    }
+    window.location.href = url.toString();
+}
+</script>
+@endsection
 @endsection

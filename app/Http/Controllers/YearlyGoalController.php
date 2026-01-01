@@ -17,6 +17,7 @@ class YearlyGoalController extends Controller
         $user = $request->user();
         $year = $request->get('year', now()->year);
         $category = $request->get('category');
+        $month = $request->get('month'); // Filter by target month
 
         $query = YearlyGoal::where('user_id', $user->id)
             ->where('year', $year)
@@ -25,6 +26,11 @@ class YearlyGoalController extends Controller
 
         if ($category) {
             $query->where('category', $category);
+        }
+
+        // Filter by target month
+        if ($month) {
+            $query->whereMonth('target_date', $month);
         }
 
         $goals = $query->get()->groupBy('category');
@@ -39,8 +45,13 @@ class YearlyGoalController extends Controller
 
         $categories = YearlyGoal::CATEGORIES;
         $years = range(now()->year - 2, now()->year + 1);
+        $months = [
+            1 => 'يناير', 2 => 'فبراير', 3 => 'مارس', 4 => 'أبريل',
+            5 => 'مايو', 6 => 'يونيو', 7 => 'يوليو', 8 => 'أغسطس',
+            9 => 'سبتمبر', 10 => 'أكتوبر', 11 => 'نوفمبر', 12 => 'ديسمبر'
+        ];
 
-        return view('decision-os.goals.index', compact('goals', 'stats', 'categories', 'years', 'year', 'category'));
+        return view('decision-os.goals.index', compact('goals', 'stats', 'categories', 'years', 'year', 'category', 'months', 'month'));
     }
 
     /**

@@ -199,7 +199,7 @@
 
                 <div class="row gy-3">
                     <div class="col-6">
-                        <div> 
+                        <div>
                             <input id="layout-light" name="data-bs-theme" type="radio" value="light" class="form-check-input" checked>
                             <label class="form-check-label p-0 avatar-3xl w-100" for="layout-light">
                                 <span class="d-flex h-100 ">
@@ -416,9 +416,6 @@
                 <div class="flex items-center justify-end gap-2 modal-footer pt-4 border-top">
                     <button type="button" class="btn btn-light" id="resetBtn">
                         <i class="ri-reset-right-line"></i> Reset Layouts
-                    </button> 
-                    <button type="button" class="btn btn-danger">
-                        <i class="ri-shopping-bag-3-line"></i> Buy Now
                     </button>
                 </div>
 
