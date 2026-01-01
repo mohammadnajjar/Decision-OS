@@ -56,7 +56,7 @@
                         <div class="col-md-8">
                             <div class="mb-3">
                                 <label class="form-label required">{{ __('app.debts.total_amount') }}</label>
-                                <input type="number" step="0.01" name="total_amount" class="form-control @error('total_amount') is-invalid @enderror"
+                                <input type="number" step="0.01" name="total_amount" id="total_amount" class="form-control @error('total_amount') is-invalid @enderror"
                                     value="{{ old('total_amount') }}" required placeholder="0.00">
                                 @error('total_amount')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -116,7 +116,7 @@
                                     <option value="biweekly" {{ old('repayment_frequency') === 'biweekly' ? 'selected' : '' }}>
                                         {{ __('app.debts.biweekly') }}
                                     </option>
-                                    <option value="monthly" {{ old('repayment_frequency') === 'monthly' ? 'selected' : '' }}>
+                                    <option value="monthly" {{ old('repayment_frequency', 'monthly') === 'monthly' ? 'selected' : '' }}>
                                         {{ __('app.debts.monthly') }}
                                     </option>
                                     <option value="quarterly" {{ old('repayment_frequency') === 'quarterly' ? 'selected' : '' }}>
@@ -132,10 +132,21 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6" id="installments_field">
+                        <div class="col-md-6" id="installment_amount_field">
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('app.debts.installment_amount') }}</label>
+                                <input type="number" step="0.01" id="installment_amount" class="form-control"
+                                    placeholder="0.00">
+                                <small class="text-muted">{{ __('app.debts.installment_amount_help') }}</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="installments_field">
+                        <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label required">{{ __('app.debts.installments_count') }}</label>
-                                <input type="number" name="installments_count" class="form-control @error('installments_count') is-invalid @enderror"
+                                <input type="number" name="installments_count" id="installments_count" class="form-control @error('installments_count') is-invalid @enderror"
                                     value="{{ old('installments_count', 1) }}" min="1" max="360" required>
                                 <small class="text-muted">{{ __('app.debts.installments_help') }}</small>
                                 @error('installments_count')
@@ -211,15 +222,54 @@
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+    const installmentAmountField = document.getElementById('installment_amount_field');
+    const totalAmountInput = document.getElementById('total_amount');
+    const installmentsCountInput = document.getElementById('installments_count');
+    const installmentAmountInput = document.getElementById('installment_amount');
 
-@section('js')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+    function toggleInstallments() {
+        if (frequencySelect.value === 'one_time') {
+            installmentsField.style.display = 'none';
+            installmentAmountField.style.display = 'none';
+            installmentsCountInput.value = 1;
+        } else {
+            installmentsField.style.display = 'block';
+            installmentAmountField.style.display = 'block';
+        }
+    }
+
+    // حساب المبلغ الإجمالي من قيمة الدفعة
+    installmentAmountInput.addEventListener('input', function() {
+        const installmentAmount = parseFloat(this.value) || 0;
+        const installmentsCount = parseInt(installmentsCountInput.value) || 1;
+
+        if (installmentAmount > 0 && installmentsCount > 0) {
+            totalAmountInput.value = (installmentAmount * installmentsCount).toFixed(2);
+        }
+    });
+
+    // حساب قيمة الدفعة من المبلغ الإجمالي
+    function calculateInstallmentAmount() {
+        const totalAmount = parseFloat(totalAmountInput.value) || 0;
+        const installmentsCount = parseInt(installmentsCountInput.value) || 1;
+
+        if (totalAmount > 0 && installmentsCount > 0 && !installmentAmountInput.value) {
+            installmentAmountInput.value = (totalAmount / installmentsCount).toFixed(2);
+        }
+    }
+
+    totalAmountInput.addEventListener('input', calculateInstallmentAmount);
+    installmentsCountInput.addEventListener('input', function() {
+        // إذا كان المستخدم غيّر عدد الأقساط، نحسب قيمة الدفعة من المبلغ الإجمالي
+        if (totalAmountInput.value && !installmentAmountInput.value) {
+            calculateInstallmentAmount();
+        } else if (installmentAmountInput.value) {
+            // إذا كان قيمة الدفعة محددة، نحسب المبلغ الإجمالي
+            const installmentAmount = parseFloat(installmentAmountInput.value);
+            const installmentsCount = parseInt(this.value) || 1;
+            totalAmountInput.value = (installmentAmount * installmentsCount).toFixed(2);
+        }
+    });ent.addEventListener('DOMContentLoaded', function() {
     const frequencySelect = document.getElementById('repayment_frequency');
     const installmentsField = document.getElementById('installments_field');
 

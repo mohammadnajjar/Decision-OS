@@ -76,6 +76,12 @@ return [
     |--------------------------------------------------------------------------
     */
     'common' => [
+        'save' => 'Save',
+        'cancel' => 'Cancel',
+        'delete' => 'Delete',
+        'edit' => 'Edit',
+        'view' => 'View',
+        'actions' => 'Actions',
         'priority' => 'Priority',
         'status' => 'Status',
         'date' => 'Date',
@@ -242,6 +248,8 @@ return [
         'installments_count' => 'Number of Installments',
         'installments' => 'Installments',
         'installments_help' => 'Number of payments required to settle the debt',
+        'installment_amount' => 'Installment Amount',
+        'installment_amount_help' => 'Enter installment amount to calculate total automatically',
         'one_time' => 'One Time',
         'weekly' => 'Weekly',
         'biweekly' => 'Bi-weekly',
