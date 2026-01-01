@@ -17,37 +17,35 @@
     }
 @endphp
 
-<div class="col-xl-3 col-md-4 col-sm-6">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <p class="fw-medium text-muted mb-0">{{ $kpi['label'] }}</p>
-                    <h2 class="mt-2 mb-2 fs-22 fw-semibold text-{{ $color }}">
-                        {{ $displayValue }}
-                        @if($kpi['unit'])
-                            <small class="fs-12 text-muted fw-normal">{{ $kpi['unit'] }}</small>
-                        @endif
-                    </h2>
-                    @if($hasTarget)
-                        <p class="mb-0 text-muted text-truncate">
-                            <span class="badge bg-{{ $color }}-subtle text-{{ $color }} mb-0">
-                                <i class="{{ $value >= $target ? 'ri-arrow-up-line' : 'ri-arrow-down-line' }} align-middle"></i>
-                                {{ round($percentage) }}%
-                            </span>
-                            <span class="fs-11">من الهدف ({{ $target }})</span>
-                        </p>
+<div class="card h-100">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <div>
+                <p class="fw-medium text-muted mb-0">{{ $kpi['label'] }}</p>
+                <h2 class="mt-2 mb-2 fs-22 fw-semibold text-{{ $color }}">
+                    {{ $displayValue }}
+                    @if($kpi['unit'])
+                        <small class="fs-12 text-muted fw-normal">{{ $kpi['unit'] }}</small>
                     @endif
-                </div>
-                <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle text-{{ $color }} border border-dark border-opacity-20 shadow-sm fs-5">
-                    <i class="{{ $icon }}"></i>
-                </div>
+                </h2>
+                @if($hasTarget)
+                    <p class="mb-0 text-muted text-truncate">
+                        <span class="badge bg-{{ $color }}-subtle text-{{ $color }} mb-0">
+                            <i class="{{ $value >= $target ? 'ri-arrow-up-line' : 'ri-arrow-down-line' }} align-middle"></i>
+                            {{ round($percentage) }}%
+                        </span>
+                        <span class="fs-11">{{ __('app.common.from_target') }} ({{ $target }})</span>
+                    </p>
+                @endif
             </div>
-            @if($hasTarget)
-                <div class="progress mt-3" style="height: 4px;">
-                    <div class="progress-bar bg-{{ $color }}" role="progressbar" style="width: {{ $percentage }}%"></div>
-                </div>
-            @endif
+            <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle text-{{ $color }} border border-dark border-opacity-20 shadow-sm fs-5">
+                <i class="{{ $icon }}"></i>
+            </div>
         </div>
+        @if($hasTarget)
+            <div class="progress mt-3" style="height: 4px;">
+                <div class="progress-bar bg-{{ $color }}" role="progressbar" style="width: {{ $percentage }}%"></div>
+            </div>
+        @endif
     </div>
 </div>

@@ -65,7 +65,14 @@
             </div>
         </div>
 
-        {{-- Row 1: Module Status Cards --}}
+        {{-- Row 1: Burnout Monitor (أول شيء في الداشبورد) --}}
+        <div class="row mb-3">
+            <div class="col-12">
+                @include('decision-os.components.burnout-indicator', ['burnoutData' => $burnoutData])
+            </div>
+        </div>
+
+        {{-- Row 2: Module Status Cards --}}
         <div class="row g-3 mb-3">
             @include('decision-os.components.module-card', [
                 'title' => __('app.modules.life_discipline'),
@@ -93,7 +100,7 @@
             ])
         </div>
 
-        {{-- Row 2: Today One Thing + Pomodoro Timer --}}
+        {{-- Row 3: Today One Thing + Pomodoro Timer --}}
         <div class="row g-3 mb-3">
             <div class="col-xl-8">
                 @include('decision-os.components.today-one-thing', ['task' => $todayTask, 'topTasks' => $topTasks])
@@ -103,7 +110,7 @@
             </div>
         </div>
 
-        {{-- Row 3: Warnings Box (if any) --}}
+        {{-- Row 4: Warnings Box (if any) --}}
         @if($warnings->isNotEmpty())
         <div class="row mb-3">
             <div class="col-12">
@@ -112,18 +119,13 @@
         </div>
         @endif
 
-        {{-- Row 4: Quick KPIs Grid --}}
+        {{-- Row 5: Quick KPIs Grid (نفس الحجم) --}}
         <div class="row g-3 mb-3">
             @foreach($kpis as $kpi)
-                @include('decision-os.components.kpi-widget', ['kpi' => $kpi])
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    @include('decision-os.components.kpi-widget', ['kpi' => $kpi])
+                </div>
             @endforeach
-        </div>
-
-        {{-- Row 5: Burnout Monitor --}}
-        <div class="row mb-3">
-            <div class="col-12">
-                @include('decision-os.components.burnout-indicator', ['burnoutData' => $burnoutData])
-            </div>
         </div>
 
         {{-- Row 6: Decisions Due + Weekly Review --}}
