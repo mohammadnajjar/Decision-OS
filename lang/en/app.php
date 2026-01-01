@@ -43,6 +43,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Common Phrases
+    |--------------------------------------------------------------------------
+    */
+    'common' => [
+        'from_target' => 'of target',
+        'of_target' => 'of',
+        'per_day' => 'per day',
+        'per_week' => 'per week',
+        'per_month' => 'per month',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Common Actions
     |--------------------------------------------------------------------------
     */
@@ -150,6 +163,7 @@ return [
         'task_title' => 'Task Title',
         'task_type' => 'Task Type',
         'today_one_thing' => 'Today One Thing',
+        'today_one_thing_title' => 'Today\'s Main Task',
         'today_one_thing_desc' => 'The most important and first task of the day',
         'top_3' => 'Top 3',
         'top_3_desc' => 'One of the three important tasks',

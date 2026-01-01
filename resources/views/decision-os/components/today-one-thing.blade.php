@@ -4,9 +4,9 @@
         <div>
             <h5 class="card-title mb-0">
                 <i class="ri-focus-2-line me-2 text-primary"></i>
-                مهمة اليوم الأساسية
+                {{ __('app.tasks.today_one_thing_title') }}
             </h5>
-            <small class="text-muted">Today One Thing</small>
+            <small class="text-muted">{{ __('app.tasks.today_one_thing') }}</small>
         </div>
         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">
             <i class="ri-add-line"></i>
