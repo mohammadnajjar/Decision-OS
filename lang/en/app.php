@@ -279,6 +279,7 @@ return [
         'updated_successfully' => 'Debt updated successfully',
         'deleted_successfully' => 'Debt deleted successfully',
         'confirm_delete' => 'Are you sure you want to delete this debt?',
+        'delete_warning' => 'This debt and all associated payments will be permanently deleted. This action cannot be undone.',
     ],
 
     /*

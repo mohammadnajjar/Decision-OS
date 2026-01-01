@@ -225,12 +225,54 @@
                                 </td>
                                 <td>
                                     <div class="hstack gap-2">
-                                        <a href="{{ route('decision-os.debts.show', $debt) }}" class="btn btn-sm btn-soft-primary">
+                                        <a href="{{ route('decision-os.debts.show', $debt) }}" class="btn btn-sm btn-soft-primary" title="{{ __('app.common.view') }}">
                                             <i class="ri-eye-line"></i>
                                         </a>
-                                        <a href="{{ route('decision-os.debts.edit', $debt) }}" class="btn btn-sm btn-soft-info">
+                                        <a href="{{ route('decision-os.debts.edit', $debt) }}" class="btn btn-sm btn-soft-info" title="{{ __('app.common.edit') }}">
                                             <i class="ri-edit-line"></i>
                                         </a>
+                                        <button type="button" class="btn btn-sm btn-soft-danger" title="{{ __('app.common.delete') }}"
+                                            data-bs-toggle="modal" data-bs-target="#deleteDebtModal{{ $debt->id }}">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteDebtModal{{ $debt->id }}" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-danger text-white">
+                                                    <h5 class="modal-title">
+                                                        <i class="ri-error-warning-line me-2"></i>
+                                                        {{ __('app.debts.confirm_delete') }}
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>{{ __('app.debts.delete_warning') }}</p>
+                                                    <div class="alert alert-light">
+                                                        <strong>{{ $debt->party_name }}</strong><br>
+                                                        <span class="text-muted">
+                                                            {{ $debt->currency }} {{ number_format($debt->total_amount, 2) }}
+                                                            @if($debt->paid_amount > 0)
+                                                                ({{ __('app.debts.paid') }}: {{ $debt->currency }} {{ number_format($debt->paid_amount, 2) }})
+                                                            @endif
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('app.common.cancel') }}</button>
+                                                    <form action="{{ route('decision-os.debts.destroy', $debt) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="ri-delete-bin-line me-1"></i>
+                                                            {{ __('app.common.delete') }}
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
