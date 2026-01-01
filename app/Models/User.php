@@ -244,4 +244,38 @@ class User extends Authenticatable
     {
         return $this->hasMany(BusinessAsset::class);
     }
+
+    /**
+     * Get user's zakat settings.
+     */
+    public function zakatSetting()
+    {
+        return $this->hasOne(ZakatSetting::class);
+    }
+
+    /**
+     * Get user's zakat payments.
+     */
+    public function zakatPayments(): HasMany
+    {
+        return $this->hasMany(ZakatPayment::class);
+    }
+
+    /**
+     * Get or create zakat settings for user.
+     */
+    public function getOrCreateZakatSetting(): ZakatSetting
+    {
+        return $this->zakatSetting ?? $this->zakatSetting()->create([
+            'currency' => $this->currency ?? 'SAR',
+        ]);
+    }
+
+    /**
+     * Get zakatable accounts (for zakat calculation).
+     */
+    public function zakatableAccounts()
+    {
+        return $this->accounts()->where('is_zakatable', true);
+    }
 }

@@ -11,10 +11,12 @@ use Illuminate\Support\Collection;
 class InsightService
 {
     private StatusService $statusService;
+    private ZakatService $zakatService;
 
-    public function __construct(StatusService $statusService)
+    public function __construct(StatusService $statusService, ZakatService $zakatService)
     {
         $this->statusService = $statusService;
+        $this->zakatService = $zakatService;
     }
 
     /**
@@ -111,6 +113,32 @@ class InsightService
                 'message_en' => '⚠️ System locked - Fix red items first',
                 'severity' => 'red',
                 'module' => 'global',
+            ],
+
+            // Zakat Rules
+            [
+                'key' => 'zakat_due',
+                'condition' => fn(User $user) => $this->checkZakatDue($user),
+                'message' => 'الزكاة مستحقة تقديرًا – راجع عالم للتأكد',
+                'message_en' => 'Zakat is due (estimated) – consult a scholar',
+                'severity' => 'info',
+                'module' => 'financial_safety',
+            ],
+            [
+                'key' => 'zakat_approaching',
+                'condition' => fn(User $user) => $this->checkZakatApproaching($user),
+                'message' => 'اقترب موعد الزكاة – حضّر للحساب',
+                'message_en' => 'Zakat due date approaching – prepare',
+                'severity' => 'info',
+                'module' => 'financial_safety',
+            ],
+            [
+                'key' => 'zakat_below_nisab',
+                'condition' => fn(User $user) => $this->checkZakatBelowNisab($user),
+                'message' => 'مالك تحت النصاب – لا زكاة عليك',
+                'message_en' => 'Your wealth is below nisab – no zakat due',
+                'severity' => 'info',
+                'module' => 'financial_safety',
             ],
         ];
     }
@@ -235,5 +263,30 @@ class InsightService
     {
         $weeksSinceReview = WeeklyReview::getWeeksSinceLastReview($user->id);
         return $weeksSinceReview >= 2;
+    }
+
+    // ============ Zakat Condition Checkers ============
+
+    private function checkZakatDue(User $user): bool
+    {
+        $status = $this->zakatService->getZakatStatus($user);
+        return $status === ZakatService::STATUS_DUE;
+    }
+
+    private function checkZakatApproaching(User $user): bool
+    {
+        $status = $this->zakatService->getZakatStatus($user);
+        return $status === ZakatService::STATUS_APPROACHING;
+    }
+
+    private function checkZakatBelowNisab(User $user): bool
+    {
+        $settings = $user->zakatSetting;
+        if (!$settings || !$settings->enabled || !$settings->isConfigComplete()) {
+            return false;
+        }
+
+        $status = $this->zakatService->getZakatStatus($user);
+        return $status === ZakatService::STATUS_BELOW_NISAB;
     }
 }

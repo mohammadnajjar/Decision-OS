@@ -18,13 +18,23 @@ class Account extends Model
         'icon',
         'color',
         'is_default',
+        'is_zakatable',
         'notes',
     ];
 
     protected $casts = [
         'balance' => 'decimal:2',
         'is_default' => 'boolean',
+        'is_zakatable' => 'boolean',
     ];
+
+    /**
+     * Scope: الحسابات الزكوية فقط
+     */
+    public function scopeZakatable($query)
+    {
+        return $query->where('is_zakatable', true);
+    }
 
     /**
      * علاقة مع المستخدم
@@ -101,5 +111,15 @@ class Account extends Model
             $this->balance += $amount;
         }
         $this->save();
+    }
+
+    /**
+     * جلب مجموع الأرصدة الزكوية للمستخدم
+     */
+    public static function getZakatableBalanceForUser(int $userId): float
+    {
+        return (float) self::where('user_id', $userId)
+            ->zakatable()
+            ->sum('balance');
     }
 }

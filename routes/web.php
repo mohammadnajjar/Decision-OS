@@ -16,6 +16,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FinancialReportController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\ZakatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -213,6 +214,22 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/business/{business}/edit', [BusinessAssetController::class, 'edit'])->name('business.edit');
     Route::put('/business/{business}', [BusinessAssetController::class, 'update'])->name('business.update');
     Route::delete('/business/{business}', [BusinessAssetController::class, 'destroy'])->name('business.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Zakat Routes (حاسبة الزكاة)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('zakat')->name('zakat.')->group(function () {
+    Route::get('/', [ZakatController::class, 'dashboard'])->name('dashboard');
+    Route::get('/settings', [ZakatController::class, 'settings'])->name('settings');
+    Route::post('/settings', [ZakatController::class, 'updateSettings'])->name('settings.update');
+    Route::get('/history', [ZakatController::class, 'history'])->name('history');
+    Route::post('/pay', [ZakatController::class, 'recordPayment'])->name('pay');
+    Route::delete('/payment/{payment}', [ZakatController::class, 'deletePayment'])->name('payment.delete');
+    Route::post('/gold-price', [ZakatController::class, 'updateGoldPrice'])->name('gold-price.update');
+    Route::get('/api/data', [ZakatController::class, 'getZakatData'])->name('api.data');
 });
 
 require __DIR__.'/auth.php';

@@ -154,6 +154,22 @@
                 </a>
             </li>
 
+            {{-- Zakat Calculator --}}
+            @php
+                $zakatEnabled = auth()->user()?->zakatSetting?->enabled ?? false;
+            @endphp
+            <li class="pe-slide">
+                <a href="{{ route('zakat.dashboard') }}" class="pe-nav-link {{ request()->routeIs('zakat.*') ? 'active' : '' }}">
+                    <i class="ri-moon-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.zakat') }}</span>
+                    @if(!$zakatEnabled)
+                        <span class="badge bg-secondary-subtle text-secondary ms-auto" title="غير مفعل">
+                            <i class="ri-settings-3-line"></i>
+                        </span>
+                    @endif
+                </a>
+            </li>
+
             {{-- Clients --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.clients.*') ? 'active' : '' }}">

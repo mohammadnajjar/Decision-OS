@@ -102,6 +102,7 @@ return [
         'career_growth' => 'التطور المهني',
         'business' => 'الأصول والأعمال',
         'business_assets' => 'الأصول والأعمال',
+        'zakat' => 'حاسبة الزكاة',
     ],
 
     /*
