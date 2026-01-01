@@ -61,6 +61,7 @@ return [
     */
     'nav' => [
         'dashboard' => 'لوحة التحكم',
+        'getting_started' => 'دليل البدء',
         'daily_input' => 'الإدخال اليومي السريع',
         'focus_work' => 'التركيز والعمل',
         'tasks' => 'المهام',

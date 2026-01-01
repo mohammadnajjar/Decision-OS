@@ -24,6 +24,14 @@
                 </a>
             </li>
 
+            {{-- Getting Started Guide --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.getting-started') }}" class="pe-nav-link {{ request()->routeIs('decision-os.getting-started') ? 'active' : '' }}">
+                    <i class="ri-rocket-line pe-nav-icon text-warning"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.getting_started') }}</span>
+                </a>
+            </li>
+
             {{-- Quick Daily Entry --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.daily-input') }}" class="pe-nav-link {{ request()->routeIs('decision-os.daily-input') ? 'active' : '' }}">

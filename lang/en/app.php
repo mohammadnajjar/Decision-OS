@@ -91,6 +91,7 @@ return [
     */
     'nav' => [
         'dashboard' => 'Dashboard',
+        'getting_started' => 'Getting Started',
         'daily_input' => 'Quick Daily Input',
         'focus_work' => 'Focus & Work',
         'tasks' => 'Tasks',

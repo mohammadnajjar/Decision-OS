@@ -58,6 +58,11 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     // Dashboard
     Route::get('/', [DecisionDashboardController::class, 'index'])->name('dashboard');
 
+    // Getting Started Guide
+    Route::get('/getting-started', function() {
+        return view('decision-os.getting-started');
+    })->name('getting-started');
+
     // Quick Daily Input Page
     Route::get('/daily-input', [DecisionDashboardController::class, 'dailyInput'])->name('daily-input');
 
