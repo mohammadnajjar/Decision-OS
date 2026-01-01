@@ -46,6 +46,14 @@ class WeeklyReviewController extends Controller
         // Calculate streak
         $streak = $this->calculateStreak($user);
 
+        // Week stats for the summary card
+        $weekStats = [
+            'tasks_completed' => $kpiSnapshot['tasks']['completed'] ?? 0,
+            'pomodoros' => $kpiSnapshot['pomodoro']['completed'] ?? 0,
+            'work_hours' => $kpiSnapshot['metrics']['avg_work_hours'] ?? 0,
+            'healthy_days' => $kpiSnapshot['metrics']['gym_days'] ?? 0,
+        ];
+
         return view('decision-os.weekly-review.form', compact(
             'kpiSnapshot',
             'lastReview',
@@ -53,7 +61,8 @@ class WeeklyReviewController extends Controller
             'weekStart',
             'weekEnd',
             'weekNumber',
-            'year'
+            'year',
+            'weekStats'
         ));
     }
 
