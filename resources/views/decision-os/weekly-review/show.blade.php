@@ -21,13 +21,19 @@
             </div>
             <div class="card-body">
                 {{-- KPI Snapshot --}}
-                @if($review->kpi_snapshot)
+                @php
+                    $kpiSnapshot = $review->kpi_snapshot;
+                    if (is_string($kpiSnapshot)) {
+                        $kpiSnapshot = json_decode($kpiSnapshot, true) ?? [];
+                    }
+                @endphp
+                @if($kpiSnapshot && is_array($kpiSnapshot))
                 <div class="mb-4">
                     <h6 class="text-muted mb-3">
                         <i class="ri-bar-chart-box-line me-1"></i> KPIs عند المراجعة
                     </h6>
                     <div class="row g-3">
-                        @foreach($review->kpi_snapshot as $key => $value)
+                        @foreach($kpiSnapshot as $key => $value)
                         <div class="col-md-4">
                             <div class="border rounded p-3 text-center">
                                 <span class="text-muted small d-block">{{ $key }}</span>

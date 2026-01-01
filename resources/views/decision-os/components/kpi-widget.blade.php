@@ -1,4 +1,4 @@
-{{-- KPI Widget Component --}}
+{{-- KPI Widget Component (Theme-styled) --}}
 @php
     $hasTarget = isset($kpi['target']);
     $value = $kpi['value'] ?? 0;
@@ -8,34 +8,43 @@
     $isGood = !$hasTarget || $value >= $target;
     $color = $kpi['color'] ?? ($isGood ? 'success' : ($value >= $target * 0.5 ? 'warning' : 'danger'));
     $icon = $kpi['icon'] ?? 'ri-bar-chart-line';
+
+    // Format value based on format type
+    if (isset($kpi['format']) && $kpi['format'] === 'currency') {
+        $displayValue = '$' . number_format($value, 2);
+    } else {
+        $displayValue = $value;
+    }
 @endphp
 
 <div class="col-xl-3 col-md-4 col-sm-6">
     <div class="card">
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fs-12">
-                    <i class="{{ $icon }} me-1"></i>
-                    {{ $kpi['label'] }}
-                </span>
-                @if($hasTarget)
-                    <span class="badge bg-{{ $color }}-subtle text-{{ $color }}">
-                        {{ $value }}/{{ $target }}
-                    </span>
-                @endif
-            </div>
-            <div class="d-flex align-items-baseline gap-2">
-                <h3 class="mb-0 fw-bold text-{{ $color }}">
-                    @if(isset($kpi['format']) && $kpi['format'] === 'currency')
-                        ${{ number_format($value, 2) }}
-                    @else
-                        {{ $value }}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p class="fw-medium text-muted mb-0">{{ $kpi['label'] }}</p>
+                    <h2 class="mt-2 mb-2 fs-22 fw-semibold text-{{ $color }}">
+                        {{ $displayValue }}
+                        @if($kpi['unit'])
+                            <small class="fs-12 text-muted fw-normal">{{ $kpi['unit'] }}</small>
+                        @endif
+                    </h2>
+                    @if($hasTarget)
+                        <p class="mb-0 text-muted text-truncate">
+                            <span class="badge bg-{{ $color }}-subtle text-{{ $color }} mb-0">
+                                <i class="{{ $value >= $target ? 'ri-arrow-up-line' : 'ri-arrow-down-line' }} align-middle"></i>
+                                {{ round($percentage) }}%
+                            </span>
+                            <span class="fs-11">من الهدف ({{ $target }})</span>
+                        </p>
                     @endif
-                </h3>
-                <small class="text-muted">{{ $kpi['unit'] ?? '' }}</small>
+                </div>
+                <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle text-{{ $color }} border border-dark border-opacity-20 shadow-sm fs-5">
+                    <i class="{{ $icon }}"></i>
+                </div>
             </div>
             @if($hasTarget)
-                <div class="progress mt-2" style="height: 4px;">
+                <div class="progress mt-3" style="height: 4px;">
                     <div class="progress-bar bg-{{ $color }}" role="progressbar" style="width: {{ $percentage }}%"></div>
                 </div>
             @endif

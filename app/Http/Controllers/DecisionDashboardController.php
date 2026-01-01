@@ -265,9 +265,9 @@ class DecisionDashboardController extends Controller
         $monthIncome = \App\Models\Income::getMonthTotal($user->id);
 
         // Get metric IDs for discipline
-        $gymMetricId = \App\Models\Metric::where('code', 'gym_days')->value('id') ?? 0;
-        $restMetricId = \App\Models\Metric::where('code', 'rest_days')->value('id') ?? 0;
-        $workHoursMetricId = \App\Models\Metric::where('code', 'avg_work_hours')->value('id') ?? 0;
+        $gymMetricId = \App\Models\Metric::where('key', 'gym_days')->value('id') ?? 0;
+        $restMetricId = \App\Models\Metric::where('key', 'rest_days')->value('id') ?? 0;
+        $workHoursMetricId = \App\Models\Metric::where('key', 'avg_work_hours')->value('id') ?? 0;
 
         // Today's metric values (keyed by metric_id)
         $metricsToday = \App\Models\MetricValue::where('user_id', $user->id)
