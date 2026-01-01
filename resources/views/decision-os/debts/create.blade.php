@@ -135,8 +135,8 @@
                         <div class="col-md-6" id="installment_amount_field">
                             <div class="mb-3">
                                 <label class="form-label">{{ __('app.debts.installment_amount') }}</label>
-                                <input type="number" step="0.01" id="installment_amount" class="form-control"
-                                    placeholder="0.00">
+                                <input type="number" step="0.01" id="installment_amount" name="installment_amount" class="form-control"
+                                    value="{{ old('installment_amount') }}" placeholder="0.00">
                                 <small class="text-muted">{{ __('app.debts.installment_amount_help') }}</small>
                             </div>
                         </div>

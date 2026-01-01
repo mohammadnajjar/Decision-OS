@@ -26,6 +26,7 @@ class Debt extends Model
         'reference_number',
         'repayment_frequency',
         'installments_count',
+        'installment_amount',
     ];
 
     protected $casts = [
@@ -123,7 +124,11 @@ class Debt extends Model
             return;
         }
 
-        $installmentAmount = round($this->total_amount / $this->installments_count, 2);
+        // استخدام قيمة الدفعة المُحددة من المستخدم إن وجدت
+        $installmentAmount = $this->installment_amount
+            ? round($this->installment_amount, 2)
+            : round($this->total_amount / $this->installments_count, 2);
+
         $currentDate = $this->start_date->copy();
 
         for ($i = 1; $i <= $this->installments_count; $i++) {
@@ -137,10 +142,13 @@ class Debt extends Model
                 default => $currentDate,
             };
 
-            // آخر قسط قد يكون مختلف بسبب التقريب
-            $amount = ($i === $this->installments_count)
-                ? $this->total_amount - ($installmentAmount * ($this->installments_count - 1))
-                : $installmentAmount;
+            // إذا كانت قيمة الدفعة محددة من المستخدم، نستخدمها مباشرة
+            // وإلا نحسب القسط الأخير ليغطي الفارق
+            $amount = $this->installment_amount
+                ? $installmentAmount
+                : (($i === $this->installments_count)
+                    ? $this->total_amount - ($installmentAmount * ($this->installments_count - 1))
+                    : $installmentAmount);
 
             DebtPayment::create([
                 'debt_id' => $this->id,
