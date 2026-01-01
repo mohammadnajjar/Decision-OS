@@ -233,4 +233,81 @@ class DecisionDashboardController extends Controller
         // Due if last review was more than 7 days ago
         return $lastReview->week_start->diffInDays(now()) >= 7;
     }
+
+    /**
+     * Display the quick daily input page.
+     */
+    public function dailyInput(Request $request): View
+    {
+        $user = $request->user();
+
+        // Today's One Thing
+        $todayTask = Task::where('user_id', $user->id)
+            ->where('date', today())
+            ->where('type', 'one_thing')
+            ->first();
+
+        // Top 3 tasks for today
+        $topTasks = Task::where('user_id', $user->id)
+            ->where('date', today())
+            ->where('type', 'top_3')
+            ->orderBy('created_at')
+            ->get();
+
+        // Expense categories
+        $expenseCategories = \App\Models\ExpenseCategory::where('user_id', $user->id)
+            ->orderBy('name')
+            ->get();
+
+        // Today's expenses
+        $todayExpenses = \App\Models\Expense::getTodayTotal($user->id);
+        $weekExpenses = \App\Models\Expense::getWeekTotal($user->id);
+        $monthIncome = \App\Models\Income::getMonthTotal($user->id);
+
+        // Get metric IDs for discipline
+        $gymMetricId = \App\Models\Metric::where('code', 'gym_days')->value('id') ?? 0;
+        $restMetricId = \App\Models\Metric::where('code', 'rest_days')->value('id') ?? 0;
+        $workHoursMetricId = \App\Models\Metric::where('code', 'avg_work_hours')->value('id') ?? 0;
+
+        // Today's metric values (keyed by metric_id)
+        $metricsToday = \App\Models\MetricValue::where('user_id', $user->id)
+            ->whereDate('date', today())
+            ->pluck('value', 'metric_id')
+            ->toArray();
+
+        // Quran progress
+        $quranProgress = \App\Models\QuranProgress::getCurrentMonth($user->id);
+
+        // Cash on hand
+        $cashOnHand = $user->cash_on_hand;
+
+        // Today's pomodoros
+        $todayPomodoros = \App\Models\PomodoroSession::where('user_id', $user->id)
+            ->whereDate('created_at', today())
+            ->where('status', 'completed')
+            ->count();
+
+        // Completed tasks today
+        $completedTasksToday = Task::where('user_id', $user->id)
+            ->where('date', today())
+            ->where('completed', true)
+            ->count();
+
+        return view('decision-os.daily-input', compact(
+            'todayTask',
+            'topTasks',
+            'expenseCategories',
+            'todayExpenses',
+            'weekExpenses',
+            'monthIncome',
+            'gymMetricId',
+            'restMetricId',
+            'workHoursMetricId',
+            'metricsToday',
+            'quranProgress',
+            'cashOnHand',
+            'todayPomodoros',
+            'completedTasksToday',
+        ));
+    }
 }

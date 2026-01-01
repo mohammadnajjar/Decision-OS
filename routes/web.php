@@ -48,6 +48,9 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     // Dashboard
     Route::get('/', [DecisionDashboardController::class, 'index'])->name('dashboard');
 
+    // Quick Daily Input Page
+    Route::get('/daily-input', [DecisionDashboardController::class, 'dailyInput'])->name('daily-input');
+
     // Metrics
     Route::get('/metrics', [MetricController::class, 'index'])->name('metrics.index');
     Route::get('/metrics/history', [MetricController::class, 'history'])->name('metrics.history');

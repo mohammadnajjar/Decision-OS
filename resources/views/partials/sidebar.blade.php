@@ -27,60 +27,89 @@
                 </a>
             </li>
 
+            {{-- Quick Daily Entry --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.daily-input') }}" class="pe-nav-link {{ request()->routeIs('decision-os.daily-input') ? 'active' : '' }}">
+                    <i class="ri-add-box-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">الإدخال اليومي السريع</span>
+                </a>
+            </li>
+
             {{-- ========================================= --}}
-            {{-- Daily Operations --}}
+            {{-- Focus & Work --}}
             {{-- ========================================= --}}
             <li class="pe-menu-title">
-                العمليات اليومية
+                التركيز والعمل
             </li>
 
-            {{-- Metrics Input --}}
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.metrics.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.index') ? 'active' : '' }}">
-                    <i class="ri-file-list-3-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">إدخال البيانات</span>
-                </a>
-            </li>
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.metrics.history') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.history') ? 'active' : '' }}">
-                    <i class="ri-history-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">سجل المقاييس</span>
-                </a>
-            </li>
-
-            {{-- Tasks --}}
+            {{-- Today One Thing --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.tasks.today') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.today') ? 'active' : '' }}">
                     <i class="ri-focus-3-line pe-nav-icon text-primary"></i>
-                    <span class="pe-nav-content">Today One Thing</span>
-                </a>
-            </li>
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.tasks.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.index') ? 'active' : '' }}">
-                    <i class="ri-task-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">جميع المهام</span>
-                </a>
-            </li>
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.tasks.create') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.create') ? 'active' : '' }}">
-                    <i class="ri-add-circle-line pe-nav-icon text-success"></i>
-                    <span class="pe-nav-content">إضافة مهمة</span>
+                    <span class="pe-nav-content">المهمة الأهم اليوم</span>
                 </a>
             </li>
 
             {{-- Pomodoro --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.pomodoro.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.pomodoro.*') ? 'active' : '' }}">
-                    <i class="ri-timer-line pe-nav-icon"></i>
+                    <i class="ri-timer-line pe-nav-icon text-danger"></i>
                     <span class="pe-nav-content">بومودورو</span>
                 </a>
             </li>
 
+            {{-- All Tasks --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.tasks.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.tasks.index') ? 'active' : '' }}">
+                    <i class="ri-task-line pe-nav-icon"></i>
+                    <span class="pe-nav-content">جميع المهام</span>
+                </a>
+            </li>
+
+            {{-- Projects --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.projects.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.projects.*') ? 'active' : '' }}">
+                    <i class="ri-folder-line pe-nav-icon text-info"></i>
+                    <span class="pe-nav-content">المشاريع</span>
+                </a>
+            </li>
+
             {{-- ========================================= --}}
-            {{-- Records & Logs --}}
+            {{-- Finance --}}
             {{-- ========================================= --}}
             <li class="pe-menu-title">
-                السجلات
+                المال
+            </li>
+
+            {{-- Expenses --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.expenses.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.expenses.*') ? 'active' : '' }}">
+                    <i class="ri-wallet-3-line pe-nav-icon text-danger"></i>
+                    <span class="pe-nav-content">المصروفات</span>
+                </a>
+            </li>
+
+            {{-- Incomes --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.incomes.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.incomes.*') ? 'active' : '' }}">
+                    <i class="ri-money-dollar-circle-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">الدخل</span>
+                </a>
+            </li>
+
+            {{-- Clients --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.clients.*') ? 'active' : '' }}">
+                    <i class="ri-user-star-line pe-nav-icon text-warning"></i>
+                    <span class="pe-nav-content">العملاء</span>
+                </a>
+            </li>
+
+            {{-- ========================================= --}}
+            {{-- Spiritual & Health --}}
+            {{-- ========================================= --}}
+            <li class="pe-menu-title">
+                الروحاني والصحة
             </li>
 
             {{-- Quran Progress --}}
@@ -91,51 +120,27 @@
                 </a>
             </li>
 
-            {{-- Expenses --}}
+            {{-- Metrics History --}}
             <li class="pe-slide">
-                <a href="{{ route('decision-os.expenses.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.expenses.*') ? 'active' : '' }}">
-                    <i class="ri-wallet-3-line pe-nav-icon text-danger"></i>
-                    <span class="pe-nav-content">المصروفات اليومية</span>
-                </a>
-            </li>
-
-            {{-- Incomes --}}
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.incomes.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.incomes.*') ? 'active' : '' }}">
-                    <i class="ri-money-dollar-circle-line pe-nav-icon text-success"></i>
-                    <span class="pe-nav-content">سجل الدخل</span>
-                </a>
-            </li>
-
-            {{-- Decisions --}}
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.decisions.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.decisions.*') ? 'active' : '' }}">
-                    <i class="ri-git-commit-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">سجل القرارات</span>
-                </a>
-            </li>
-
-            {{-- Projects --}}
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.projects.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.projects.*') ? 'active' : '' }}">
-                    <i class="ri-folder-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">المشاريع</span>
-                </a>
-            </li>
-
-            {{-- Clients --}}
-            <li class="pe-slide">
-                <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.clients.*') ? 'active' : '' }}">
-                    <i class="ri-user-star-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">العملاء</span>
+                <a href="{{ route('decision-os.metrics.history') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.*') ? 'active' : '' }}">
+                    <i class="ri-heart-pulse-line pe-nav-icon text-danger"></i>
+                    <span class="pe-nav-content">الانضباط والصحة</span>
                 </a>
             </li>
 
             {{-- ========================================= --}}
-            {{-- Review --}}
+            {{-- Review & Goals --}}
             {{-- ========================================= --}}
             <li class="pe-menu-title">
-                المراجعة
+                المراجعة والأهداف
+            </li>
+
+            {{-- Weekly Review --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.weekly-review.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.weekly-review.*') ? 'active' : '' }}">
+                    <i class="ri-calendar-check-line pe-nav-icon text-primary"></i>
+                    <span class="pe-nav-content">المراجعة الأسبوعية</span>
+                </a>
             </li>
 
             {{-- Yearly Goals --}}
@@ -146,11 +151,11 @@
                 </a>
             </li>
 
-            {{-- Weekly Review --}}
+            {{-- Decisions Log --}}
             <li class="pe-slide">
-                <a href="{{ route('decision-os.weekly-review.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.weekly-review.*') ? 'active' : '' }}">
-                    <i class="ri-calendar-check-line pe-nav-icon"></i>
-                    <span class="pe-nav-content">المراجعة الأسبوعية</span>
+                <a href="{{ route('decision-os.decisions.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.decisions.*') ? 'active' : '' }}">
+                    <i class="ri-git-commit-line pe-nav-icon text-info"></i>
+                    <span class="pe-nav-content">سجل القرارات</span>
                 </a>
             </li>
 
