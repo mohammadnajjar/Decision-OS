@@ -9,6 +9,7 @@ class Income extends Model
 {
     protected $fillable = [
         'user_id',
+        'account_id',
         'amount',
         'date',
         'source',
@@ -26,6 +27,14 @@ class Income extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get account for this income.
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
     }
 
     /**

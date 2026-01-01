@@ -45,6 +45,26 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">الحساب</label>
+                            <select name="account_id" class="form-select">
+                                <option value="">اختر الحساب (اختياري)...</option>
+                                @foreach($accounts as $account)
+                                    <option value="{{ $account->id }}" {{ $account->is_default ? 'selected' : '' }}>
+                                        @if($account->icon)
+                                            {{ $account->icon }}
+                                        @endif
+                                        {{ $account->name }} ({{ $account->currency }} {{ number_format($account->balance, 2) }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if($accounts->isEmpty())
+                                <div class="alert alert-warning mt-2">
+                                    <small>لا توجد حسابات مالية. <a href="{{ route('decision-os.accounts.create') }}">أضف حساباً الآن</a></small>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">التاريخ</label>
                             <input type="date" name="date" class="form-control" value="{{ today()->toDateString() }}" required>
                         </div>
