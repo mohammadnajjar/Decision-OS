@@ -76,6 +76,7 @@ return [
         'incomes' => 'الدخل',
         'expense_categories' => 'فئات المصاريف',
         'financial_reports' => 'التقارير المالية',
+        'debts' => 'الديون والقروض',
         'spiritual_health' => 'الروحاني والصحة',
         'quran' => 'ختمة القرآن',
         'adhkar' => 'الأذكار',
@@ -152,6 +153,105 @@ return [
         'updated_successfully' => 'تم تحديث الحساب بنجاح',
         'deleted_successfully' => 'تم حذف الحساب بنجاح',
         'confirm_delete' => 'هل أنت متأكد من حذف هذا الحساب؟',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Debts & Loans
+    |--------------------------------------------------------------------------
+    */
+    'debts' => [
+        'title' => 'الديون والقروض',
+        'all' => 'الكل',
+        'payable' => 'ديون علي',
+        'receivable' => 'ديون لي',
+        'add_new' => 'إضافة دين جديد',
+        'add_payable' => 'إضافة دين علي',
+        'add_receivable' => 'إضافة دين لي',
+        'i_owe' => 'علي دفعه',
+        'owes_me' => 'مستحق لي',
+        'debt_details' => 'تفاصيل الدين',
+        'summary' => 'ملخص',
+        'payment_schedule' => 'جدول الدفعات',
+
+        // Stats
+        'total_payable' => 'إجمالي الديون علي',
+        'total_receivable' => 'إجمالي الديون لي',
+        'net_position' => 'الموقف الصافي',
+        'overdue' => 'متأخرة',
+        'due_soon_alert' => 'لديك ديون قريبة الاستحقاق!',
+        'due_on' => 'الاستحقاق في',
+        'no_debts' => 'لا توجد ديون',
+        'start_tracking' => 'ابدأ بتتبع الديون والقروض',
+
+        // Fields
+        'party' => 'الطرف',
+        'party_name' => 'اسم الطرف',
+        'creditor_name' => 'اسم الدائن',
+        'debtor_name' => 'اسم المدين',
+        'party_name_placeholder' => 'مثال: أحمد، بنك الإمارات، شركة XYZ',
+        'contact' => 'رقم التواصل',
+        'contact_placeholder' => 'رقم الهاتف أو البريد الإلكتروني',
+        'type' => 'النوع',
+        'total_amount' => 'المبلغ الكلي',
+        'paid' => 'المدفوع',
+        'paid_amount' => 'المبلغ المدفوع',
+        'remaining' => 'المتبقي',
+        'remaining_amount' => 'المبلغ المتبقي',
+        'amount' => 'المبلغ',
+        'currency' => 'العملة',
+        'start_date' => 'تاريخ البداية',
+        'due_date' => 'تاريخ الاستحقاق',
+        'payment_date' => 'تاريخ الدفع',
+        'interest_rate' => 'نسبة الفائدة',
+        'reference_number' => 'رقم مرجعي',
+        'reference' => 'المرجع',
+        'reference_placeholder' => 'رقم العقد أو المرجع',
+        'notes' => 'ملاحظات',
+
+        // Repayment
+        'repayment_frequency' => 'تكرار الدفع',
+        'frequency' => 'التكرار',
+        'installments_count' => 'عدد الأقساط',
+        'installments' => 'الأقساط',
+        'installments_help' => 'عدد الدفعات المطلوبة لسداد الدين',
+        'one_time' => 'دفعة واحدة',
+        'weekly' => 'أسبوعي',
+        'biweekly' => 'كل أسبوعين',
+        'monthly' => 'شهري',
+        'quarterly' => 'كل 3 أشهر',
+        'yearly' => 'سنوي',
+
+        // Account
+        'linked_account' => 'الحساب المرتبط',
+        'select_account' => 'اختر الحساب (اختياري)',
+        'account' => 'الحساب',
+        'no_account' => 'بدون حساب',
+
+        // Status
+        'status' => 'الحالة',
+        'active' => 'نشط',
+        'pending' => 'معلق',
+        'partially_paid' => 'مدفوع جزئياً',
+        'fully_paid' => 'مدفوع بالكامل',
+        'overdue_status' => 'متأخر',
+
+        // Actions
+        'mark_paid' => 'تحديد كمدفوع',
+        'record_payment' => 'تسجيل دفعة',
+        'payment_amount' => 'مبلغ الدفعة',
+        'payment_method' => 'طريقة الدفع',
+        'payment_method_placeholder' => 'مثال: تحويل بنكي، كاش، شيك',
+        'confirm_payment' => 'تأكيد الدفع',
+        'payment_recorded' => 'تم تسجيل الدفعة بنجاح',
+        'no_schedule' => 'لا يوجد جدول دفعات',
+        'total' => 'الإجمالي',
+
+        // Messages
+        'created_successfully' => 'تم إنشاء الدين بنجاح',
+        'updated_successfully' => 'تم تحديث الدين بنجاح',
+        'deleted_successfully' => 'تم حذف الدين بنجاح',
+        'confirm_delete' => 'هل أنت متأكد من حذف هذا الدين؟',
     ],
 
     /*

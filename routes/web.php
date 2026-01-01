@@ -15,6 +15,7 @@ use App\Http\Controllers\BusinessAssetController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FinancialReportController;
+use App\Http\Controllers\DebtController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -172,6 +173,16 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
 
     // Financial Reports
     Route::get('/reports/financial', [FinancialReportController::class, 'index'])->name('reports.financial');
+
+    // Debts & Loans
+    Route::get('/debts', [DebtController::class, 'index'])->name('debts.index');
+    Route::get('/debts/create', [DebtController::class, 'create'])->name('debts.create');
+    Route::post('/debts', [DebtController::class, 'store'])->name('debts.store');
+    Route::get('/debts/{debt}', [DebtController::class, 'show'])->name('debts.show');
+    Route::get('/debts/{debt}/edit', [DebtController::class, 'edit'])->name('debts.edit');
+    Route::put('/debts/{debt}', [DebtController::class, 'update'])->name('debts.update');
+    Route::delete('/debts/{debt}', [DebtController::class, 'destroy'])->name('debts.destroy');
+    Route::post('/debts/{debt}/payment', [DebtController::class, 'recordPayment'])->name('debts.record-payment');
 
     // Quran Progress (ختمة القرآن)
     Route::get('/quran', [\App\Http\Controllers\QuranProgressController::class, 'index'])->name('quran.index');

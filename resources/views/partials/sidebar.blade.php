@@ -146,6 +146,14 @@
                 </a>
             </li>
 
+            {{-- Debts & Loans --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.debts.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.debts.*') ? 'active' : '' }}">
+                    <i class="ri-swap-line pe-nav-icon text-warning"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.debts') }}</span>
+                </a>
+            </li>
+
             {{-- Clients --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.clients.*') ? 'active' : '' }}">

@@ -182,6 +182,105 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Debts & Loans
+    |--------------------------------------------------------------------------
+    */
+    'debts' => [
+        'title' => 'Debts & Loans',
+        'all' => 'All',
+        'payable' => 'I Owe',
+        'receivable' => 'Owed to Me',
+        'add_new' => 'Add New Debt',
+        'add_payable' => 'Add Debt I Owe',
+        'add_receivable' => 'Add Debt Owed to Me',
+        'i_owe' => 'I Owe',
+        'owes_me' => 'Owes Me',
+        'debt_details' => 'Debt Details',
+        'summary' => 'Summary',
+        'payment_schedule' => 'Payment Schedule',
+
+        // Stats
+        'total_payable' => 'Total I Owe',
+        'total_receivable' => 'Total Owed to Me',
+        'net_position' => 'Net Position',
+        'overdue' => 'Overdue',
+        'due_soon_alert' => 'You have debts due soon!',
+        'due_on' => 'Due on',
+        'no_debts' => 'No debts found',
+        'start_tracking' => 'Start tracking your debts and loans',
+
+        // Fields
+        'party' => 'Party',
+        'party_name' => 'Party Name',
+        'creditor_name' => 'Creditor Name',
+        'debtor_name' => 'Debtor Name',
+        'party_name_placeholder' => 'e.g., Ahmed, Emirates Bank, XYZ Company',
+        'contact' => 'Contact',
+        'contact_placeholder' => 'Phone number or email',
+        'type' => 'Type',
+        'total_amount' => 'Total Amount',
+        'paid' => 'Paid',
+        'paid_amount' => 'Paid Amount',
+        'remaining' => 'Remaining',
+        'remaining_amount' => 'Remaining Amount',
+        'amount' => 'Amount',
+        'currency' => 'Currency',
+        'start_date' => 'Start Date',
+        'due_date' => 'Due Date',
+        'payment_date' => 'Payment Date',
+        'interest_rate' => 'Interest Rate',
+        'reference_number' => 'Reference Number',
+        'reference' => 'Reference',
+        'reference_placeholder' => 'Contract or reference number',
+        'notes' => 'Notes',
+
+        // Repayment
+        'repayment_frequency' => 'Repayment Frequency',
+        'frequency' => 'Frequency',
+        'installments_count' => 'Number of Installments',
+        'installments' => 'Installments',
+        'installments_help' => 'Number of payments required to settle the debt',
+        'one_time' => 'One Time',
+        'weekly' => 'Weekly',
+        'biweekly' => 'Bi-weekly',
+        'monthly' => 'Monthly',
+        'quarterly' => 'Quarterly',
+        'yearly' => 'Yearly',
+
+        // Account
+        'linked_account' => 'Linked Account',
+        'select_account' => 'Select Account (Optional)',
+        'account' => 'Account',
+        'no_account' => 'No Account',
+
+        // Status
+        'status' => 'Status',
+        'active' => 'Active',
+        'pending' => 'Pending',
+        'partially_paid' => 'Partially Paid',
+        'fully_paid' => 'Fully Paid',
+        'overdue_status' => 'Overdue',
+
+        // Actions
+        'mark_paid' => 'Mark as Paid',
+        'record_payment' => 'Record Payment',
+        'payment_amount' => 'Payment Amount',
+        'payment_method' => 'Payment Method',
+        'payment_method_placeholder' => 'e.g., Bank transfer, Cash, Check',
+        'confirm_payment' => 'Confirm Payment',
+        'payment_recorded' => 'Payment recorded successfully',
+        'no_schedule' => 'No payment schedule',
+        'total' => 'Total',
+
+        // Messages
+        'created_successfully' => 'Debt created successfully',
+        'updated_successfully' => 'Debt updated successfully',
+        'deleted_successfully' => 'Debt deleted successfully',
+        'confirm_delete' => 'Are you sure you want to delete this debt?',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Modules
     |--------------------------------------------------------------------------
     */
