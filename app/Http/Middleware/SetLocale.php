@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
@@ -34,6 +35,9 @@ class SetLocale
         }
 
         App::setLocale($locale);
+
+        // ضبط لغة Carbon لترجمة التواريخ
+        Carbon::setLocale($locale);
 
         return $next($request);
     }

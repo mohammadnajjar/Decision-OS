@@ -17,7 +17,7 @@
                             <i class="ri-add-circle-line text-primary me-2"></i>
                             إدخال بيانات اليوم
                         </h4>
-                        <p class="text-muted mb-0">{{ now()->format('l, d F Y') }}</p>
+                        <p class="text-muted mb-0">{{ now()->translatedFormat('l، d F Y') }}</p>
                     </div>
                     <a href="{{ route('decision-os.career.index') }}" class="btn btn-outline-secondary">
                         <i class="ri-arrow-right-line me-1"></i> رجوع

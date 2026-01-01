@@ -21,14 +21,14 @@
             <div class="flex-shrink-0 d-flex align-items-center gap-1">
                 {{-- Language Switcher --}}
                 <div class="dropdown">
-                    <button class="btn header-btn dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn header-btn dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 120px;">
                         @if(app()->getLocale() === 'ar')
                             <span class="fi fi-sa me-1"></span> العربية
                         @else
                             <span class="fi fi-gb me-1"></span> English
                         @endif
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown" style="min-width: 150px;">
                         <li>
                             <a class="dropdown-item language-switch {{ app()->getLocale() === 'ar' ? 'active' : '' }}" href="{{ route('language.switch', 'ar') }}" data-locale="ar">
                                 <span class="fi fi-sa me-2"></span> العربية
