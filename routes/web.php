@@ -48,6 +48,7 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
 
     // Metrics
     Route::get('/metrics', [MetricController::class, 'index'])->name('metrics.index');
+    Route::get('/metrics/history', [MetricController::class, 'history'])->name('metrics.history');
     Route::post('/metrics', [MetricController::class, 'store'])->name('metrics.store');
 
     // Tasks - Today One Thing
@@ -98,6 +99,27 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
     Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
     Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+
+    // Expenses (Daily Expense Tracking)
+    Route::get('/expenses', [\App\Http\Controllers\ExpenseController::class, 'index'])->name('expenses.index');
+    Route::get('/expenses/create', [\App\Http\Controllers\ExpenseController::class, 'create'])->name('expenses.create');
+    Route::post('/expenses', [\App\Http\Controllers\ExpenseController::class, 'store'])->name('expenses.store');
+    Route::post('/expenses/quick', [\App\Http\Controllers\ExpenseController::class, 'quickStore'])->name('expenses.quick-store');
+    Route::delete('/expenses/{expense}', [\App\Http\Controllers\ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+    // Incomes
+    Route::get('/incomes', [\App\Http\Controllers\IncomeController::class, 'index'])->name('incomes.index');
+    Route::get('/incomes/create', [\App\Http\Controllers\IncomeController::class, 'create'])->name('incomes.create');
+    Route::post('/incomes', [\App\Http\Controllers\IncomeController::class, 'store'])->name('incomes.store');
+    Route::delete('/incomes/{income}', [\App\Http\Controllers\IncomeController::class, 'destroy'])->name('incomes.destroy');
+
+    // Expense Categories
+    Route::get('/expense-categories', [\App\Http\Controllers\ExpenseCategoryController::class, 'index'])->name('expense-categories.index');
+    Route::get('/expense-categories/create', [\App\Http\Controllers\ExpenseCategoryController::class, 'create'])->name('expense-categories.create');
+    Route::post('/expense-categories', [\App\Http\Controllers\ExpenseCategoryController::class, 'store'])->name('expense-categories.store');
+    Route::get('/expense-categories/{expenseCategory}/edit', [\App\Http\Controllers\ExpenseCategoryController::class, 'edit'])->name('expense-categories.edit');
+    Route::put('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'update'])->name('expense-categories.update');
+    Route::delete('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'destroy'])->name('expense-categories.destroy');
 });
 
 require __DIR__.'/auth.php';

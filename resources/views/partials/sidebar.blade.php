@@ -36,9 +36,15 @@
 
             {{-- Metrics Input --}}
             <li class="pe-slide">
-                <a href="{{ route('decision-os.metrics.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.*') ? 'active' : '' }}">
+                <a href="{{ route('decision-os.metrics.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.index') ? 'active' : '' }}">
                     <i class="ri-file-list-3-line pe-nav-icon"></i>
                     <span class="pe-nav-content">إدخال البيانات</span>
+                </a>
+            </li>
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.metrics.history') }}" class="pe-nav-link {{ request()->routeIs('decision-os.metrics.history') ? 'active' : '' }}">
+                    <i class="ri-history-line pe-nav-icon"></i>
+                    <span class="pe-nav-content">سجل المقاييس</span>
                 </a>
             </li>
 
@@ -75,6 +81,22 @@
             {{-- ========================================= --}}
             <li class="pe-menu-title">
                 السجلات
+            </li>
+
+            {{-- Expenses --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.expenses.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.expenses.*') ? 'active' : '' }}">
+                    <i class="ri-wallet-3-line pe-nav-icon text-danger"></i>
+                    <span class="pe-nav-content">المصروفات اليومية</span>
+                </a>
+            </li>
+
+            {{-- Incomes --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.incomes.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.incomes.*') ? 'active' : '' }}">
+                    <i class="ri-money-dollar-circle-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">سجل الدخل</span>
+                </a>
             </li>
 
             {{-- Decisions --}}
