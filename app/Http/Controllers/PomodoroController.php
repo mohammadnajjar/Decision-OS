@@ -24,6 +24,13 @@ class PomodoroController extends Controller
             ->where('date', $today->toDateString())
             ->first();
 
+        // Get all incomplete tasks for optional selection
+        $allTasks = Task::where('user_id', $user->id)
+            ->where('completed', false)
+            ->orderBy('date', 'desc')
+            ->limit(20)
+            ->get();
+
         // Today's stats
         $completed = PomodoroSession::where('user_id', $user->id)
             ->whereDate('created_at', $today)
@@ -40,7 +47,7 @@ class PomodoroController extends Controller
             'focus_minutes' => round($focusMinutes),
         ];
 
-        return view('decision-os.pomodoro.index', compact('todayTask', 'stats'));
+        return view('decision-os.pomodoro.index', compact('todayTask', 'allTasks', 'stats'));
     }
 
     /**

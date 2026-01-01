@@ -87,13 +87,21 @@
                     </div>
 
                     {{-- Current Task --}}
-                    @if($todayTask)
                     <div class="mt-4 pt-4 border-top">
-                        <p class="text-muted mb-2">تركز على:</p>
-                        <h5 class="mb-0">{{ $todayTask->title }}</h5>
-                        <input type="hidden" id="current-task-id" value="{{ $todayTask->id }}">
+                        <p class="text-muted mb-2">تركز على مهمة (اختياري):</p>
+                        <select id="task-selector" class="form-select w-auto mx-auto">
+                            <option value="">-- بدون مهمة محددة --</option>
+                            @if($todayTask)
+                                <option value="{{ $todayTask->id }}" selected>⭐ {{ $todayTask->title }} (مهمة اليوم)</option>
+                            @endif
+                            @foreach($allTasks as $task)
+                                @if(!$todayTask || $task->id !== $todayTask->id)
+                                    <option value="{{ $task->id }}">{{ $task->title }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <input type="hidden" id="current-task-id" value="{{ $todayTask?->id ?? '' }}">
                     </div>
-                    @endif
                 </div>
             </div>
         </div>
@@ -184,44 +192,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const resumeBtn = document.getElementById('resume-btn');
     const modeBtns = document.querySelectorAll('.mode-btn');
     const taskIdInput = document.getElementById('current-task-id');
+    const taskSelector = document.getElementById('task-selector');
+
+    // Update hidden input when task selector changes
+    if (taskSelector) {
+        taskSelector.addEventListener('change', function() {
+            taskIdInput.value = this.value;
+        });
+    }
 
     // Update display
     function updateDisplay() {
         const minutes = Math.floor(timeRemaining / 60);
         const seconds = timeRemaining % 60;
         timerText.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        
+
         const progress = (timeRemaining / totalTime) * 100;
         timerProgress.style.width = `${progress}%`;
         timerProgress.className = `progress-bar bg-${modes[currentMode].color}`;
-        
+
         document.title = `${timerText.textContent} - Pomodoro`;
     }
 
     // Switch mode
     function switchMode(mode) {
         if (isRunning) return;
-        
+
         currentMode = mode;
         timeRemaining = modes[mode].duration;
         totalTime = modes[mode].duration;
         timerLabel.textContent = modes[mode].label;
-        
+
         modeBtns.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.mode === mode);
         });
-        
+
         updateDisplay();
     }
 
     // Start timer
     async function startTimer() {
         if (isRunning) return;
-        
+
         isRunning = true;
         isPaused = false;
         startTime = Date.now();
-        
+
         // Start session on server
         if (currentMode === 'focus') {
             try {
@@ -243,11 +259,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error starting session:', error);
             }
         }
-        
+
         startBtn.classList.add('d-none');
         pauseBtn.classList.remove('d-none');
         stopBtn.classList.remove('d-none');
-        
+
         intervalId = setInterval(() => {
             if (timeRemaining > 0) {
                 timeRemaining--;
@@ -261,10 +277,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Pause timer
     function pauseTimer() {
         if (!isRunning || isPaused) return;
-        
+
         isPaused = true;
         clearInterval(intervalId);
-        
+
         pauseBtn.classList.add('d-none');
         resumeBtn.classList.remove('d-none');
     }
@@ -272,12 +288,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Resume timer
     function resumeTimer() {
         if (!isRunning || !isPaused) return;
-        
+
         isPaused = false;
-        
+
         resumeBtn.classList.add('d-none');
         pauseBtn.classList.remove('d-none');
-        
+
         intervalId = setInterval(() => {
             if (timeRemaining > 0) {
                 timeRemaining--;
@@ -299,9 +315,9 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(intervalId);
         isRunning = false;
         isPaused = false;
-        
+
         const duration = totalTime - timeRemaining;
-        
+
         // Complete session on server
         if (currentMode === 'focus' && sessionId) {
             try {
@@ -320,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error completing session:', error);
             }
         }
-        
+
         // Show notification
         if (status === 'completed') {
             if (Notification.permission === 'granted') {
@@ -333,18 +349,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const audio = new Audio('/assets/sounds/bell.mp3');
             audio.play().catch(() => {});
         }
-        
+
         // Reset UI
         timeRemaining = modes[currentMode].duration;
         sessionId = null;
-        
+
         startBtn.classList.remove('d-none');
         pauseBtn.classList.add('d-none');
         stopBtn.classList.add('d-none');
         resumeBtn.classList.add('d-none');
-        
+
         updateDisplay();
-        
+
         // Reload stats
         if (status === 'completed') {
             setTimeout(() => location.reload(), 1000);
@@ -356,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pauseBtn.addEventListener('click', pauseTimer);
     resumeBtn.addEventListener('click', resumeTimer);
     stopBtn.addEventListener('click', stopTimer);
-    
+
     modeBtns.forEach(btn => {
         btn.addEventListener('click', () => switchMode(btn.dataset.mode));
     });

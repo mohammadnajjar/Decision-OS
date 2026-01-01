@@ -76,6 +76,14 @@ class Project extends Model
     }
 
     /**
+     * Get tasks for this project.
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    /**
      * تحديد حالة المشروع (مربح/خاسر)
      * بناءً على Revenue per Hour
      */

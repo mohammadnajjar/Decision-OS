@@ -116,4 +116,81 @@ class ProjectController extends Controller
 
         return back()->with('success', 'تم تسجيل الساعات');
     }
+
+    /**
+     * Kanban Board for project tasks
+     */
+    public function kanban(Project $project)
+    {
+        if ($project->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $tasks = $project->tasks()->orderBy('priority', 'desc')->get()->groupBy('status');
+
+        $columns = [
+            'backlog' => 'قائمة الانتظار',
+            'todo' => 'للتنفيذ',
+            'in_progress' => 'قيد العمل',
+            'done' => 'مكتمل',
+        ];
+
+        return view('decision-os.projects.kanban', compact('project', 'tasks', 'columns'));
+    }
+
+    /**
+     * Update task status (for Kanban drag & drop)
+     */
+    public function updateTaskStatus(Request $request, Project $project, \App\Models\Task $task)
+    {
+        if ($project->user_id !== Auth::id() || $task->project_id !== $project->id) {
+            abort(403);
+        }
+
+        $request->validate([
+            'status' => 'required|in:backlog,todo,in_progress,done',
+            'priority' => 'nullable|integer',
+        ]);
+
+        $task->update([
+            'status' => $request->status,
+            'priority' => $request->priority ?? $task->priority,
+            'completed' => $request->status === 'done',
+            'completed_at' => $request->status === 'done' ? now() : null,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
+    /**
+     * Add task to project
+     */
+    public function addTask(Request $request, Project $project)
+    {
+        if ($project->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'nullable|in:backlog,todo,in_progress,done',
+        ]);
+
+        $task = \App\Models\Task::create([
+            'user_id' => Auth::id(),
+            'project_id' => $project->id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'type' => 'top_3',
+            'status' => $request->status ?? 'todo',
+            'date' => today(),
+        ]);
+
+        if ($request->wantsJson()) {
+            return response()->json(['success' => true, 'task' => $task]);
+        }
+
+        return back()->with('success', 'تم إضافة المهمة');
+    }
 }

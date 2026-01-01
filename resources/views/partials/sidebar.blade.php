@@ -130,6 +130,14 @@
                 المراجعة
             </li>
 
+            {{-- Yearly Goals --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.goals.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.goals.*') ? 'active' : '' }}">
+                    <i class="ri-award-line pe-nav-icon text-warning"></i>
+                    <span class="pe-nav-content">أهداف السنة</span>
+                </a>
+            </li>
+
             {{-- Weekly Review --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.weekly-review.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.weekly-review.*') ? 'active' : '' }}">

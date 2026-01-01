@@ -91,6 +91,18 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/projects/{project}/revenue', [ProjectController::class, 'updateRevenue'])->name('projects.update-revenue');
     Route::post('/projects/{project}/hours', [ProjectController::class, 'logHours'])->name('projects.log-hours');
+    Route::get('/projects/{project}/kanban', [ProjectController::class, 'kanban'])->name('projects.kanban');
+    Route::post('/projects/{project}/tasks', [ProjectController::class, 'addTask'])->name('projects.add-task');
+    Route::patch('/projects/{project}/tasks/{task}/status', [ProjectController::class, 'updateTaskStatus'])->name('projects.update-task-status');
+
+    // Yearly Goals
+    Route::get('/goals', [\App\Http\Controllers\YearlyGoalController::class, 'index'])->name('goals.index');
+    Route::get('/goals/create', [\App\Http\Controllers\YearlyGoalController::class, 'create'])->name('goals.create');
+    Route::post('/goals', [\App\Http\Controllers\YearlyGoalController::class, 'store'])->name('goals.store');
+    Route::get('/goals/{goal}/edit', [\App\Http\Controllers\YearlyGoalController::class, 'edit'])->name('goals.edit');
+    Route::put('/goals/{goal}', [\App\Http\Controllers\YearlyGoalController::class, 'update'])->name('goals.update');
+    Route::patch('/goals/{goal}/progress', [\App\Http\Controllers\YearlyGoalController::class, 'updateProgress'])->name('goals.update-progress');
+    Route::delete('/goals/{goal}', [\App\Http\Controllers\YearlyGoalController::class, 'destroy'])->name('goals.destroy');
 
     // Clients (Client Health)
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
