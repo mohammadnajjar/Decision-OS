@@ -35,6 +35,9 @@
 
             @include('partials.vendor-scripts')
 
+            {{-- Language Switcher Script --}}
+            <script src="{{ asset('assets/js/language-switcher.js') }}"></script>
+
             @yield('js')
 
 </body>

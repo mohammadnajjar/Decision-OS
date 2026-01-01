@@ -30,12 +30,12 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
                         <li>
-                            <a class="dropdown-item {{ app()->getLocale() === 'ar' ? 'active' : '' }}" href="{{ route('language.switch', 'ar') }}">
+                            <a class="dropdown-item language-switch {{ app()->getLocale() === 'ar' ? 'active' : '' }}" href="{{ route('language.switch', 'ar') }}" data-locale="ar">
                                 <span class="fi fi-sa me-2"></span> العربية
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}">
+                            <a class="dropdown-item language-switch {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ route('language.switch', 'en') }}" data-locale="en">
                                 <span class="fi fi-gb me-2"></span> English
                             </a>
                         </li>
