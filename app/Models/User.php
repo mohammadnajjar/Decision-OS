@@ -27,6 +27,7 @@ class User extends Authenticatable
         'starting_balance_date',
         'currency',
         'timezone',
+        'locale',
         'onboarding_completed',
     ];
 

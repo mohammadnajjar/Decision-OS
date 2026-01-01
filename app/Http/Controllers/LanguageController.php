@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class LanguageController extends Controller
 {
     /**
-     * تبديل اللغة
+     * تبديل اللغة - يحفظ في قاعدة البيانات للمستخدم المسجل
      */
     public function switch(Request $request, string $locale)
     {
@@ -19,7 +19,14 @@ class LanguageController extends Controller
             $locale = 'ar';
         }
 
-        Session::put('locale', $locale);
+        // حفظ في قاعدة البيانات للمستخدم المسجل
+        if (Auth::check()) {
+            Auth::user()->update(['locale' => $locale]);
+        }
+
+        // حفظ في الجلسة أيضاً للضيوف
+        session(['locale' => $locale]);
+
         App::setLocale($locale);
 
         return redirect()->back();

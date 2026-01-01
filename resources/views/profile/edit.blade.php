@@ -92,6 +92,17 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label for="locale" class="form-label">اللغة</label>
+                            <select name="locale" id="locale" class="form-select">
+                                <option value="ar" {{ ($user->locale ?? 'ar') === 'ar' ? 'selected' : '' }}>العربية</option>
+                                <option value="en" {{ ($user->locale ?? 'ar') === 'en' ? 'selected' : '' }}>English</option>
+                            </select>
+                            @error('locale')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6">
                             <label for="timezone" class="form-label">المنطقة الزمنية</label>
                             <select name="timezone" id="timezone" class="form-select">
                                 {{-- دول الخليج العربي --}}

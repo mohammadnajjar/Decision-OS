@@ -77,19 +77,25 @@ class BusinessAsset extends Model
 
     /**
      * التحقق من إمكانية فتح هذا الـ Module
-     * يفتح فقط إذا: Discipline ≥ 70% AND Financial Safety ≥ 60%
+     * يفتح فقط إذا: Discipline = Green AND Financial Safety = Green or Yellow
      */
     public static function isModuleUnlocked(int $userId): bool
     {
+        $user = User::find($userId);
+        if (!$user) {
+            return false;
+        }
+
         $statusService = app(\App\Services\StatusService::class);
 
-        $disciplineStatus = $statusService->calculateModuleStatus('discipline', $userId);
-        $financialStatus = $statusService->calculateModuleStatus('financial_safety', $userId);
+        $disciplineStatus = $statusService->getModuleStatus($user, 'life_discipline');
+        $financialStatus = $statusService->getModuleStatus($user, 'financial_safety');
 
-        $disciplinePercent = $disciplineStatus['percentage'] ?? 0;
-        $financialPercent = $financialStatus['percentage'] ?? 0;
+        // Discipline must be Green, Financial must be Green or Yellow
+        $disciplineOk = $disciplineStatus === 'green';
+        $financialOk = in_array($financialStatus, ['green', 'yellow']);
 
-        return $disciplinePercent >= 70 && $financialPercent >= 60;
+        return $disciplineOk && $financialOk;
     }
 
     /**
@@ -101,18 +107,24 @@ class BusinessAsset extends Model
             return null;
         }
 
-        $statusService = app(\App\Services\StatusService::class);
-        $disciplineStatus = $statusService->calculateModuleStatus('discipline', $userId);
-        $financialStatus = $statusService->calculateModuleStatus('financial_safety', $userId);
-
-        $messages = [];
-
-        if (($disciplineStatus['percentage'] ?? 0) < 70) {
-            $messages[] = 'الانضباط يجب أن يكون ≥ 70% (حالياً: ' . ($disciplineStatus['percentage'] ?? 0) . '%)';
+        $user = User::find($userId);
+        if (!$user) {
+            return 'المستخدم غير موجود';
         }
 
-        if (($financialStatus['percentage'] ?? 0) < 60) {
-            $messages[] = 'الأمان المالي يجب أن يكون ≥ 60% (حالياً: ' . ($financialStatus['percentage'] ?? 0) . '%)';
+        $statusService = app(\App\Services\StatusService::class);
+        $disciplineStatus = $statusService->getModuleStatus($user, 'life_discipline');
+        $financialStatus = $statusService->getModuleStatus($user, 'financial_safety');
+
+        $statusLabels = ['green' => 'أخضر', 'yellow' => 'أصفر', 'red' => 'أحمر'];
+        $messages = [];
+
+        if ($disciplineStatus !== 'green') {
+            $messages[] = 'الانضباط يجب أن يكون أخضر (حالياً: ' . ($statusLabels[$disciplineStatus] ?? $disciplineStatus) . ')';
+        }
+
+        if ($financialStatus === 'red') {
+            $messages[] = 'الأمان المالي لا يجب أن يكون أحمر (حالياً: ' . ($statusLabels[$financialStatus] ?? $financialStatus) . ')';
         }
 
         return implode(' | ', $messages);
