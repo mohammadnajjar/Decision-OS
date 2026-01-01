@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/onboarding', [OnboardingController::class, 'selectProfile'])->name('onboarding.select-profile');
     Route::post('/onboarding', [OnboardingController::class, 'storeProfile'])->name('onboarding.store-profile');
+    Route::get('/onboarding/setup', [OnboardingController::class, 'showSetup'])->name('onboarding.setup');
+    Route::post('/onboarding/setup', [OnboardingController::class, 'storeSetup'])->name('onboarding.setup.store');
 });
 
 /*

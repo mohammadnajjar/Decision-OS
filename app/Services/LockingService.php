@@ -16,13 +16,11 @@ class LockingService
     /**
      * Check if the system is locked for a user.
      * Locked when ≥2 red statuses.
-     * TEMPORARILY DISABLED for testing - always returns false
      */
     public function isLocked(User $user): bool
     {
-        // Disabled for testing - unlock all modules
-        return false;
-        // Original: return $this->statusService->isGloballyLocked($user);
+        // تفعيل القفل الحقيقي - يقفل النظام عند وجود 2 أو أكثر من الحالات الحمراء
+        return $this->statusService->isGloballyLocked($user);
     }
 
     /**

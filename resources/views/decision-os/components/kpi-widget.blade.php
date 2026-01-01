@@ -6,14 +6,18 @@
     $percentage = $hasTarget && $target > 0 ? min(100, ($value / $target) * 100) : 100;
 
     $isGood = !$hasTarget || $value >= $target;
-    $color = $isGood ? 'success' : ($value >= $target * 0.5 ? 'warning' : 'danger');
+    $color = $kpi['color'] ?? ($isGood ? 'success' : ($value >= $target * 0.5 ? 'warning' : 'danger'));
+    $icon = $kpi['icon'] ?? 'ri-bar-chart-line';
 @endphp
 
 <div class="col-xl-3 col-md-4 col-sm-6">
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <span class="text-muted fs-12">{{ $kpi['label'] }}</span>
+                <span class="text-muted fs-12">
+                    <i class="{{ $icon }} me-1"></i>
+                    {{ $kpi['label'] }}
+                </span>
                 @if($hasTarget)
                     <span class="badge bg-{{ $color }}-subtle text-{{ $color }}">
                         {{ $value }}/{{ $target }}
@@ -21,9 +25,9 @@
                 @endif
             </div>
             <div class="d-flex align-items-baseline gap-2">
-                <h3 class="mb-0 fw-bold">
+                <h3 class="mb-0 fw-bold text-{{ $color }}">
                     @if(isset($kpi['format']) && $kpi['format'] === 'currency')
-                        ${{ number_format($value) }}
+                        ${{ number_format($value, 2) }}
                     @else
                         {{ $value }}
                     @endif
