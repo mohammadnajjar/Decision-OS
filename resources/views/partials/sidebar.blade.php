@@ -83,6 +83,14 @@
                 السجلات
             </li>
 
+            {{-- Quran Progress --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.quran.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.quran.*') ? 'active' : '' }}">
+                    <i class="ri-book-open-line pe-nav-icon text-success"></i>
+                    <span class="pe-nav-content">ختمة القرآن</span>
+                </a>
+            </li>
+
             {{-- Expenses --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.expenses.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.expenses.*') ? 'active' : '' }}">
