@@ -8,7 +8,7 @@
 
     <div id="layout-wrapper">
 
-        {{-- Lock Warning --}}
+        {{-- Lock Warning - فوق كل شي --}}
         @if($isLocked)
         <div class="row mb-3">
             <div class="col-12">
@@ -29,6 +29,15 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        @endif
+
+        {{-- Warnings Box - بعد Lock Warning مباشرة --}}
+        @if($warnings->isNotEmpty())
+        <div class="row mb-3">
+            <div class="col-12">
+                @include('decision-os.components.warnings-box', ['warnings' => $warnings])
             </div>
         </div>
         @endif
@@ -110,16 +119,7 @@
             </div>
         </div>
 
-        {{-- Row 4: Warnings Box (if any) --}}
-        @if($warnings->isNotEmpty())
-        <div class="row mb-3">
-            <div class="col-12">
-                @include('decision-os.components.warnings-box', ['warnings' => $warnings])
-            </div>
-        </div>
-        @endif
-
-        {{-- Row 5: Quick KPIs Grid (نفس الحجم) --}}
+        {{-- Row 4: Quick KPIs Grid (نفس الحجم) --}}
         <div class="row g-3 mb-3">
             @foreach($kpis as $kpi)
                 <div class="col-xl-3 col-lg-4 col-md-6">
@@ -128,7 +128,7 @@
             @endforeach
         </div>
 
-        {{-- Row 6: Decisions Due + Weekly Review --}}
+        {{-- Row 5: Decisions Due + Weekly Review --}}
         <div class="row g-3">
             @if($decisionsDue->isNotEmpty())
             <div class="col-xl-6">

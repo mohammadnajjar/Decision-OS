@@ -23,7 +23,8 @@
 </script>
 
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/images/k_favicon_32x.png') }}">
+<link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('assets/images/logo.png') }}">
 
 @yield('css')
 @include('partials.head-css')
