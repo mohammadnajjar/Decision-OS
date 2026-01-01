@@ -42,7 +42,11 @@
             @yield('content')
             @include('partials.switcher')
             @include('partials.scroll-to-top')
-            @include('partials.footer')
+
+        </div>
+    </main>
+
+    @include('partials.footer')
 
             @include('partials.vendor-scripts')
 
