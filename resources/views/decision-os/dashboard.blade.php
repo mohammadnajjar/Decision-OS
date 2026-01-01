@@ -2,7 +2,7 @@
 
 @section('title', 'Decision OS | Dashboard')
 @section('title-sub', 'Decision OS')
-@section('pagetitle', 'Dashboard')
+@section('pagetitle', 'لوحة التحكم')
 
 @section('content')
 
@@ -12,13 +12,19 @@
         @if($isLocked)
         <div class="row mb-3">
             <div class="col-12">
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
-                    <i class="ri-lock-line fs-4 me-2"></i>
-                    <div>
-                        <strong>{{ $lockMessage }}</strong>
-                        <div class="mt-2">
+                <div class="alert alert-danger border-0 shadow-sm d-flex align-items-center" role="alert">
+                    <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle bg-danger text-white me-3">
+                        <i class="ri-lock-line fs-3"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <h5 class="text-danger mb-1">🔒 النظام مقفل</h5>
+                        <p class="mb-2">{{ $lockMessage }}</p>
+                        <div class="d-flex flex-wrap gap-2">
                             @foreach($redStatuses as $red)
-                                <span class="badge bg-danger me-1">{{ $red['label'] }}: {{ $red['fix_action'] }}</span>
+                                <span class="badge bg-danger-subtle text-danger">
+                                    <i class="ri-error-warning-line me-1"></i>
+                                    {{ $red['label'] }}: {{ $red['fix_action'] }}
+                                </span>
                             @endforeach
                         </div>
                     </div>
@@ -27,27 +33,40 @@
         </div>
         @endif
 
-        {{-- Row 1: Today One Thing + Pomodoro --}}
-        <div class="row">
-            <div class="col-xl-8">
-                @include('decision-os.components.today-one-thing', ['task' => $todayTask, 'topTasks' => $topTasks])
-            </div>
-            <div class="col-xl-4">
-                @include('decision-os.components.pomodoro-timer')
-            </div>
-        </div>
-
-        {{-- Row 2: Warnings Box --}}
-        @if($warnings->isNotEmpty())
-        <div class="row">
+        {{-- Quick Actions Bar --}}
+        <div class="row mb-3">
             <div class="col-12">
-                @include('decision-os.components.warnings-box', ['warnings' => $warnings])
+                <div class="card bg-primary-subtle border-0">
+                    <div class="card-body py-3">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="avatar-sm d-flex justify-content-center align-items-center rounded-circle bg-primary text-white">
+                                    <i class="ri-calendar-check-line"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 text-primary">{{ now()->translatedFormat('l') }}</h6>
+                                    <small class="text-muted">{{ now()->format('Y/m/d') }}</small>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="{{ route('decision-os.daily-input') }}" class="btn btn-primary">
+                                    <i class="ri-add-circle-line me-1"></i> الإدخال اليومي
+                                </a>
+                                <a href="{{ route('decision-os.pomodoro.index') }}" class="btn btn-outline-danger">
+                                    <i class="ri-timer-line me-1"></i> Pomodoro
+                                </a>
+                                <a href="{{ route('decision-os.weekly-review.create') }}" class="btn btn-outline-secondary">
+                                    <i class="ri-file-list-3-line me-1"></i> مراجعة أسبوعية
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        @endif
 
-        {{-- Row 3: Module Cards --}}
-        <div class="row">
+        {{-- Row 1: Module Status Cards --}}
+        <div class="row g-3 mb-3">
             @include('decision-os.components.module-card', [
                 'title' => 'الانضباط والحياة',
                 'icon' => 'ri-heart-pulse-line',
@@ -58,7 +77,7 @@
                 'title' => 'الأمان المالي',
                 'icon' => 'ri-wallet-3-line',
                 'status' => $moduleStatuses['financial_safety'],
-                'link' => route('decision-os.metrics.index')
+                'link' => route('decision-os.expenses.index')
             ])
             @include('decision-os.components.module-card', [
                 'title' => 'نظام التركيز',
@@ -74,32 +93,47 @@
             ])
         </div>
 
-        {{-- Row 4: Burnout Monitor --}}
-        <div class="row">
-            <div class="col-12">
-                @include('decision-os.components.burnout-indicator', ['burnoutData' => $burnoutData])
+        {{-- Row 2: Today One Thing + Pomodoro Timer --}}
+        <div class="row g-3 mb-3">
+            <div class="col-xl-8">
+                @include('decision-os.components.today-one-thing', ['task' => $todayTask, 'topTasks' => $topTasks])
+            </div>
+            <div class="col-xl-4">
+                @include('decision-os.components.pomodoro-timer')
             </div>
         </div>
 
-        {{-- Row 5: Quick KPIs --}}
-        <div class="row">
+        {{-- Row 3: Warnings Box (if any) --}}
+        @if($warnings->isNotEmpty())
+        <div class="row mb-3">
+            <div class="col-12">
+                @include('decision-os.components.warnings-box', ['warnings' => $warnings])
+            </div>
+        </div>
+        @endif
+
+        {{-- Row 4: Quick KPIs Grid --}}
+        <div class="row g-3 mb-3">
             @foreach($kpis as $kpi)
                 @include('decision-os.components.kpi-widget', ['kpi' => $kpi])
             @endforeach
         </div>
 
-        {{-- Row 6: Decisions Due --}}
-        @if($decisionsDue->isNotEmpty())
-        <div class="row">
+        {{-- Row 5: Burnout Monitor --}}
+        <div class="row mb-3">
             <div class="col-12">
-                @include('decision-os.components.decisions-due', ['decisions' => $decisionsDue])
+                @include('decision-os.components.burnout-indicator', ['burnoutData' => $burnoutData])
             </div>
         </div>
-        @endif
 
-        {{-- Row 7: Weekly Review CTA --}}
-        <div class="row">
-            <div class="col-12">
+        {{-- Row 6: Decisions Due + Weekly Review --}}
+        <div class="row g-3">
+            @if($decisionsDue->isNotEmpty())
+            <div class="col-xl-6">
+                @include('decision-os.components.decisions-due', ['decisions' => $decisionsDue])
+            </div>
+            @endif
+            <div class="{{ $decisionsDue->isNotEmpty() ? 'col-xl-6' : 'col-12' }}">
                 @include('decision-os.components.weekly-review-cta', [
                     'weeklyReviewDue' => $weeklyReviewDue,
                     'lastReview' => $lastReview
