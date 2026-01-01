@@ -210,15 +210,23 @@
                         @csrf
                         <input type="hidden" name="date" value="{{ today()->toDateString() }}">
 
-                        {{-- Gym Today --}}
-                        <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded mb-2">
-                            <div>
+                        {{-- Gym Hours --}}
+                        <div class="p-3 bg-light rounded mb-2">
+                            <label class="form-label mb-2">
                                 <i class="ri-run-line text-primary me-2"></i>
-                                <span>تمرين اليوم؟</span>
+                                ساعات التمرين
+                            </label>
+                            <div class="input-group">
+                                <input type="number" name="metrics[{{ $gymMetricId }}]" class="form-control"
+                                       value="{{ $metricsToday[$gymMetricId] ?? '' }}"
+                                       placeholder="0" min="0" max="8" step="0.5">
+                                <span class="input-group-text">ساعة</span>
                             </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="metrics[{{ $gymMetricId }}]"
-                                       value="1" {{ ($metricsToday[$gymMetricId] ?? 0) ? 'checked' : '' }}>
+                            <div class="btn-group btn-group-sm w-100 mt-2">
+                                <button type="button" class="btn btn-outline-primary quick-gym" data-hours="0.5">0.5</button>
+                                <button type="button" class="btn btn-outline-primary quick-gym" data-hours="1">1</button>
+                                <button type="button" class="btn btn-outline-primary quick-gym" data-hours="1.5">1.5</button>
+                                <button type="button" class="btn btn-outline-primary quick-gym" data-hours="2">2</button>
                             </div>
                         </div>
 
@@ -387,6 +395,17 @@ document.querySelectorAll('.quick-quran').forEach(btn => {
         form.innerHTML = `@csrf<input type="hidden" name="pages" value="${pages}">`;
         document.body.appendChild(form);
         form.submit();
+    });
+});
+
+// Quick gym hours buttons
+document.querySelectorAll('.quick-gym').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const hours = this.dataset.hours;
+        const input = document.querySelector('input[name="metrics[{{ $gymMetricId }}]"]');
+        if (input) {
+            input.value = hours;
+        }
     });
 });
 </script>
