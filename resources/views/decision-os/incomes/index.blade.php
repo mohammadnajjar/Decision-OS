@@ -39,7 +39,7 @@
                         <div class="mb-3">
                             <label class="form-label">المبلغ</label>
                             <div class="input-group">
-                                <span class="input-group-text">$</span>
+                                <span class="input-group-text">{{ auth()->user()->currency }}</span>
                                 <input type="number" step="0.01" name="amount" class="form-control form-control-lg" placeholder="0.00" required>
                             </div>
                         </div>
