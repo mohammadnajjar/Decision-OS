@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
+use App\Models\Debt;
+use App\Policies\DebtPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // ضبط لغة Carbon بناءً على locale التطبيق
         Carbon::setLocale(App::getLocale());
+
+        // Register Debt Policy
+        Gate::policy(Debt::class, DebtPolicy::class);
     }
 }
