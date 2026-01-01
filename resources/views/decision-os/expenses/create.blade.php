@@ -18,12 +18,35 @@
                         <div class="mb-3">
                             <label class="form-label">المبلغ <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <span class="input-group-text">$</span>
+                                <span class="input-group-text">{{ auth()->user()->currency }}</span>
                                 <input type="number" step="0.01" name="amount" class="form-control form-control-lg" placeholder="0.00" required value="{{ old('amount') }}">
                             </div>
                             @error('amount')
                                 <div class="text-danger fs-12 mt-1">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الحساب <span class="text-danger">*</span></label>
+                            <select name="account_id" class="form-select" required>
+                                <option value="">اختر الحساب...</option>
+                                @foreach($accounts as $account)
+                                    <option value="{{ $account->id }}" {{ old('account_id') == $account->id || (!old('account_id') && $account->is_default) ? 'selected' : '' }}>
+                                        @if($account->icon)
+                                            <i class="{{ $account->icon }}"></i>
+                                        @endif
+                                        {{ $account->name }} ({{ $account->currency }} {{ number_format($account->balance, 2) }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('account_id')
+                                <div class="text-danger fs-12 mt-1">{{ $message }}</div>
+                            @enderror
+                            @if($accounts->isEmpty())
+                                <div class="alert alert-warning mt-2">
+                                    لا توجد حسابات مالية. <a href="{{ route('decision-os.accounts.create') }}">أضف حساباً الآن</a>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="mb-3">

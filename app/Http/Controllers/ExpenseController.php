@@ -18,7 +18,7 @@ class ExpenseController extends Controller
         $user = $request->user();
 
         $expenses = Expense::where('user_id', $user->id)
-            ->with('category')
+            ->with(['category', 'account'])
             ->orderBy('date', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(20);
@@ -32,13 +32,16 @@ class ExpenseController extends Controller
             $q->whereNull('user_id')->orWhere('user_id', $user->id);
         })->orderBy('sort_order')->get();
 
+        $accounts = $user->accounts;
+
         return view('decision-os.expenses.index', compact(
             'expenses',
             'todayTotal',
             'weekTotal',
             'monthTotal',
             'topCategory',
-            'categories'
+            'categories',
+            'accounts'
         ));
     }
 
@@ -51,7 +54,9 @@ class ExpenseController extends Controller
             $q->whereNull('user_id')->orWhere('user_id', $request->user()->id);
         })->orderBy('sort_order')->get();
 
-        return view('decision-os.expenses.create', compact('categories'));
+        $accounts = $request->user()->accounts;
+
+        return view('decision-os.expenses.create', compact('categories', 'accounts'));
     }
 
     /**
@@ -62,19 +67,26 @@ class ExpenseController extends Controller
         $request->validate([
             'amount' => 'required|numeric|min:0.01',
             'expense_category_id' => 'required|exists:expense_categories,id',
+            'account_id' => 'nullable|exists:accounts,id',
             'date' => 'required|date',
             'note' => 'nullable|string|max:255',
             'payment_method' => 'nullable|in:cash,card,other',
         ]);
 
-        Expense::create([
+        $expense = Expense::create([
             'user_id' => $request->user()->id,
             'expense_category_id' => $request->expense_category_id,
+            'account_id' => $request->account_id,
             'amount' => $request->amount,
             'date' => $request->date,
             'note' => $request->note,
             'payment_method' => $request->payment_method ?? 'cash',
         ]);
+
+        // تحديث رصيد الحساب إذا تم تحديده
+        if ($expense->account_id) {
+            $expense->account->updateBalance($expense->amount, 'expense');
+        }
 
         return redirect()
             ->route('decision-os.expenses.index')
@@ -103,16 +115,23 @@ class ExpenseController extends Controller
         $request->validate([
             'amount' => 'required|numeric|min:0.01',
             'expense_category_id' => 'required|exists:expense_categories,id',
+            'account_id' => 'nullable|exists:accounts,id',
         ]);
 
         $expense = Expense::create([
             'user_id' => $request->user()->id,
             'expense_category_id' => $request->expense_category_id,
+            'account_id' => $request->account_id,
             'amount' => $request->amount,
             'date' => today(),
             'note' => $request->note,
             'payment_method' => $request->payment_method ?? 'cash',
         ]);
+
+        // تحديث رصيد الحساب
+        if ($expense->account_id) {
+            $expense->account->updateBalance($expense->amount, 'expense');
+        }
 
         return response()->json([
             'success' => true,

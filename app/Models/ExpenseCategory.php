@@ -15,12 +15,16 @@ class ExpenseCategory extends Model
         'color',
         'is_default',
         'is_system',
+        'is_investment',
+        'auto_percentage',
         'sort_order',
     ];
 
     protected $casts = [
         'is_default' => 'boolean',
         'is_system' => 'boolean',
+        'is_investment' => 'boolean',
+        'auto_percentage' => 'decimal:2',
     ];
 
     /**
