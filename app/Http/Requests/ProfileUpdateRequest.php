@@ -27,6 +27,8 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'timezone' => ['nullable', 'string', 'timezone'],
             'locale' => ['nullable', 'string', 'in:ar,en'],
+            'currency' => ['nullable', 'string', 'in:AED,SAR,USD,EUR,GBP,EGP,JOD,KWD,QAR,BHD,OMR'],
+            'onboarding_completed' => ['nullable', 'boolean'],
         ];
     }
 }

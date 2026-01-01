@@ -24,6 +24,7 @@ class WeeklyReviewController extends Controller
         $weekStart = now()->startOfWeek();
         $weekEnd = now()->endOfWeek();
         $weekNumber = now()->weekOfYear;
+        $year = now()->year;
 
         // Check if already reviewed this week
         $existingReview = WeeklyReview::where('user_id', $user->id)
@@ -51,7 +52,8 @@ class WeeklyReviewController extends Controller
             'streak',
             'weekStart',
             'weekEnd',
-            'weekNumber'
+            'weekNumber',
+            'year'
         ));
     }
 

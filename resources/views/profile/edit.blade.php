@@ -107,6 +107,35 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label for="currency" class="form-label">العملة</label>
+                            <select name="currency" id="currency" class="form-select">
+                                <option value="AED" {{ ($user->currency ?? 'AED') === 'AED' ? 'selected' : '' }}>🇦🇪 درهم إماراتي (AED)</option>
+                                <option value="SAR" {{ ($user->currency ?? 'AED') === 'SAR' ? 'selected' : '' }}>🇸🇦 ريال سعودي (SAR)</option>
+                                <option value="USD" {{ ($user->currency ?? 'AED') === 'USD' ? 'selected' : '' }}>🇺🇸 دولار أمريكي (USD)</option>
+                                <option value="EUR" {{ ($user->currency ?? 'AED') === 'EUR' ? 'selected' : '' }}>🇪🇺 يورو (EUR)</option>
+                                <option value="GBP" {{ ($user->currency ?? 'AED') === 'GBP' ? 'selected' : '' }}>🇬🇧 جنيه إسترليني (GBP)</option>
+                                <option value="EGP" {{ ($user->currency ?? 'AED') === 'EGP' ? 'selected' : '' }}>🇪🇬 جنيه مصري (EGP)</option>
+                                <option value="JOD" {{ ($user->currency ?? 'AED') === 'JOD' ? 'selected' : '' }}>🇯🇴 دينار أردني (JOD)</option>
+                                <option value="KWD" {{ ($user->currency ?? 'AED') === 'KWD' ? 'selected' : '' }}>🇰🇼 دينار كويتي (KWD)</option>
+                                <option value="QAR" {{ ($user->currency ?? 'AED') === 'QAR' ? 'selected' : '' }}>🇶🇦 ريال قطري (QAR)</option>
+                                <option value="BHD" {{ ($user->currency ?? 'AED') === 'BHD' ? 'selected' : '' }}>🇧🇭 دينار بحريني (BHD)</option>
+                                <option value="OMR" {{ ($user->currency ?? 'AED') === 'OMR' ? 'selected' : '' }}>🇴🇲 ريال عماني (OMR)</option>
+                            </select>
+                            @error('currency')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="onboarding_completed" name="onboarding_completed" value="1" {{ $user->onboarding_completed ? 'checked' : '' }}>
+                                <label class="form-check-label" for="onboarding_completed">
+                                    أنا أكملت Onboarding وجاهز للبدء
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <label for="timezone" class="form-label">المنطقة الزمنية</label>
                             <select name="timezone" id="timezone" class="form-select">
                                 {{-- دول الخليج العربي --}}
