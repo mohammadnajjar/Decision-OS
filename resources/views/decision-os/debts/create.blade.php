@@ -222,6 +222,17 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const frequencySelect = document.getElementById('repayment_frequency');
+    const installmentsField = document.getElementById('installments_field');
     const installmentAmountField = document.getElementById('installment_amount_field');
     const totalAmountInput = document.getElementById('total_amount');
     const installmentsCountInput = document.getElementById('installments_count');
@@ -269,18 +280,7 @@
             const installmentsCount = parseInt(this.value) || 1;
             totalAmountInput.value = (installmentAmount * installmentsCount).toFixed(2);
         }
-    });ent.addEventListener('DOMContentLoaded', function() {
-    const frequencySelect = document.getElementById('repayment_frequency');
-    const installmentsField = document.getElementById('installments_field');
-
-    function toggleInstallments() {
-        if (frequencySelect.value === 'one_time') {
-            installmentsField.style.display = 'none';
-            document.querySelector('input[name="installments_count"]').value = 1;
-        } else {
-            installmentsField.style.display = 'block';
-        }
-    }
+    });
 
     frequencySelect.addEventListener('change', toggleInstallments);
     toggleInstallments();
