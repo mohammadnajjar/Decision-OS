@@ -14,9 +14,9 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card mx-xxl-8">
                         <div class="card-body py-12 px-8">
-                            <img src="{{ asset('assets/images/logo-dark.png') }}" alt="Logo Dark" height="30"
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="Decision OS Logo" height="50"
                                 class="mb-4 mx-auto d-block">
-                            <h6 class="mb-3 mb-8 fw-medium text-center">تسجيل الدخول إلى Decision OS</h6>
+                            <h6 class="mb-3 mb-8 fw-medium text-center">{{ __('app.auth.login_title') }}</h6>
 
                             <!-- Session Status -->
                             @if (session('status'))
