@@ -483,4 +483,201 @@ return [
         'log' => 'Log',
         'optional' => 'optional',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pomodoro
+    |--------------------------------------------------------------------------
+    */
+    'pomodoro' => [
+        'title' => 'Pomodoro Timer',
+        'sessions_completed_today' => 'Sessions Completed Today',
+        'focus_minutes' => 'Focus Minutes',
+        'task_set' => 'Today\'s Task Set',
+        'no_task' => 'No Task',
+        'set_today_task' => 'Set Today\'s Task',
+        'focus_25' => 'Focus 25',
+        'break_5' => 'Break 5',
+        'long_break_15' => 'Long Break 15',
+        'focus_time' => 'Focus Time',
+        'break_time' => 'Break Time',
+        'start' => 'Start',
+        'pause' => 'Pause',
+        'stop' => 'Stop',
+        'reset' => 'Reset',
+        'complete_session' => 'Complete Session',
+        'interruptions' => 'Interruptions',
+        'add_interruption' => 'Add Interruption',
+        'session_notes' => 'Session Notes',
+        'session_summary' => 'Session Summary',
+        'history' => 'Session History',
+        'started_at' => 'Started At',
+        'completed_at' => 'Completed At',
+        'interruption_count' => 'Interruption Count',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Metrics
+    |--------------------------------------------------------------------------
+    */
+    'metrics' => [
+        'title' => 'Daily Metrics Input',
+        'input' => 'Metrics Input',
+        'history' => 'Metrics History',
+        'save_all' => 'Save All Metrics',
+        'change_date' => 'Change Date',
+        'value' => 'Value',
+        'unit' => 'Unit',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Incomes
+    |--------------------------------------------------------------------------
+    */
+    'incomes' => [
+        'title' => 'Income Log',
+        'add_income' => 'Add Income',
+        'month_total' => 'This Month\'s Income',
+        'total_since_start' => 'Total Income',
+        'amount' => 'Amount',
+        'source' => 'Source',
+        'date' => 'Date',
+        'notes' => 'Notes',
+        'income_log' => 'Income Log',
+        'no_income' => 'No income data',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Expenses
+    |--------------------------------------------------------------------------
+    */
+    'expenses' => [
+        'title' => 'Expense Log',
+        'add_expense' => 'Add Expense',
+        'today_total' => 'Today\'s Spending',
+        'week_total' => 'Week\'s Spending',
+        'month_total' => 'Month\'s Spending',
+        'amount' => 'Amount',
+        'category' => 'Category',
+        'date' => 'Date',
+        'notes' => 'Notes',
+        'expense_log' => 'Expense Log',
+        'no_expenses' => 'No expenses',
+        'select_category' => 'Select Category',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Expense Categories
+    |--------------------------------------------------------------------------
+    */
+    'expense_categories' => [
+        'title' => 'Expense Categories',
+        'add_category' => 'Add Category',
+        'category_name' => 'Category Name',
+        'description' => 'Description',
+        'edit_category' => 'Edit Category',
+        'delete_category' => 'Delete Category',
+        'no_categories' => 'No categories',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Career
+    |--------------------------------------------------------------------------
+    */
+    'career' => [
+        'title' => 'Career Development',
+        'add_data' => 'Add Today\'s Data',
+        'progress' => 'Career Progress',
+        'cv_updates' => 'CV Updates',
+        'applications' => 'Job Applications',
+        'interviews' => 'Interviews',
+        'skill_hours' => 'Skill Development Hours',
+        'cv_status' => 'CV Status',
+        'cv_not_ready' => 'Not Ready',
+        'cv_ready' => 'Ready',
+        'cv_sent' => 'Sent',
+        'applications_sent' => 'Applications Sent',
+        'interviews_scheduled' => 'Interviews Scheduled',
+        'offers_received' => 'Offers Received',
+        'skill_development' => 'Skill Development',
+        'weekly_stats' => 'Weekly Stats',
+        'monthly_stats' => 'Monthly Stats',
+        'history' => 'History',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Business
+    |--------------------------------------------------------------------------
+    */
+    'business' => [
+        'title' => 'Business & Assets',
+        'add_business' => 'Add Project/Asset',
+        'name' => 'Project Name',
+        'type' => 'Type',
+        'status' => 'Status',
+        'monthly_revenue' => 'Monthly Revenue',
+        'initial_investment' => 'Initial Investment',
+        'roi' => 'Return on Investment',
+        'notes' => 'Notes',
+        'active_projects' => 'Active Projects',
+        'total_revenue' => 'Total Revenue',
+        'avg_roi' => 'Average ROI',
+        'module_locked' => 'Module Locked',
+        'unlock_requirements' => 'Unlock Requirements',
+        'discipline_green' => 'Discipline Green',
+        'financial_not_red' => 'Financial Safety Not Red',
+        'type_project' => 'Project',
+        'type_asset' => 'Asset',
+        'type_investment' => 'Investment',
+        'status_planning' => 'Planning',
+        'status_active' => 'Active',
+        'status_paused' => 'Paused',
+        'status_completed' => 'Completed',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Clients
+    |--------------------------------------------------------------------------
+    */
+    'clients' => [
+        'title' => 'Clients',
+        'add_client' => 'Add Client',
+        'client_name' => 'Client Name',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'company' => 'Company',
+        'status' => 'Status',
+        'notes' => 'Notes',
+        'total_clients' => 'Total Clients',
+        'active_clients' => 'Active Clients',
+        'total_projects' => 'Total Projects',
+        'view_details' => 'View Details',
+        'edit_client' => 'Edit Client',
+        'delete_client' => 'Delete Client',
+        'no_clients' => 'No clients',
+        'status_active' => 'Active',
+        'status_inactive' => 'Inactive',
+        'status_prospect' => 'Prospect',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Adhkar
+    |--------------------------------------------------------------------------
+    */
+    'adhkar' => [
+        'title' => 'Daily Adhkar',
+        'morning' => 'Morning Adhkar',
+        'evening' => 'Evening Adhkar',
+        'completed' => 'Completed',
+        'mark_complete' => 'Mark Complete',
+        'reset' => 'Reset',
+    ],
 ];
