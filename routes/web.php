@@ -137,6 +137,14 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/expense-categories/{expenseCategory}/edit', [\App\Http\Controllers\ExpenseCategoryController::class, 'edit'])->name('expense-categories.edit');
     Route::put('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'update'])->name('expense-categories.update');
     Route::delete('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'destroy'])->name('expense-categories.destroy');
+
+    // Quran Progress (ختمة القرآن)
+    Route::get('/quran', [\App\Http\Controllers\QuranProgressController::class, 'index'])->name('quran.index');
+    Route::post('/quran/log-reading', [\App\Http\Controllers\QuranProgressController::class, 'logReading'])->name('quran.log-reading');
+    Route::post('/quran/update-position', [\App\Http\Controllers\QuranProgressController::class, 'updatePosition'])->name('quran.update-position');
+    Route::post('/quran/update-notes', [\App\Http\Controllers\QuranProgressController::class, 'updateNotes'])->name('quran.update-notes');
+    Route::post('/quran/start-new', [\App\Http\Controllers\QuranProgressController::class, 'startNewKhatma'])->name('quran.start-new');
+    Route::post('/quran/reset', [\App\Http\Controllers\QuranProgressController::class, 'reset'])->name('quran.reset');
 });
 
 require __DIR__.'/auth.php';

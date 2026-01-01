@@ -23,6 +23,10 @@ class User extends Authenticatable
         'email',
         'password',
         'profile',
+        'starting_balance',
+        'starting_balance_date',
+        'currency',
+        'onboarding_completed',
     ];
 
     /**
@@ -45,7 +49,22 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'starting_balance' => 'decimal:2',
+            'starting_balance_date' => 'date',
+            'onboarding_completed' => 'boolean',
         ];
+    }
+
+    /**
+     * حساب Cash On Hand
+     * starting_balance + total_income - total_expenses
+     */
+    public function getCashOnHandAttribute(): float
+    {
+        $totalIncome = Income::where('user_id', $this->id)->sum('amount');
+        $totalExpenses = Expense::where('user_id', $this->id)->sum('amount');
+
+        return (float) $this->starting_balance + $totalIncome - $totalExpenses;
     }
 
     /**

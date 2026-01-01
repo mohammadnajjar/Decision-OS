@@ -100,40 +100,48 @@ class DecisionDashboardController extends Controller
 
         return [
             [
-                'label' => 'أيام الجيم',
-                'value' => \App\Models\MetricValue::getSumForUser($user->id, 'gym_days', $weekStart, $weekEnd) ?? 0,
-                'target' => 3,
-                'unit' => '/أسبوع',
-            ],
-            [
-                'label' => 'ساعات العمل',
-                'value' => round(\App\Models\MetricValue::getAverageForUser($user->id, 'avg_work_hours', $weekStart, $weekEnd) ?? 0, 1),
-                'target' => 8,
-                'unit' => '/يوم',
-            ],
-            [
-                'label' => 'أيام الراحة',
-                'value' => \App\Models\MetricValue::getSumForUser($user->id, 'rest_days', $weekStart, $weekEnd) ?? 0,
-                'target' => 1,
-                'unit' => '/أسبوع',
-            ],
-            [
-                'label' => 'الدخل',
-                'value' => \App\Models\MetricValue::getLatestForUser($user->id, 'income') ?? 0,
+                'label' => 'الرصيد المتاح',
+                'value' => $user->cash_on_hand,
                 'format' => 'currency',
-                'unit' => '/شهر',
+                'unit' => '',
+                'icon' => 'ri-wallet-3-line',
+                'color' => $user->cash_on_hand >= 0 ? 'success' : 'danger',
             ],
             [
-                'label' => 'المصروفات',
-                'value' => \App\Models\MetricValue::getLatestForUser($user->id, 'expenses') ?? 0,
+                'label' => 'صرف اليوم',
+                'value' => \App\Models\Expense::getTodayTotal($user->id),
                 'format' => 'currency',
-                'unit' => '/شهر',
+                'unit' => '',
+                'icon' => 'ri-shopping-cart-line',
+            ],
+            [
+                'label' => 'صرف الأسبوع',
+                'value' => \App\Models\Expense::getWeekTotal($user->id),
+                'format' => 'currency',
+                'unit' => '',
+                'icon' => 'ri-calendar-line',
+            ],
+            [
+                'label' => 'صرف الشهر',
+                'value' => \App\Models\Expense::getMonthTotal($user->id),
+                'format' => 'currency',
+                'unit' => '',
+                'icon' => 'ri-calendar-2-line',
+            ],
+            [
+                'label' => 'دخل الشهر',
+                'value' => \App\Models\Income::getMonthTotal($user->id),
+                'format' => 'currency',
+                'unit' => '',
+                'icon' => 'ri-money-dollar-circle-line',
+                'color' => 'success',
             ],
             [
                 'label' => 'Runway',
                 'value' => $this->calculateRunway($user),
                 'target' => 3,
                 'unit' => 'شهر',
+                'icon' => 'ri-time-line',
             ],
             [
                 'label' => 'Pomodoros اليوم',
@@ -143,6 +151,28 @@ class DecisionDashboardController extends Controller
                     ->count(),
                 'target' => 6,
                 'unit' => '',
+                'icon' => 'ri-timer-line',
+            ],
+            [
+                'label' => 'أيام الجيم',
+                'value' => \App\Models\MetricValue::getSumForUser($user->id, 'gym_days', $weekStart, $weekEnd) ?? 0,
+                'target' => 3,
+                'unit' => '/أسبوع',
+                'icon' => 'ri-heart-pulse-line',
+            ],
+            [
+                'label' => 'ساعات العمل',
+                'value' => round(\App\Models\MetricValue::getAverageForUser($user->id, 'avg_work_hours', $weekStart, $weekEnd) ?? 0, 1),
+                'target' => 8,
+                'unit' => '/يوم',
+                'icon' => 'ri-time-fill',
+            ],
+            [
+                'label' => 'أيام الراحة',
+                'value' => \App\Models\MetricValue::getSumForUser($user->id, 'rest_days', $weekStart, $weekEnd) ?? 0,
+                'target' => 1,
+                'unit' => '/أسبوع',
+                'icon' => 'ri-rest-time-line',
             ],
             [
                 'label' => 'مهام مكتملة',
@@ -151,8 +181,25 @@ class DecisionDashboardController extends Controller
                     ->where('completed', true)
                     ->count(),
                 'unit' => '/أسبوع',
+                'icon' => 'ri-checkbox-circle-line',
+            ],
+            [
+                'label' => 'ختمة القرآن',
+                'value' => $this->getQuranProgress($user),
+                'unit' => '%',
+                'icon' => 'ri-book-open-line',
+                'color' => 'success',
             ],
         ];
+    }
+
+    /**
+     * Get Quran progress percentage for current month.
+     */
+    private function getQuranProgress($user): int
+    {
+        $progress = \App\Models\QuranProgress::getCurrentMonth($user->id);
+        return $progress ? (int) $progress->progress_percentage : 0;
     }
 
     /**
