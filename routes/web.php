@@ -89,11 +89,16 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::post('/projects/{project}/revenue', [ProjectController::class, 'updateRevenue'])->name('projects.update-revenue');
     Route::post('/projects/{project}/hours', [ProjectController::class, 'logHours'])->name('projects.log-hours');
     Route::get('/projects/{project}/kanban', [ProjectController::class, 'kanban'])->name('projects.kanban');
     Route::post('/projects/{project}/tasks', [ProjectController::class, 'addTask'])->name('projects.add-task');
     Route::patch('/projects/{project}/tasks/{task}/status', [ProjectController::class, 'updateTaskStatus'])->name('projects.update-task-status');
+    Route::post('/projects/{project}/attachments', [ProjectController::class, 'uploadAttachment'])->name('projects.upload-attachment');
+    Route::delete('/projects/{project}/attachments/{attachment}', [ProjectController::class, 'deleteAttachment'])->name('projects.delete-attachment');
+    Route::get('/projects/{project}/attachments/{attachment}/download', [ProjectController::class, 'downloadAttachment'])->name('projects.download-attachment');
 
     // Yearly Goals
     Route::get('/goals', [\App\Http\Controllers\YearlyGoalController::class, 'index'])->name('goals.index');

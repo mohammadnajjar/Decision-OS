@@ -20,6 +20,7 @@ class Project extends Model
         'total_hours',
         'total_pomodoros',
         'status',
+        'priority',
         'start_date',
         'end_date',
     ];
@@ -28,6 +29,19 @@ class Project extends Model
         'total_revenue' => 'decimal:2',
         'start_date' => 'date',
         'end_date' => 'date',
+    ];
+
+    const STATUSES = [
+        'active' => 'نشط',
+        'completed' => 'مكتمل',
+        'paused' => 'متوقف',
+        'cancelled' => 'ملغي',
+    ];
+
+    const PRIORITIES = [
+        'low' => 'منخفضة',
+        'medium' => 'متوسطة',
+        'high' => 'عالية',
     ];
 
     /**
@@ -81,6 +95,57 @@ class Project extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    /**
+     * Get attachments for this project.
+     */
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(ProjectAttachment::class);
+    }
+
+    /**
+     * Get priority label in Arabic.
+     */
+    public function getPriorityLabelAttribute(): string
+    {
+        return self::PRIORITIES[$this->priority] ?? $this->priority;
+    }
+
+    /**
+     * Get status label in Arabic.
+     */
+    public function getStatusLabelAttribute(): string
+    {
+        return self::STATUSES[$this->status] ?? $this->status;
+    }
+
+    /**
+     * Get priority color.
+     */
+    public function getPriorityColorAttribute(): string
+    {
+        return match($this->priority) {
+            'high' => 'danger',
+            'medium' => 'warning',
+            'low' => 'secondary',
+            default => 'secondary',
+        };
+    }
+
+    /**
+     * Get status color.
+     */
+    public function getStatusColorAttribute(): string
+    {
+        return match($this->status) {
+            'active' => 'primary',
+            'completed' => 'success',
+            'paused' => 'warning',
+            'cancelled' => 'danger',
+            default => 'secondary',
+        };
     }
 
     /**
