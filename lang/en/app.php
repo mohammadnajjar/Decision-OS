@@ -438,6 +438,7 @@ return [
     */
     'auth' => [
         'login' => 'Login',
+        'login_title' => 'Login to Decision OS',
         'register' => 'Register',
         'logout' => 'Logout',
         'forgot_password' => 'Forgot Password?',
