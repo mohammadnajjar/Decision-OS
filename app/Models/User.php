@@ -102,6 +102,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all financial accounts
+     */
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class);
+    }
+
+    /**
+     * Get default account
+     */
+    public function defaultAccount()
+    {
+        return $this->accounts()->where('is_default', true)->first();
+    }
+
+    /**
      * Check if user is a freelancer.
      */
     public function isFreelancer(): bool

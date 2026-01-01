@@ -114,6 +114,14 @@
                 {{ __('app.nav.money') }}
             </li>
 
+            {{-- Financial Accounts --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.accounts.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.accounts.*') ? 'active' : '' }}">
+                    <i class="ri-bank-line pe-nav-icon text-primary"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.accounts') }}</span>
+                </a>
+            </li>
+
             {{-- Expenses --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.expenses.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.expenses.*') ? 'active' : '' }}">

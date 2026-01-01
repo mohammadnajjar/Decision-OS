@@ -98,6 +98,7 @@ return [
         'pomodoro' => 'Pomodoro',
         'projects' => 'Projects',
         'money' => 'Money',
+        'accounts' => 'Financial Accounts',
         'expenses' => 'Expenses',
         'incomes' => 'Incomes',
         'expense_categories' => 'Expense Categories',

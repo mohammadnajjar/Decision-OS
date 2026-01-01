@@ -68,6 +68,7 @@ return [
         'pomodoro' => 'بومودورو',
         'projects' => 'المشاريع',
         'money' => 'المال',
+        'accounts' => 'الحسابات المالية',
         'expenses' => 'المصاريف',
         'incomes' => 'الدخل',
         'expense_categories' => 'فئات المصاريف',
