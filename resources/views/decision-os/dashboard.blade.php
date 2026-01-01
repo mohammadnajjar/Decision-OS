@@ -1,8 +1,8 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Decision OS | Dashboard')
-@section('title-sub', 'Decision OS')
-@section('pagetitle', 'لوحة التحكم')
+@section('title', __('app.app_name') . ' | ' . __('app.nav.dashboard'))
+@section('title-sub', __('app.app_name'))
+@section('pagetitle', __('app.nav.dashboard'))
 
 @section('content')
 
@@ -17,7 +17,7 @@
                         <i class="ri-lock-line fs-3"></i>
                     </div>
                     <div class="flex-grow-1">
-                        <h5 class="text-danger mb-1">🔒 النظام مقفل</h5>
+                        <h5 class="text-danger mb-1">🔒 {{ __('app.status.system_locked') }}</h5>
                         <p class="mb-2">{{ $lockMessage }}</p>
                         <div class="d-flex flex-wrap gap-2">
                             @foreach($redStatuses as $red)
@@ -50,13 +50,13 @@
                             </div>
                             <div class="d-flex flex-wrap gap-2">
                                 <a href="{{ route('decision-os.daily-input') }}" class="btn btn-primary">
-                                    <i class="ri-add-circle-line me-1"></i> الإدخال اليومي
+                                    <i class="ri-add-circle-line me-1"></i> {{ __('app.nav.daily_input') }}
                                 </a>
                                 <a href="{{ route('decision-os.pomodoro.index') }}" class="btn btn-outline-danger">
-                                    <i class="ri-timer-line me-1"></i> Pomodoro
+                                    <i class="ri-timer-line me-1"></i> {{ __('app.nav.pomodoro') }}
                                 </a>
                                 <a href="{{ route('decision-os.weekly-review.create') }}" class="btn btn-outline-secondary">
-                                    <i class="ri-file-list-3-line me-1"></i> مراجعة أسبوعية
+                                    <i class="ri-file-list-3-line me-1"></i> {{ __('app.nav.weekly_review') }}
                                 </a>
                             </div>
                         </div>
@@ -68,25 +68,25 @@
         {{-- Row 1: Module Status Cards --}}
         <div class="row g-3 mb-3">
             @include('decision-os.components.module-card', [
-                'title' => 'الانضباط والحياة',
+                'title' => __('app.modules.life_discipline'),
                 'icon' => 'ri-heart-pulse-line',
                 'status' => $moduleStatuses['life_discipline'],
                 'link' => route('decision-os.metrics.index')
             ])
             @include('decision-os.components.module-card', [
-                'title' => 'الأمان المالي',
+                'title' => __('app.modules.financial_safety'),
                 'icon' => 'ri-wallet-3-line',
                 'status' => $moduleStatuses['financial_safety'],
                 'link' => route('decision-os.expenses.index')
             ])
             @include('decision-os.components.module-card', [
-                'title' => 'نظام التركيز',
+                'title' => __('app.modules.focus_system'),
                 'icon' => 'ri-focus-3-line',
                 'status' => $moduleStatuses['focus_system'],
                 'link' => route('decision-os.tasks.index')
             ])
             @include('decision-os.components.module-card', [
-                'title' => 'Pomodoro',
+                'title' => __('app.modules.pomodoro'),
                 'icon' => 'ri-timer-line',
                 'status' => $moduleStatuses['pomodoro'],
                 'link' => route('decision-os.pomodoro.history')
