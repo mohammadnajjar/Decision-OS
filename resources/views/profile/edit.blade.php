@@ -94,18 +94,100 @@
                         <div class="col-md-6">
                             <label for="timezone" class="form-label">المنطقة الزمنية</label>
                             <select name="timezone" id="timezone" class="form-select">
-                                <option value="Asia/Dubai" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Dubai' ? 'selected' : '' }}>دبي (GMT+4)</option>
-                                <option value="Asia/Riyadh" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Riyadh' ? 'selected' : '' }}>الرياض (GMT+3)</option>
-                                <option value="Asia/Kuwait" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kuwait' ? 'selected' : '' }}>الكويت (GMT+3)</option>
-                                <option value="Asia/Qatar" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Qatar' ? 'selected' : '' }}>قطر (GMT+3)</option>
-                                <option value="Asia/Bahrain" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Bahrain' ? 'selected' : '' }}>البحرين (GMT+3)</option>
-                                <option value="Asia/Baghdad" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Baghdad' ? 'selected' : '' }}>بغداد (GMT+3)</option>
-                                <option value="Africa/Cairo" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Cairo' ? 'selected' : '' }}>القاهرة (GMT+2)</option>
-                                <option value="Asia/Amman" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Amman' ? 'selected' : '' }}>عمان (GMT+3)</option>
-                                <option value="Asia/Damascus" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Damascus' ? 'selected' : '' }}>دمشق (GMT+3)</option>
-                                <option value="Asia/Beirut" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Beirut' ? 'selected' : '' }}>بيروت (GMT+3)</option>
-                                <option value="Europe/London" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/London' ? 'selected' : '' }}>لندن (GMT+0)</option>
-                                <option value="America/New_York" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/New_York' ? 'selected' : '' }}>نيويورك (GMT-5)</option>
+                                {{-- دول الخليج العربي --}}
+                                <optgroup label="دول الخليج العربي">
+                                    <option value="Asia/Dubai" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Dubai' ? 'selected' : '' }}>الإمارات - دبي (GMT+4)</option>
+                                    <option value="Asia/Riyadh" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Riyadh' ? 'selected' : '' }}>السعودية - الرياض (GMT+3)</option>
+                                    <option value="Asia/Kuwait" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kuwait' ? 'selected' : '' }}>الكويت (GMT+3)</option>
+                                    <option value="Asia/Qatar" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Qatar' ? 'selected' : '' }}>قطر (GMT+3)</option>
+                                    <option value="Asia/Bahrain" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Bahrain' ? 'selected' : '' }}>البحرين (GMT+3)</option>
+                                    <option value="Asia/Muscat" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Muscat' ? 'selected' : '' }}>عُمان - مسقط (GMT+4)</option>
+                                </optgroup>
+
+                                {{-- بلاد الشام والعراق --}}
+                                <optgroup label="بلاد الشام والعراق">
+                                    <option value="Asia/Baghdad" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Baghdad' ? 'selected' : '' }}>العراق - بغداد (GMT+3)</option>
+                                    <option value="Asia/Damascus" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Damascus' ? 'selected' : '' }}>سوريا - دمشق (GMT+3)</option>
+                                    <option value="Asia/Beirut" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Beirut' ? 'selected' : '' }}>لبنان - بيروت (GMT+3)</option>
+                                    <option value="Asia/Amman" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Amman' ? 'selected' : '' }}>الأردن - عمان (GMT+3)</option>
+                                    <option value="Asia/Jerusalem" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Jerusalem' ? 'selected' : '' }}>فلسطين - القدس (GMT+3)</option>
+                                </optgroup>
+
+                                {{-- شمال أفريقيا --}}
+                                <optgroup label="شمال أفريقيا">
+                                    <option value="Africa/Cairo" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Cairo' ? 'selected' : '' }}>مصر - القاهرة (GMT+2)</option>
+                                    <option value="Africa/Khartoum" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Khartoum' ? 'selected' : '' }}>السودان - الخرطوم (GMT+2)</option>
+                                    <option value="Africa/Tripoli" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Tripoli' ? 'selected' : '' }}>ليبيا - طرابلس (GMT+2)</option>
+                                    <option value="Africa/Tunis" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Tunis' ? 'selected' : '' }}>تونس (GMT+1)</option>
+                                    <option value="Africa/Algiers" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Algiers' ? 'selected' : '' }}>الجزائر (GMT+1)</option>
+                                    <option value="Africa/Casablanca" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Casablanca' ? 'selected' : '' }}>المغرب - الدار البيضاء (GMT+1)</option>
+                                </optgroup>
+
+                                {{-- آسيا --}}
+                                <optgroup label="آسيا">
+                                    <option value="Asia/Istanbul" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Istanbul' ? 'selected' : '' }}>تركيا - إسطنبول (GMT+3)</option>
+                                    <option value="Asia/Tehran" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Tehran' ? 'selected' : '' }}>إيران - طهران (GMT+3:30)</option>
+                                    <option value="Asia/Kabul" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kabul' ? 'selected' : '' }}>أفغانستان - كابول (GMT+4:30)</option>
+                                    <option value="Asia/Karachi" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Karachi' ? 'selected' : '' }}>باكستان - كراتشي (GMT+5)</option>
+                                    <option value="Asia/Kolkata" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kolkata' ? 'selected' : '' }}>الهند - كولكاتا (GMT+5:30)</option>
+                                    <option value="Asia/Dhaka" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Dhaka' ? 'selected' : '' }}>بنغلاديش - دكا (GMT+6)</option>
+                                    <option value="Asia/Jakarta" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Jakarta' ? 'selected' : '' }}>إندونيسيا - جاكرتا (GMT+7)</option>
+                                    <option value="Asia/Kuala_Lumpur" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Kuala_Lumpur' ? 'selected' : '' }}>ماليزيا - كوالالمبور (GMT+8)</option>
+                                    <option value="Asia/Singapore" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Singapore' ? 'selected' : '' }}>سنغافورة (GMT+8)</option>
+                                    <option value="Asia/Shanghai" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Shanghai' ? 'selected' : '' }}>الصين - شانغهاي (GMT+8)</option>
+                                    <option value="Asia/Tokyo" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Tokyo' ? 'selected' : '' }}>اليابان - طوكيو (GMT+9)</option>
+                                    <option value="Asia/Seoul" {{ ($user->timezone ?? 'Asia/Dubai') === 'Asia/Seoul' ? 'selected' : '' }}>كوريا الجنوبية - سيول (GMT+9)</option>
+                                </optgroup>
+
+                                {{-- أوروبا --}}
+                                <optgroup label="أوروبا">
+                                    <option value="Europe/London" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/London' ? 'selected' : '' }}>المملكة المتحدة - لندن (GMT+0)</option>
+                                    <option value="Europe/Dublin" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Dublin' ? 'selected' : '' }}>أيرلندا - دبلن (GMT+0)</option>
+                                    <option value="Europe/Paris" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Paris' ? 'selected' : '' }}>فرنسا - باريس (GMT+1)</option>
+                                    <option value="Europe/Berlin" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Berlin' ? 'selected' : '' }}>ألمانيا - برلين (GMT+1)</option>
+                                    <option value="Europe/Rome" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Rome' ? 'selected' : '' }}>إيطاليا - روما (GMT+1)</option>
+                                    <option value="Europe/Madrid" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Madrid' ? 'selected' : '' }}>إسبانيا - مدريد (GMT+1)</option>
+                                    <option value="Europe/Amsterdam" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Amsterdam' ? 'selected' : '' }}>هولندا - أمستردام (GMT+1)</option>
+                                    <option value="Europe/Brussels" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Brussels' ? 'selected' : '' }}>بلجيكا - بروكسل (GMT+1)</option>
+                                    <option value="Europe/Vienna" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Vienna' ? 'selected' : '' }}>النمسا - فيينا (GMT+1)</option>
+                                    <option value="Europe/Stockholm" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Stockholm' ? 'selected' : '' }}>السويد - ستوكهولم (GMT+1)</option>
+                                    <option value="Europe/Moscow" {{ ($user->timezone ?? 'Asia/Dubai') === 'Europe/Moscow' ? 'selected' : '' }}>روسيا - موسكو (GMT+3)</option>
+                                </optgroup>
+
+                                {{-- أمريكا الشمالية --}}
+                                <optgroup label="أمريكا الشمالية">
+                                    <option value="America/New_York" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/New_York' ? 'selected' : '' }}>الولايات المتحدة - نيويورك (GMT-5)</option>
+                                    <option value="America/Chicago" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Chicago' ? 'selected' : '' }}>الولايات المتحدة - شيكاغو (GMT-6)</option>
+                                    <option value="America/Denver" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Denver' ? 'selected' : '' }}>الولايات المتحدة - دنفر (GMT-7)</option>
+                                    <option value="America/Los_Angeles" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Los_Angeles' ? 'selected' : '' }}>الولايات المتحدة - لوس أنجلوس (GMT-8)</option>
+                                    <option value="America/Toronto" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Toronto' ? 'selected' : '' }}>كندا - تورونتو (GMT-5)</option>
+                                    <option value="America/Vancouver" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Vancouver' ? 'selected' : '' }}>كندا - فانكوفر (GMT-8)</option>
+                                    <option value="America/Mexico_City" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Mexico_City' ? 'selected' : '' }}>المكسيك - مكسيكو سيتي (GMT-6)</option>
+                                </optgroup>
+
+                                {{-- أمريكا الجنوبية --}}
+                                <optgroup label="أمريكا الجنوبية">
+                                    <option value="America/Sao_Paulo" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Sao_Paulo' ? 'selected' : '' }}>البرازيل - ساو باولو (GMT-3)</option>
+                                    <option value="America/Buenos_Aires" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Buenos_Aires' ? 'selected' : '' }}>الأرجنتين - بوينس آيرس (GMT-3)</option>
+                                    <option value="America/Lima" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Lima' ? 'selected' : '' }}>البيرو - ليما (GMT-5)</option>
+                                    <option value="America/Bogota" {{ ($user->timezone ?? 'Asia/Dubai') === 'America/Bogota' ? 'selected' : '' }}>كولومبيا - بوغوتا (GMT-5)</option>
+                                </optgroup>
+
+                                {{-- أوقيانوسيا --}}
+                                <optgroup label="أوقيانوسيا">
+                                    <option value="Australia/Sydney" {{ ($user->timezone ?? 'Asia/Dubai') === 'Australia/Sydney' ? 'selected' : '' }}>أستراليا - سيدني (GMT+10)</option>
+                                    <option value="Australia/Melbourne" {{ ($user->timezone ?? 'Asia/Dubai') === 'Australia/Melbourne' ? 'selected' : '' }}>أستراليا - ملبورن (GMT+10)</option>
+                                    <option value="Australia/Perth" {{ ($user->timezone ?? 'Asia/Dubai') === 'Australia/Perth' ? 'selected' : '' }}>أستراليا - بيرث (GMT+8)</option>
+                                    <option value="Pacific/Auckland" {{ ($user->timezone ?? 'Asia/Dubai') === 'Pacific/Auckland' ? 'selected' : '' }}>نيوزيلندا - أوكلاند (GMT+12)</option>
+                                </optgroup>
+
+                                {{-- أفريقيا الأخرى --}}
+                                <optgroup label="أفريقيا الأخرى">
+                                    <option value="Africa/Johannesburg" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Johannesburg' ? 'selected' : '' }}>جنوب أفريقيا - جوهانسبرغ (GMT+2)</option>
+                                    <option value="Africa/Lagos" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Lagos' ? 'selected' : '' }}>نيجيريا - لاغوس (GMT+1)</option>
+                                    <option value="Africa/Nairobi" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Nairobi' ? 'selected' : '' }}>كينيا - نيروبي (GMT+3)</option>
+                                    <option value="Africa/Addis_Ababa" {{ ($user->timezone ?? 'Asia/Dubai') === 'Africa/Addis_Ababa' ? 'selected' : '' }}>إثيوبيا - أديس أبابا (GMT+3)</option>
+                                </optgroup>
                             </select>
                             @error('timezone')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
