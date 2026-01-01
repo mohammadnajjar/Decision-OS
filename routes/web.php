@@ -14,6 +14,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\BusinessAssetController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\FinancialReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -168,6 +169,9 @@ Route::middleware(['auth'])->prefix('decision-os')->name('decision-os.')->group(
     Route::get('/expense-categories/{expenseCategory}/edit', [\App\Http\Controllers\ExpenseCategoryController::class, 'edit'])->name('expense-categories.edit');
     Route::put('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'update'])->name('expense-categories.update');
     Route::delete('/expense-categories/{expenseCategory}', [\App\Http\Controllers\ExpenseCategoryController::class, 'destroy'])->name('expense-categories.destroy');
+
+    // Financial Reports
+    Route::get('/reports/financial', [FinancialReportController::class, 'index'])->name('reports.financial');
 
     // Quran Progress (ختمة القرآن)
     Route::get('/quran', [\App\Http\Controllers\QuranProgressController::class, 'index'])->name('quran.index');

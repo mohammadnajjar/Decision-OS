@@ -138,6 +138,14 @@
                 </a>
             </li>
 
+            {{-- Financial Reports --}}
+            <li class="pe-slide">
+                <a href="{{ route('decision-os.reports.financial') }}" class="pe-nav-link {{ request()->routeIs('decision-os.reports.*') ? 'active' : '' }}">
+                    <i class="ri-bar-chart-box-line pe-nav-icon text-info"></i>
+                    <span class="pe-nav-content">{{ __('app.nav.financial_reports') }}</span>
+                </a>
+            </li>
+
             {{-- Clients --}}
             <li class="pe-slide">
                 <a href="{{ route('decision-os.clients.index') }}" class="pe-nav-link {{ request()->routeIs('decision-os.clients.*') ? 'active' : '' }}">

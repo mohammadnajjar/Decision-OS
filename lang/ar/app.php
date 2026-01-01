@@ -52,6 +52,9 @@ return [
         'per_day' => 'يومياً',
         'per_week' => 'أسبوعياً',
         'per_month' => 'شهرياً',
+        'actions' => 'الإجراءات',
+        'optional' => 'اختياري',
+        'notes' => 'ملاحظات',
     ],
 
     /*
@@ -72,6 +75,7 @@ return [
         'expenses' => 'المصاريف',
         'incomes' => 'الدخل',
         'expense_categories' => 'فئات المصاريف',
+        'financial_reports' => 'التقارير المالية',
         'spiritual_health' => 'الروحاني والصحة',
         'quran' => 'ختمة القرآن',
         'adhkar' => 'الأذكار',
@@ -92,6 +96,23 @@ return [
         'career_growth' => 'التطور المهني',
         'business' => 'الأصول والأعمال',
         'business_assets' => 'الأصول والأعمال',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reports
+    |--------------------------------------------------------------------------
+    */
+    'reports' => [
+        'financial_reports' => 'التقارير المالية',
+        'total_income' => 'إجمالي الدخل',
+        'total_expenses' => 'إجمالي المصاريف',
+        'investments' => 'الاستثمارات',
+        'net_balance' => 'الرصيد الصافي',
+        'expenses_by_category' => 'المصاريف حسب الفئة',
+        'expenses_by_account' => 'المصاريف حسب الحساب',
+        'income_by_account' => 'الدخل حسب الحساب',
+        'investment_summary' => 'ملخص الاستثمارات',
     ],
 
     /*
