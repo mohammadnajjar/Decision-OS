@@ -116,6 +116,7 @@ class Debt extends Model
             DebtPayment::create([
                 'debt_id' => $this->id,
                 'amount' => $this->total_amount,
+                'payment_date' => $this->due_date ?? $this->start_date,
                 'due_date' => $this->due_date ?? $this->start_date,
                 'status' => 'pending',
             ]);
@@ -144,6 +145,7 @@ class Debt extends Model
             DebtPayment::create([
                 'debt_id' => $this->id,
                 'amount' => $amount,
+                'payment_date' => $dueDate,
                 'due_date' => $dueDate,
                 'status' => 'pending',
             ]);

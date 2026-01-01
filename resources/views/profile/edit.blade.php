@@ -335,6 +335,31 @@
                 </button>
             </div>
         </div>
+
+        {{-- Reset Account --}}
+        <div class="card border-warning mt-3">
+            <div class="card-header bg-warning-subtle">
+                <h5 class="card-title mb-0 text-warning">
+                    <i class="ri-refresh-line me-2"></i>
+                    إعادة تعيين الحساب
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-3">
+                    <i class="ri-information-line me-1"></i>
+                    سيتم حذف جميع بياناتك (المهام، المشاريع، المصروفات، الجلسات، القرارات، إلخ) مع الإبقاء على حسابك.
+                    ستعود إلى صفحة الإعداد الأولي لبدء تجربة جديدة.
+                </p>
+                <div class="alert alert-warning mb-3">
+                    <i class="ri-error-warning-line me-2"></i>
+                    <strong>تنبيه:</strong> هذا الإجراء لا يمكن التراجع عنه! جميع البيانات سيتم حذفها نهائياً.
+                </div>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#resetAccountModal">
+                    <i class="ri-refresh-line me-1"></i>
+                    إعادة تعيين الحساب
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -366,6 +391,55 @@
                     <button type="submit" class="btn btn-danger">
                         <i class="ri-delete-bin-line me-1"></i>
                         حذف الحساب نهائياً
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Reset Account Modal --}}
+<div class="modal fade" id="resetAccountModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title">
+                    <i class="ri-refresh-line me-2"></i>
+                    تأكيد إعادة تعيين الحساب
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{{ route('profile.reset') }}">
+                @csrf
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <i class="ri-error-warning-line me-2"></i>
+                        <strong>تحذير!</strong> سيتم حذف جميع بياناتك:
+                    </div>
+                    <ul class="text-muted mb-3">
+                        <li>جميع المهام والمشاريع</li>
+                        <li>جلسات البومودورو</li>
+                        <li>المصروفات والدخل</li>
+                        <li>الحسابات والديون</li>
+                        <li>العملاء والقرارات</li>
+                        <li>المراجعات الأسبوعية</li>
+                        <li>الأهداف السنوية</li>
+                        <li>تقدم القرآن والأذكار</li>
+                    </ul>
+                    <p class="fw-bold text-warning">سيبقى حسابك فعالاً وستعود لصفحة الإعداد الأولي.</p>
+                    <hr>
+                    <label for="reset_password" class="form-label">أدخل كلمة المرور للتأكيد:</label>
+                    <input type="password" class="form-control" id="reset_password" name="password"
+                           placeholder="كلمة المرور" required>
+                    @error('password', 'accountReset')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="ri-refresh-line me-1"></i>
+                        إعادة تعيين الحساب
                     </button>
                 </div>
             </form>

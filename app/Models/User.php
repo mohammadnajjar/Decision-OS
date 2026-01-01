@@ -164,4 +164,84 @@ class User extends Authenticatable
     {
         return $this->profile === 'founder';
     }
+
+    /**
+     * Get user's expenses.
+     */
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    /**
+     * Get user's incomes.
+     */
+    public function incomes(): HasMany
+    {
+        return $this->hasMany(Income::class);
+    }
+
+    /**
+     * Get user's expense categories.
+     */
+    public function expenseCategories(): HasMany
+    {
+        return $this->hasMany(ExpenseCategory::class);
+    }
+
+    /**
+     * Get user's clients.
+     */
+    public function clients(): HasMany
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    /**
+     * Get user's decisions.
+     */
+    public function decisions(): HasMany
+    {
+        return $this->hasMany(Decision::class);
+    }
+
+    /**
+     * Get user's projects.
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
+     * Get user's yearly goals.
+     */
+    public function yearlyGoals(): HasMany
+    {
+        return $this->hasMany(YearlyGoal::class);
+    }
+
+    /**
+     * Get user's quran progress.
+     */
+    public function quranProgress(): HasMany
+    {
+        return $this->hasMany(QuranProgress::class);
+    }
+
+    /**
+     * Get user's career data.
+     */
+    public function careerData(): HasMany
+    {
+        return $this->hasMany(CareerData::class);
+    }
+
+    /**
+     * Get user's business assets.
+     */
+    public function businessAssets(): HasMany
+    {
+        return $this->hasMany(BusinessAsset::class);
+    }
 }
