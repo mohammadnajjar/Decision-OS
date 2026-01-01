@@ -102,6 +102,8 @@ return [
         'expenses' => 'Expenses',
         'incomes' => 'Incomes',
         'expense_categories' => 'Expense Categories',
+        'financial_reports' => 'Financial Reports',
+        'debts' => 'Debts & Loans',
         'spiritual_health' => 'Spiritual & Health',
         'quran' => 'Quran Khatma',
         'adhkar' => 'Adhkar',
