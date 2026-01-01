@@ -110,6 +110,30 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all debts (payable and receivable)
+     */
+    public function debts(): HasMany
+    {
+        return $this->hasMany(Debt::class);
+    }
+
+    /**
+     * Get debts I owe (payable)
+     */
+    public function payableDebts(): HasMany
+    {
+        return $this->hasMany(Debt::class)->where('type', 'payable');
+    }
+
+    /**
+     * Get debts owed to me (receivable)
+     */
+    public function receivableDebts(): HasMany
+    {
+        return $this->hasMany(Debt::class)->where('type', 'receivable');
+    }
+
+    /**
      * Get default account
      */
     public function defaultAccount()

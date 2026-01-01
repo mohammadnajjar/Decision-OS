@@ -84,6 +84,11 @@ class IncomeController extends Controller
             abort(403);
         }
 
+        // إعادة الرصيد من الحساب قبل الحذف
+        if ($income->account_id) {
+            $income->account->updateBalance($income->amount, 'expense');
+        }
+
         $income->delete();
 
         return back()->with('success', 'تم حذف الدخل');

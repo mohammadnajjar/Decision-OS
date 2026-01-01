@@ -51,6 +51,22 @@ class Account extends Model
     }
 
     /**
+     * علاقة مع الديون
+     */
+    public function debts()
+    {
+        return $this->hasMany(Debt::class);
+    }
+
+    /**
+     * علاقة مع دفعات الديون
+     */
+    public function debtPayments()
+    {
+        return $this->hasMany(DebtPayment::class);
+    }
+
+    /**
      * حساب إجمالي المصاريف من هذا الحساب
      */
     public function getTotalExpensesAttribute()

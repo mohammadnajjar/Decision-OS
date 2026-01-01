@@ -102,6 +102,11 @@ class ExpenseController extends Controller
             abort(403);
         }
 
+        // إعادة الرصيد إلى الحساب قبل الحذف
+        if ($expense->account_id) {
+            $expense->account->updateBalance($expense->amount, 'income');
+        }
+
         $expense->delete();
 
         return back()->with('success', 'تم حذف المصروف');
