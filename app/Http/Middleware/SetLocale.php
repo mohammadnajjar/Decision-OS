@@ -39,6 +39,10 @@ class SetLocale
         // ضبط لغة Carbon لترجمة التواريخ
         Carbon::setLocale($locale);
 
+        // حفظ dir في الجلسة لاستخدامه في الـ Blade
+        $dir = $locale === 'ar' ? 'rtl' : 'ltr';
+        session(['dir' => $dir]);
+
         return $next($request);
     }
 }

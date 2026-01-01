@@ -1,8 +1,8 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Decision OS | المشاريع')
-@section('title-sub', 'Decision OS')
-@section('pagetitle', 'المشاريع')
+@section('title', __('app.app_name') . ' | ' . __('app.projects.title'))
+@section('title-sub', __('app.app_name'))
+@section('pagetitle', __('app.projects.title'))
 
 @section('content')
 <div id="layout-wrapper">
@@ -13,11 +13,11 @@
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
                     <div>
-                        <h4 class="mb-1">جدول المشاريع</h4>
-                        <p class="text-muted mb-0">إدارة ومتابعة جميع المشاريع</p>
+                        <h4 class="mb-1">{{ __('app.projects.project_table') }}</h4>
+                        <p class="text-muted mb-0">{{ __('app.projects.all_projects') }}</p>
                     </div>
                     <a href="{{ route('decision-os.projects.create') }}" class="btn btn-success">
-                        <i class="ri-add-line me-1"></i> New
+                        <i class="ri-add-line me-1"></i> {{ __('app.projects.new_project') }}
                     </a>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-0">${{ number_format($stats['total_revenue']) }}</h4>
-                                <span class="text-muted">إجمالي الإيرادات</span>
+                                <span class="text-muted">{{ __('app.projects.total_revenue') }}</span>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-0">{{ number_format($stats['total_hours'], 1) }}</h4>
-                                <span class="text-muted">ساعات العمل</span>
+                                <span class="text-muted">{{ __('app.projects.total_hours') }}</span>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div>
                                 <h4 class="mb-0">{{ $stats['active_count'] }}</h4>
-                                <span class="text-muted">مشاريع نشطة</span>
+                                <span class="text-muted">{{ __('app.projects.active_projects') }}</span>
                             </div>
                         </div>
                     </div>
@@ -79,13 +79,13 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>اسم المشروع</th>
-                                <th>العميل</th>
-                                <th>المهام</th>
-                                <th>الحالة</th>
-                                <th>الأولوية</th>
-                                <th>تاريخ البدء</th>
-                                <th>الإيراد</th>
+                                <th>{{ __('app.projects.project_name') }}</th>
+                                <th>{{ __('app.projects.client') }}</th>
+                                <th>{{ __('app.tasks.title') }}</th>
+                                <th>{{ __('app.projects.status') }}</th>
+                                <th>{{ __('app.common.priority') }}</th>
+                                <th>{{ __('app.projects.start_date') }}</th>
+                                <th>{{ __('app.projects.revenue') }}</th>
                                 <th></th>
                             </tr>
                         </thead>

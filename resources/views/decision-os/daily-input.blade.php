@@ -1,8 +1,8 @@
 @extends('partials.layouts.master')
 
-@section('title', 'الإدخال اليومي السريع | Decision OS')
-@section('title-sub', 'Decision OS')
-@section('pagetitle', 'الإدخال اليومي السريع')
+@section('title', __('app.nav.daily_input') . ' | ' . __('app.app_name'))
+@section('title-sub', __('app.app_name'))
+@section('pagetitle', __('app.nav.daily_input'))
 
 @section('content')
 <div id="layout-wrapper">
@@ -18,7 +18,7 @@
                                 <i class="ri-calendar-check-line me-2"></i>
                                 {{ now()->translatedFormat('l، d F Y') }}
                             </h3>
-                            <p class="text-white-50 mb-0">سجّل يومك بسرعة من مكان واحد</p>
+                            <p class="text-white-50 mb-0">{{ __('app.daily_input.subtitle') }}</p>
                         </div>
                         <div class="text-end">
                             <div class="fs-1">📝</div>
@@ -37,7 +37,7 @@
                 <div class="card-header bg-primary text-white">
                     <h5 class="card-title mb-0">
                         <i class="ri-focus-3-line me-2"></i>
-                        المهمة الأهم اليوم
+                        {{ __('app.tasks.today_one_thing') }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -54,7 +54,7 @@
                                 </span>
                             </div>
                             @if($todayTask->completed)
-                                <span class="badge bg-success">✓ مكتمل</span>
+                                <span class="badge bg-success">✓ {{ __('app.status.completed') }}</span>
                             @endif
                         </div>
                     @else
@@ -64,7 +64,7 @@
                             <input type="hidden" name="date" value="{{ today()->toDateString() }}">
                             <div class="input-group">
                                 <input type="text" name="title" class="form-control form-control-lg"
-                                       placeholder="ما هي المهمة الوحيدة الأهم اليوم؟" required>
+                                       placeholder="{{ __('app.tasks.what_is_one_thing') }}" required>
                                 <button type="submit" class="btn btn-primary">
                                     <i class="ri-check-line"></i>
                                 </button>
@@ -79,7 +79,7 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="ri-add-circle-line me-2 text-success"></i>
-                        إضافة مهمة سريعة
+                        {{ __('app.daily_input.quick_task') }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -88,9 +88,9 @@
                         <input type="hidden" name="type" value="top_3">
                         <input type="hidden" name="date" value="{{ today()->toDateString() }}">
                         <div class="input-group mb-2">
-                            <input type="text" name="title" class="form-control" placeholder="عنوان المهمة" required>
+                            <input type="text" name="title" class="form-control" placeholder="{{ __('app.tasks.task_title') }}" required>
                             <button type="submit" class="btn btn-success">
-                                <i class="ri-add-line"></i> أضف
+                                <i class="ri-add-line"></i> {{ __('app.add') }}
                             </button>
                         </div>
                     </form>
@@ -120,7 +120,7 @@
                 <div class="card-header bg-danger text-white">
                     <h5 class="card-title mb-0">
                         <i class="ri-wallet-3-line me-2"></i>
-                        تسجيل مصروف
+                        {{ __('app.daily_input.log_expense') }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -129,22 +129,22 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <input type="number" name="amount" class="form-control form-control-lg"
-                                       placeholder="المبلغ" step="0.01" min="0.01" required>
+                                       placeholder="{{ __('app.financial.amount') }}" step="0.01" min="0.01" required>
                             </div>
                             <div class="col-6">
                                 <select name="expense_category_id" class="form-select form-select-lg" required>
-                                    <option value="">الفئة</option>
+                                    <option value="">{{ __('app.financial.category') }}</option>
                                     @foreach($expenseCategories as $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->icon }} {{ $cat->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-12">
-                                <input type="text" name="note" class="form-control" placeholder="ملاحظة (اختياري)">
+                                <input type="text" name="note" class="form-control" placeholder="{{ __('app.financial.note') }} ({{ __('app.daily_input.optional') }})">
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-danger w-100">
-                                    <i class="ri-add-line me-1"></i> سجّل المصروف
+                                    <i class="ri-add-line me-1"></i> {{ __('app.daily_input.save_expense') }}
                                 </button>
                             </div>
                         </div>
@@ -153,11 +153,11 @@
                     {{-- Today's expenses summary --}}
                     <div class="mt-3 p-3 bg-light rounded">
                         <div class="d-flex justify-content-between">
-                            <span>صرف اليوم:</span>
+                            <span>{{ __('app.financial.today_spent') }}:</span>
                             <span class="fw-bold text-danger">${{ number_format($todayExpenses, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mt-1">
-                            <span>صرف الأسبوع:</span>
+                            <span>{{ __('app.financial.week_spent') }}:</span>
                             <span class="fw-bold">${{ number_format($weekExpenses, 2) }}</span>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                 <div class="card-header bg-success text-white">
                     <h5 class="card-title mb-0">
                         <i class="ri-money-dollar-circle-line me-2"></i>
-                        تسجيل دخل
+                        {{ __('app.daily_input.log_income') }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -179,14 +179,14 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <input type="number" name="amount" class="form-control"
-                                       placeholder="المبلغ" step="0.01" min="0.01" required>
+                                       placeholder="{{ __('app.financial.amount') }}" step="0.01" min="0.01" required>
                             </div>
                             <div class="col-6">
-                                <input type="text" name="source" class="form-control" placeholder="المصدر">
+                                <input type="text" name="source" class="form-control" placeholder="{{ __('app.financial.source') }}">
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-success w-100">
-                                    <i class="ri-add-line me-1"></i> سجّل الدخل
+                                    <i class="ri-add-line me-1"></i> {{ __('app.daily_input.save_income') }}
                                 </button>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="ri-heart-pulse-line me-2 text-danger"></i>
-                        مقاييس الانضباط اليوم
+                        {{ __('app.daily_input.discipline_metrics') }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -214,13 +214,13 @@
                         <div class="p-3 bg-light rounded mb-2">
                             <label class="form-label mb-2">
                                 <i class="ri-run-line text-primary me-2"></i>
-                                ساعات التمرين
+                                {{ __('app.discipline.gym_hours') }}
                             </label>
                             <div class="input-group">
                                 <input type="number" name="metrics[{{ $gymMetricId }}]" class="form-control"
                                        value="{{ $metricsToday[$gymMetricId] ?? '' }}"
                                        placeholder="0" min="0" max="8" step="0.5">
-                                <span class="input-group-text">ساعة</span>
+                                <span class="input-group-text">{{ __('app.discipline.hours') }}</span>
                             </div>
                             <div class="btn-group btn-group-sm w-100 mt-2">
                                 <button type="button" class="btn btn-outline-primary quick-gym" data-hours="0.5">0.5</button>
@@ -234,7 +234,7 @@
                         <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded mb-2">
                             <div>
                                 <i class="ri-zzz-line text-info me-2"></i>
-                                <span>يوم راحة؟</span>
+                                <span>{{ __('app.discipline.is_rest_day') }}</span>
                             </div>
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" name="metrics[{{ $restMetricId }}]"
@@ -246,18 +246,18 @@
                         <div class="p-3 bg-light rounded mb-3">
                             <label class="form-label">
                                 <i class="ri-time-line text-warning me-2"></i>
-                                ساعات العمل
+                                {{ __('app.discipline.work_hours') }}
                             </label>
                             <div class="input-group">
                                 <input type="number" name="metrics[{{ $workHoursMetricId }}]" class="form-control"
                                        value="{{ $metricsToday[$workHoursMetricId] ?? '' }}"
                                        placeholder="0" min="0" max="24" step="0.5">
-                                <span class="input-group-text">ساعة</span>
+                                <span class="input-group-text">{{ __('app.discipline.hours') }}</span>
                             </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100">
-                            <i class="ri-save-line me-1"></i> حفظ المقاييس
+                            <i class="ri-save-line me-1"></i> {{ __('app.daily_input.save_metrics') }}
                         </button>
                     </form>
                 </div>
@@ -268,14 +268,14 @@
                 <div class="card-header bg-success-subtle">
                     <h5 class="card-title mb-0">
                         <i class="ri-book-open-line me-2 text-success"></i>
-                        قراءة القرآن اليوم
+                        {{ __('app.daily_input.quran_today') }}
                     </h5>
                 </div>
                 <div class="card-body">
                     @if($quranProgress)
                         <div class="text-center mb-3">
                             <div class="fs-2 fw-bold text-success">{{ $quranProgress->progress_percentage }}%</div>
-                            <div class="text-muted">{{ $quranProgress->completed_pages }}/{{ $quranProgress->target_pages }} صفحة</div>
+                            <div class="text-muted">{{ $quranProgress->completed_pages }}/{{ $quranProgress->target_pages }} {{ __('app.quran.pages') }}</div>
                             <div class="progress mt-2" style="height: 10px;">
                                 <div class="progress-bar bg-success" style="width: {{ $quranProgress->progress_percentage }}%"></div>
                             </div>
@@ -283,8 +283,8 @@
                         <form action="{{ route('decision-os.quran.log-reading') }}" method="POST">
                             @csrf
                             <div class="input-group">
-                                <input type="number" name="pages" class="form-control" placeholder="صفحات" min="1" max="604">
-                                <button type="submit" class="btn btn-success">سجّل</button>
+                                <input type="number" name="pages" class="form-control" placeholder="{{ __('app.quran.pages') }}" min="1" max="604">
+                                <button type="submit" class="btn btn-success">{{ __('app.daily_input.log') }}</button>
                             </div>
                             <div class="btn-group btn-group-sm w-100 mt-2">
                                 <button type="button" class="btn btn-outline-success quick-quran" data-pages="2">2</button>
@@ -295,7 +295,7 @@
                         </form>
                     @else
                         <a href="{{ route('decision-os.quran.index') }}" class="btn btn-outline-success w-100">
-                            ابدأ ختمة هذا الشهر
+                            {{ __('app.daily_input.start_khatma') }}
                         </a>
                     @endif
                 </div>
@@ -310,7 +310,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="fw-medium text-muted mb-0">الرصيد المتاح</p>
+                            <p class="fw-medium text-muted mb-0">{{ __('app.financial.cash_on_hand') }}</p>
                             <h2 class="mt-2 mb-0 fs-22 fw-semibold {{ $cashOnHand >= 0 ? 'text-success' : 'text-danger' }}">
                                 ${{ number_format($cashOnHand, 2) }}
                             </h2>
@@ -327,7 +327,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="fw-medium text-muted mb-0">Pomodoros اليوم</p>
+                            <p class="fw-medium text-muted mb-0">{{ __('app.daily_input.pomodoros_today') }}</p>
                             <h2 class="mt-2 mb-0 fs-22 fw-semibold">{{ $todayPomodoros }}</h2>
                         </div>
                         <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle text-danger border border-dark border-opacity-20 shadow-sm fs-5">
@@ -342,7 +342,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="fw-medium text-muted mb-0">مهام مكتملة</p>
+                            <p class="fw-medium text-muted mb-0">{{ __('app.tasks.tasks_completed') }}</p>
                             <h2 class="mt-2 mb-0 fs-22 fw-semibold text-success">{{ $completedTasksToday }}</h2>
                         </div>
                         <div class="avatar-md d-flex justify-content-center align-items-center rounded-circle text-primary border border-dark border-opacity-20 shadow-sm fs-5">
@@ -357,7 +357,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="fw-medium text-muted mb-0">دخل الشهر</p>
+                            <p class="fw-medium text-muted mb-0">{{ __('app.financial.monthly_income') }}</p>
                             <h2 class="mt-2 mb-0 fs-22 fw-semibold text-success">
                                 ${{ number_format($monthIncome, 2) }}
                             </h2>

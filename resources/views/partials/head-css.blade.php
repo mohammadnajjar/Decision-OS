@@ -16,4 +16,10 @@
     body, .card, .btn, input, textarea, select, .form-control, .dropdown-menu, h1, h2, h3, h4, h5, h6, p, span, a, label {
         font-family: 'Tajawal', sans-serif !important;
     }
+    button#languageDropdown {
+    background: none;
+}
+ button#languageDropdown:hover {
+    border: none;
+}
 </style>

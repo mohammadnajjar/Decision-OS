@@ -11,6 +11,17 @@
 <!-- layout setup -->
 <script type="module" src="{{ asset('assets/js/layout-setup.js') }}"></script>
 
+<!-- Sync dir from Backend to Theme Customizer localStorage -->
+<script>
+    // مزامنة dir من Backend إلى localStorage للـ Theme Customizer فقط
+    (function() {
+        const currentDir = document.documentElement.dir;
+        if (currentDir) {
+            localStorage.setItem('dir', currentDir);
+        }
+    })();
+</script>
+
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{ asset('assets/images/k_favicon_32x.png') }}">
 

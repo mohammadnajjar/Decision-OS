@@ -1,8 +1,8 @@
 @extends('partials.layouts.master')
 
-@section('title', 'Decision OS | المراجعة الأسبوعية')
-@section('title-sub', 'Decision OS')
-@section('pagetitle', 'المراجعة الأسبوعية')
+@section('title', __('app.app_name') . ' | ' . __('app.weekly_review.title'))
+@section('title-sub', __('app.app_name'))
+@section('pagetitle', __('app.weekly_review.title'))
 
 @section('content')
 <div id="layout-wrapper">
@@ -13,9 +13,9 @@
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <h4 class="mb-1">المراجعة الأسبوعية</h4>
+                        <h4 class="mb-1">{{ __('app.weekly_review.title') }}</h4>
                         <p class="text-muted mb-0">
-                            الأسبوع {{ $weekNumber }} - من {{ $weekStart->format('d/m') }} إلى {{ $weekEnd->format('d/m/Y') }}
+                            {{ __('app.weekly_review.week_number') }} {{ $weekNumber }} - {{ __('app.weekly_review.from') }} {{ $weekStart->format('d/m') }} {{ __('app.weekly_review.to') }} {{ $weekEnd->format('d/m/Y') }}
                         </p>
                     </div>
                 </div>
@@ -33,13 +33,13 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                <i class="ri-bar-chart-line text-primary me-2"></i> ملخص الأسبوع
+                                <i class="ri-bar-chart-line text-primary me-2"></i> {{ __('app.weekly_review.week_summary') }}
                             </h5>
                         </div>
                         <div class="card-body">
                             <div class="d-flex flex-column gap-3">
                                 <div class="d-flex justify-content-between align-items-center p-3 bg-success-subtle rounded">
-                                    <span>مهام مكتملة</span>
+                                    <span>{{ __('app.weekly_review.tasks_completed') }}</span>
                                     <span class="badge bg-success fs-5">{{ $weekStats['tasks_completed'] }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center p-3 bg-primary-subtle rounded">
@@ -47,11 +47,11 @@
                                     <span class="badge bg-primary fs-5">{{ $weekStats['pomodoros'] }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center p-3 bg-info-subtle rounded">
-                                    <span>ساعات العمل</span>
+                                    <span>{{ __('app.weekly_review.work_hours') }}</span>
                                     <span class="badge bg-info fs-5">{{ $weekStats['work_hours'] }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center p-3 bg-warning-subtle rounded">
-                                    <span>أيام صحية</span>
+                                    <span>{{ __('app.weekly_review.healthy_days') }}</span>
                                     <span class="badge bg-warning fs-5">{{ $weekStats['healthy_days'] }}/7</span>
                                 </div>
                             </div>
@@ -61,17 +61,17 @@
 
                 {{-- Right Column - Review Questions --}}
                 <div class="col-lg-8">
-                    
+
                     {{-- Wins --}}
                     <div class="card mb-4 border-success">
                         <div class="card-header bg-success-subtle">
                             <h5 class="card-title mb-0 text-success">
-                                <i class="ri-trophy-line me-2"></i> إنجازات الأسبوع
+                                <i class="ri-trophy-line me-2"></i> {{ __('app.weekly_review.wins') }}
                             </h5>
                         </div>
                         <div class="card-body">
-                            <textarea class="form-control" name="wins" rows="4" 
-                                placeholder="ما هي أهم 3 إنجازات حققتها هذا الأسبوع؟">{{ old('wins') }}</textarea>
+                            <textarea class="form-control" name="wins" rows="4"
+                                placeholder="{{ __('app.weekly_review.wins_placeholder') }}">{{ old('wins') }}</textarea>
                         </div>
                     </div>
 
@@ -79,12 +79,12 @@
                     <div class="card mb-4 border-warning">
                         <div class="card-header bg-warning-subtle">
                             <h5 class="card-title mb-0 text-warning">
-                                <i class="ri-error-warning-line me-2"></i> تحديات وعقبات
+                                <i class="ri-error-warning-line me-2"></i> {{ __('app.weekly_review.challenges') }}
                             </h5>
                         </div>
                         <div class="card-body">
-                            <textarea class="form-control" name="challenges" rows="4" 
-                                placeholder="ما هي التحديات التي واجهتها؟ وكيف تعاملت معها؟">{{ old('challenges') }}</textarea>
+                            <textarea class="form-control" name="challenges" rows="4"
+                                placeholder="{{ __('app.weekly_review.challenges_placeholder') }}">{{ old('challenges') }}</textarea>
                         </div>
                     </div>
 
@@ -92,12 +92,12 @@
                     <div class="card mb-4 border-info">
                         <div class="card-header bg-info-subtle">
                             <h5 class="card-title mb-0 text-info">
-                                <i class="ri-lightbulb-line me-2"></i> دروس مستفادة
+                                <i class="ri-lightbulb-line me-2"></i> {{ __('app.weekly_review.lessons') }}
                             </h5>
                         </div>
                         <div class="card-body">
-                            <textarea class="form-control" name="lessons" rows="4" 
-                                placeholder="ما الذي تعلمته هذا الأسبوع؟ ما الذي ستفعله بشكل مختلف؟">{{ old('lessons') }}</textarea>
+                            <textarea class="form-control" name="lessons" rows="4"
+                                placeholder="{{ __('app.weekly_review.lessons_placeholder') }}">{{ old('lessons') }}</textarea>
                         </div>
                     </div>
 
@@ -105,12 +105,12 @@
                     <div class="card mb-4 border-primary">
                         <div class="card-header bg-primary-subtle">
                             <h5 class="card-title mb-0 text-primary">
-                                <i class="ri-focus-line me-2"></i> أولويات الأسبوع القادم
+                                <i class="ri-focus-line me-2"></i> {{ __('app.weekly_review.next_week') }}
                             </h5>
                         </div>
                         <div class="card-body">
-                            <textarea class="form-control" name="next_week_priorities" rows="4" 
-                                placeholder="ما هي أهم 3 أولويات للأسبوع القادم؟">{{ old('next_week_priorities') }}</textarea>
+                            <textarea class="form-control" name="next_week_priorities" rows="4"
+                                placeholder="{{ __('app.weekly_review.next_week_placeholder') }}">{{ old('next_week_priorities') }}</textarea>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@
                                 <div class="col-md-4">
                                     <label class="form-label fw-medium">تقييم الإنتاجية</label>
                                     <div class="d-flex align-items-center gap-2">
-                                        <input type="range" class="form-range" min="1" max="10" 
+                                        <input type="range" class="form-range" min="1" max="10"
                                                name="productivity_rating" value="5"
                                                id="productivity-rating"
                                                oninput="document.getElementById('productivity-rating-value').textContent = this.value">
@@ -136,7 +136,7 @@
                                 <div class="col-md-4">
                                     <label class="form-label fw-medium">تقييم الصحة</label>
                                     <div class="d-flex align-items-center gap-2">
-                                        <input type="range" class="form-range" min="1" max="10" 
+                                        <input type="range" class="form-range" min="1" max="10"
                                                name="health_rating" value="5"
                                                id="health-rating"
                                                oninput="document.getElementById('health-rating-value').textContent = this.value">
@@ -146,7 +146,7 @@
                                 <div class="col-md-4">
                                     <label class="form-label fw-medium">تقييم السعادة</label>
                                     <div class="d-flex align-items-center gap-2">
-                                        <input type="range" class="form-range" min="1" max="10" 
+                                        <input type="range" class="form-range" min="1" max="10"
                                                name="happiness_rating" value="5"
                                                id="happiness-rating"
                                                oninput="document.getElementById('happiness-rating-value').textContent = this.value">

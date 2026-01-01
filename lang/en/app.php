@@ -43,6 +43,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Common Actions
+    |--------------------------------------------------------------------------
+    */
+    'actions' => [
+        'save' => 'Save',
+        'cancel' => 'Cancel',
+        'delete' => 'Delete',
+        'edit' => 'Edit',
+        'view' => 'View',
+        'back' => 'Back',
+        'submit' => 'Submit',
+        'reset' => 'Reset',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Common
+    |--------------------------------------------------------------------------
+    */
+    'common' => [
+        'priority' => 'Priority',
+        'status' => 'Status',
+        'date' => 'Date',
+        'time' => 'Time',
+        'description' => 'Description',
+        'notes' => 'Notes',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Navigation
     |--------------------------------------------------------------------------
     */
@@ -115,16 +145,90 @@ return [
     */
     'tasks' => [
         'title' => 'Tasks',
-        'today_one_thing' => 'Today One Thing',
-        'top_3' => 'Top 3 Tasks',
         'add_task' => 'Add Task',
+        'new_task' => 'Add New Task',
         'task_title' => 'Task Title',
+        'task_type' => 'Task Type',
+        'today_one_thing' => 'Today One Thing',
+        'today_one_thing_desc' => 'The most important and first task of the day',
+        'top_3' => 'Top 3',
+        'top_3_desc' => 'One of the three important tasks',
         'completed' => 'Completed',
+        'pending' => 'Pending',
+        'mark_done' => 'Mark as Done',
+        'mark_undone' => 'Mark as Undone',
+        'today' => 'Today\'s Tasks',
+        'all_tasks' => 'All Tasks',
+        'date' => 'Date',
+        'save_task' => 'Save Task',
+        'placeholder' => 'Write task title here...',
         'not_completed' => 'Not Completed',
         'no_task_today' => 'No task set for today',
         'what_is_one_thing' => 'What is the ONE most important task today?',
         'tasks_completed' => 'Tasks Completed',
         'days_without' => 'Days Without Completion',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Weekly Review
+    |--------------------------------------------------------------------------
+    */
+    'weekly_review' => [
+        'title' => 'Weekly Review',
+        'create_review' => 'Create Review',
+        'week_summary' => 'Week Summary',
+        'tasks_completed' => 'Tasks Completed',
+        'work_hours' => 'Work Hours',
+        'healthy_days' => 'Healthy Days',
+        'wins' => 'Week Wins',
+        'wins_placeholder' => 'What are the top 3 achievements this week?',
+        'challenges' => 'Challenges & Obstacles',
+        'challenges_placeholder' => 'What were the biggest challenges you faced?',
+        'lessons' => 'Lessons Learned',
+        'lessons_placeholder' => 'What did you learn this week? What would you do differently?',
+        'next_week' => 'Next Week Priorities',
+        'next_week_placeholder' => 'What are the top 3 priorities for next week?',
+        'improvements' => 'Improvements Needed',
+        'improvements_placeholder' => 'What do you want to improve next week?',
+        'save_review' => 'Save Review',
+        'week_of' => 'Week of',
+        'from' => 'from',
+        'to' => 'to',
+        'week_number' => 'Week',
+        'view_details' => 'View Details',
+        'all_reviews' => 'All Reviews',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Projects
+    |--------------------------------------------------------------------------
+    */
+    'projects' => [
+        'title' => 'Projects',
+        'project_table' => 'Projects Table',
+        'all_projects' => 'Manage and track all projects',
+        'new_project' => 'New Project',
+        'project_name' => 'Project Name',
+        'client' => 'Client',
+        'status' => 'Status',
+        'revenue' => 'Revenue',
+        'total_revenue' => 'Total Revenue',
+        'total_hours' => 'Work Hours',
+        'active_projects' => 'Active Projects',
+        'completed_projects' => 'Completed Projects',
+        'start_date' => 'Start Date',
+        'end_date' => 'End Date',
+        'hours_logged' => 'Hours Logged',
+        'actions' => 'Actions',
+        'view' => 'View',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'active' => 'Active',
+        'completed' => 'Completed',
+        'on_hold' => 'On Hold',
+        'cancelled' => 'Cancelled',
     ],
 
     /*
@@ -357,5 +461,26 @@ return [
         'months' => 'months',
         'years' => 'years',
         'ago' => 'ago',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Daily Input
+    |--------------------------------------------------------------------------
+    */
+    'daily_input' => [
+        'subtitle' => 'Log your day quickly from one place',
+        'quick_task' => 'Quick Add Task',
+        'log_expense' => 'Log Expense',
+        'log_income' => 'Log Income',
+        'save_expense' => 'Save Expense',
+        'save_income' => 'Save Income',
+        'save_metrics' => 'Save Metrics',
+        'discipline_metrics' => 'Today\'s Discipline Metrics',
+        'quran_today' => 'Quran Reading Today',
+        'start_khatma' => 'Start This Month\'s Khatma',
+        'pomodoros_today' => 'Pomodoros Today',
+        'log' => 'Log',
+        'optional' => 'optional',
     ],
 ];
