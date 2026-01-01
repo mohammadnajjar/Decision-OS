@@ -64,7 +64,7 @@ class QuranProgressController extends Controller
         }
 
         // رسالة تذكير الأذكار
-        $adhkarReminder = $this->adhkarService->getReminderMessage();
+        $adhkarReminder = $this->adhkarService->getReminderMessage($user);
 
         return view('decision-os.quran.index', compact(
             'currentProgress',

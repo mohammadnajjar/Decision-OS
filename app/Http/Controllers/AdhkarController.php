@@ -18,10 +18,11 @@ class AdhkarController extends Controller
     /**
      * عرض صفحة الأذكار
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $adhkarData = $this->adhkarService->getCurrentAdhkar();
-        $randomDhikr = $this->adhkarService->getRandomDhikr();
+        $user = $request->user();
+        $adhkarData = $this->adhkarService->getCurrentAdhkar($user);
+        $randomDhikr = $this->adhkarService->getRandomDhikr($user);
 
         return view('decision-os.adhkar.index', compact('adhkarData', 'randomDhikr'));
     }

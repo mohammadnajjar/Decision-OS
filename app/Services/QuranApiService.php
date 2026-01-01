@@ -274,7 +274,9 @@ class QuranApiService
         $result = [];
         foreach ($juzSurahs[$juz] ?? [] as $surahNum) {
             if (isset(self::SURAH_NAMES[$surahNum])) {
-                $result[$surahNum] = self::SURAH_NAMES[$surahNum];
+                $surahData = self::SURAH_NAMES[$surahNum];
+                $surahData['number'] = $surahNum;
+                $result[] = $surahData;
             }
         }
         return $result;

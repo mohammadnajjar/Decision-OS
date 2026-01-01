@@ -329,11 +329,11 @@
                         <input type="text" class="form-control" id="surahSearch" placeholder="🔍 ابحث عن سورة...">
                     </div>
                     <div class="row" id="surahList">
-                        @foreach($surahs as $surah)
+                        @foreach($surahs as $number => $surah)
                             <div class="col-lg-3 col-md-4 col-6 mb-2 surah-item" data-name="{{ $surah['name'] }} {{ $surah['english'] }}">
                                 <div class="p-2 rounded bg-light text-center surah-card" style="cursor: pointer;"
-                                     data-bs-toggle="modal" data-bs-target="#surahModal{{ $surah['number'] }}">
-                                    <span class="badge bg-primary">{{ $surah['number'] }}</span>
+                                     data-bs-toggle="modal" data-bs-target="#surahModal{{ $number }}">
+                                    <span class="badge bg-primary">{{ $number }}</span>
                                     <div class="fw-bold mt-1">{{ $surah['name'] }}</div>
                                     <small class="text-muted">{{ $surah['english'] }}</small>
                                     <div class="small">
@@ -346,7 +346,7 @@
                             </div>
 
                             {{-- Modal لتفاصيل السورة --}}
-                            <div class="modal fade" id="surahModal{{ $surah['number'] }}" tabindex="-1">
+                            <div class="modal fade" id="surahModal{{ $number }}" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -354,7 +354,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <div class="display-6 text-primary mb-3">{{ $surah['number'] }}</div>
+                                            <div class="display-6 text-primary mb-3">{{ $number }}</div>
                                             <h3>{{ $surah['name'] }}</h3>
                                             <p class="text-muted">{{ $surah['english'] }}</p>
                                             <div class="d-flex justify-content-center gap-3">

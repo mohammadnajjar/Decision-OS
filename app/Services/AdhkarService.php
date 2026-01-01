@@ -134,9 +134,13 @@ class AdhkarService
     /**
      * تحديد إذا كان الوقت صباحاً أم مساءً
      */
-    public function isMorning(): bool
+    public function isMorning($user = null): bool
     {
-        $hour = Carbon::now()->hour;
+        $now = $user && $user->timezone
+            ? Carbon::now($user->timezone)
+            : Carbon::now('Asia/Riyadh');
+
+        $hour = $now->hour;
         // الصباح: من الفجر (4:00) حتى العصر (15:00)
         return $hour >= 4 && $hour < 15;
     }
@@ -144,9 +148,9 @@ class AdhkarService
     /**
      * جلب الأذكار المناسبة للوقت الحالي
      */
-    public function getCurrentAdhkar(): array
+    public function getCurrentAdhkar($user = null): array
     {
-        if ($this->isMorning()) {
+        if ($this->isMorning($user)) {
             return [
                 'type' => 'morning',
                 'title' => 'أذكار الصباح',
@@ -168,18 +172,18 @@ class AdhkarService
     /**
      * جلب ذكر عشوائي
      */
-    public function getRandomDhikr(): array
+    public function getRandomDhikr($user = null): array
     {
-        $adhkar = $this->isMorning() ? self::MORNING_ADHKAR : self::EVENING_ADHKAR;
+        $adhkar = $this->isMorning($user) ? self::MORNING_ADHKAR : self::EVENING_ADHKAR;
         return $adhkar[array_rand($adhkar)];
     }
 
     /**
      * جلب رسالة تذكير بالأذكار
      */
-    public function getReminderMessage(): array
+    public function getReminderMessage($user = null): array
     {
-        if ($this->isMorning()) {
+        if ($this->isMorning($user)) {
             return [
                 'title' => '☀️ أذكار الصباح',
                 'message' => 'لا تنسَ أذكار الصباح! ابدأ يومك بذكر الله.',
