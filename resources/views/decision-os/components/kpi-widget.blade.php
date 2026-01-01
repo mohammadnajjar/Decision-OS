@@ -9,9 +9,13 @@
     $color = $kpi['color'] ?? ($isGood ? 'success' : ($value >= $target * 0.5 ? 'warning' : 'danger'));
     $icon = $kpi['icon'] ?? 'ri-bar-chart-line';
 
+    // Get user currency
+    $currency = auth()->user()->currency ?? 'AED';
+    $currencySymbol = $currency === 'AED' ? 'د.إ' : ($currency === 'USD' ? '$' : $currency);
+
     // Format value based on format type
     if (isset($kpi['format']) && $kpi['format'] === 'currency') {
-        $displayValue = '$' . number_format($value, 2);
+        $displayValue = $currencySymbol . ' ' . number_format($value, 2);
     } else {
         $displayValue = $value;
     }

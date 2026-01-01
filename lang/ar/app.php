@@ -422,6 +422,7 @@ return [
     */
     'auth' => [
         'login' => 'تسجيل الدخول',
+        'login_title' => 'تسجيل الدخول إلى Decision OS',
         'register' => 'إنشاء حساب',
         'logout' => 'تسجيل الخروج',
         'forgot_password' => 'نسيت كلمة المرور؟',

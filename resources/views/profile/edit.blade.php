@@ -38,20 +38,24 @@
                 </h5>
             </div>
             <div class="card-body">
+                @php
+                    $currency = $user->currency ?? 'AED';
+                    $currencySymbol = $currency === 'AED' ? 'د.إ' : ($currency === 'USD' ? '$' : $currency);
+                @endphp
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">الرصيد المتاح</span>
                     <span class="fw-bold {{ $user->cash_on_hand >= 0 ? 'text-success' : 'text-danger' }}">
-                        ${{ number_format($user->cash_on_hand ?? 0, 2) }}
+                        {{ $currencySymbol }} {{ number_format($user->cash_on_hand ?? 0, 2) }}
                     </span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="text-muted">العملة</span>
-                    <span>{{ $user->currency ?? 'USD' }}</span>
+                    <span class="badge bg-primary">{{ $currency }}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class="text-muted">Onboarding</span>
                     <span class="badge {{ $user->onboarding_completed ? 'bg-success' : 'bg-warning' }}">
-                        {{ $user->onboarding_completed ? 'مكتمل' : 'غير مكتمل' }}
+                        {{ $user->onboarding_completed ? '✓ مكتمل' : 'غير مكتمل' }}
                     </span>
                 </div>
             </div>
