@@ -102,14 +102,16 @@ class PomodoroTimer {
     async skip() {
         this.pause();
 
-        // إذا كانت جلسة عمل وليست استراحة، سجّلها كـ interrupted
-        if (!this.isBreak && this.currentSessionId) {
-            await this.interruptSession();
-        }
-
-        // انتقل للمرحلة التالية بدون احتساب كجلسة مكتملة
         if (!this.isBreak) {
-            // تخطي جلسة العمل → انتقل للاستراحة
+            // تخطي جلسة العمل = إكمالها
+            const duration = this.startTime ? Math.floor((Date.now() - this.startTime) / 1000) : this.workDuration - this.timeRemaining;
+            this.sessionsCompleted++;
+
+            if (this.currentSessionId) {
+                await this.completeSession(duration);
+            }
+
+            // الانتقال للاستراحة
             this.isBreak = true;
             this.timeRemaining = this.getBreakDuration();
         } else {
@@ -118,9 +120,8 @@ class PomodoroTimer {
             this.timeRemaining = this.workDuration;
         }
 
-        // إعادة تعيين وقت البداية ومعرف الجلسة
+        // إعادة تعيين وقت البداية
         this.startTime = null;
-        this.currentSessionId = null;
 
         this.saveState();
         this.updateDisplay();
