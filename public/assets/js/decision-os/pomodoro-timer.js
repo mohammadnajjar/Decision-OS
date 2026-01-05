@@ -118,6 +118,11 @@ class PomodoroTimer {
             this.timeRemaining = this.workDuration;
         }
 
+        // إعادة تعيين وقت البداية ومعرف الجلسة
+        this.startTime = null;
+        this.currentSessionId = null;
+
+        this.saveState();
         this.updateDisplay();
         this.updateButtons();
     }
