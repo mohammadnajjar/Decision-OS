@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\SetLocale::class,
         ]);
+
+        // Exclude Pomodoro API routes from CSRF verification for desktop app
+        $middleware->validateCsrfTokens(except: [
+            'decision-os/pomodoro/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
