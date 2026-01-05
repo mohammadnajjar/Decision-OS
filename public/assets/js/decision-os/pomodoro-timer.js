@@ -36,6 +36,12 @@ class PomodoroTimer {
         this.init();
     }
 
+    // Helper: Get CSRF token safely
+    getCsrfToken() {
+        const metaTag = document.querySelector('meta[name="csrf-token"]');
+        return metaTag ? metaTag.content : '';
+    }
+
     init() {
         this.bindEvents();
         this.loadState(); // استعادة الحالة من localStorage
@@ -132,12 +138,17 @@ class PomodoroTimer {
         if (!this.currentSessionId) return;
 
         try {
+            const csrfToken = this.getCsrfToken();
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (csrfToken) {
+                headers['X-CSRF-TOKEN'] = csrfToken;
+            }
+
             await fetch(`/decision-os/pomodoro/${this.currentSessionId}/interrupt`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
+                headers: headers
             });
 
             this.currentSessionId = null;
@@ -191,12 +202,17 @@ class PomodoroTimer {
 
     async startSession() {
         try {
+            const csrfToken = this.getCsrfToken();
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (csrfToken) {
+                headers['X-CSRF-TOKEN'] = csrfToken;
+            }
+
             const response = await fetch('/decision-os/pomodoro/start', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
+                headers: headers,
                 body: JSON.stringify({
                     duration: this.workDuration / 60
                 })
@@ -219,12 +235,17 @@ class PomodoroTimer {
         }
 
         try {
+            const csrfToken = this.getCsrfToken();
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (csrfToken) {
+                headers['X-CSRF-TOKEN'] = csrfToken;
+            }
+
             const response = await fetch(`/decision-os/pomodoro/${this.currentSessionId}/complete`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
+                headers: headers,
                 body: JSON.stringify({
                     status: 'completed',
                     duration: duration || this.workDuration
