@@ -95,14 +95,14 @@ class PomodoroController extends Controller
         }
 
         $request->validate([
-            'status' => 'required|in:completed,interrupted',
-            'duration' => 'required|integer|min:1',
+            'status' => 'nullable|in:completed,interrupted',
+            'duration' => 'nullable|integer|min:1',
             'energy_after' => 'nullable|integer|min:1|max:5',
         ]);
 
         $session->update([
-            'status' => $request->status,
-            'duration' => $request->duration,
+            'status' => $request->status ?? 'completed',
+            'duration' => $request->duration ?? 25 * 60,
             'energy_after' => $request->energy_after,
         ]);
 
@@ -145,6 +145,7 @@ class PomodoroController extends Controller
     {
         $user = $request->user();
         $today = today();
+        $weekStart = now()->startOfWeek();
 
         $completed = PomodoroSession::where('user_id', $user->id)
             ->whereDate('created_at', $today)
@@ -161,14 +162,23 @@ class PomodoroController extends Controller
             ->where('status', 'completed')
             ->sum('duration') / 60;
 
+        $weekCount = PomodoroSession::where('user_id', $user->id)
+            ->where('created_at', '>=', $weekStart)
+            ->where('status', 'completed')
+            ->count();
+
         $total = $completed + $interrupted;
         $interruptionRate = $total > 0 ? round(($interrupted / $total) * 100) : 0;
 
         return response()->json([
             'completed' => $completed,
+            'today_count' => $completed,
             'interrupted' => $interrupted,
             'focus_minutes' => round($focusMinutes),
+            'today_minutes' => round($focusMinutes),
+            'week_count' => $weekCount,
             'interruption_rate' => $interruptionRate,
+            'streak' => 0, // يمكن حسابه لاحقاً
         ]);
     }
 

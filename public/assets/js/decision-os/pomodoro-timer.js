@@ -5,10 +5,14 @@
 
 class PomodoroTimer {
     constructor(options = {}) {
-        this.workDuration = options.workDuration || 25 * 60; // 25 دقيقة
-        this.breakDuration = options.breakDuration || 5 * 60; // 5 دقائق
-        this.longBreakDuration = options.longBreakDuration || 15 * 60; // 15 دقيقة
-        this.longBreakInterval = options.longBreakInterval || 4; // كل 4 جلسات
+        // Load settings from localStorage or use defaults
+        const savedSettings = this.loadSettings();
+
+        this.workDuration = savedSettings.workDuration || options.workDuration || 25 * 60; // 25 دقيقة
+        this.breakDuration = savedSettings.breakDuration || options.breakDuration || 5 * 60; // 5 دقائق
+        this.longBreakDuration = savedSettings.longBreakDuration || options.longBreakDuration || 15 * 60; // 15 دقيقة
+        this.longBreakInterval = savedSettings.longBreakInterval || options.longBreakInterval || 4; // كل 4 جلسات
+        this.soundEnabled = savedSettings.soundEnabled !== undefined ? savedSettings.soundEnabled : true;
 
         this.timeRemaining = this.workDuration;
         this.isRunning = false;
@@ -16,6 +20,7 @@ class PomodoroTimer {
         this.sessionsCompleted = 0;
         this.currentSessionId = null;
         this.intervalId = null;
+        this.startTime = null;
 
         // DOM Elements - matching HTML IDs
         this.timerDisplay = document.getElementById('pomodoro-display');
@@ -33,8 +38,10 @@ class PomodoroTimer {
 
     init() {
         this.bindEvents();
+        this.loadState(); // استعادة الحالة من localStorage
         this.updateDisplay();
         this.loadTodayStats();
+        this.setupSettingsModal();
     }
 
     bindEvents() {
@@ -58,6 +65,9 @@ class PomodoroTimer {
         // إذا بداية جلسة جديدة (ليست استئناف)
         if (!this.isBreak && this.timeRemaining === this.workDuration) {
             await this.startSession();
+            this.startTime = Date.now();
+        } else if (!this.startTime) {
+            this.startTime = Date.now() - ((this.isBreak ? this.getBreakDuration() : this.workDuration) - this.timeRemaining) * 1000;
         }
 
         this.isRunning = true;
@@ -66,6 +76,7 @@ class PomodoroTimer {
         this.intervalId = setInterval(() => {
             this.timeRemaining--;
             this.updateDisplay();
+            this.saveState(); // حفظ الحالة كل ثانية
 
             if (this.timeRemaining <= 0) {
                 this.complete();
@@ -79,6 +90,7 @@ class PomodoroTimer {
         this.isRunning = false;
         clearInterval(this.intervalId);
         this.updateButtons();
+        this.saveState();
     }
 
     reset() {
@@ -134,24 +146,33 @@ class PomodoroTimer {
 
         if (!this.isBreak) {
             // انتهت جلسة العمل
+            const duration = Math.floor((Date.now() - this.startTime) / 1000);
             this.sessionsCompleted++;
-            await this.completeSession();
-            this.playNotificationSound();
+            await this.completeSession(duration);
+
+            if (this.soundEnabled) {
+                this.playNotificationSound();
+            }
             this.showNotification('انتهت جلسة العمل!', 'حان وقت الاستراحة 🎉');
 
             // التحول للاستراحة
             this.isBreak = true;
             this.timeRemaining = this.getBreakDuration();
+            this.startTime = null;
         } else {
             // انتهت الاستراحة
-            this.playNotificationSound();
+            if (this.soundEnabled) {
+                this.playNotificationSound();
+            }
             this.showNotification('انتهت الاستراحة!', 'حان وقت العمل 💪');
 
             // التحول للعمل
             this.isBreak = false;
             this.timeRemaining = this.workDuration;
+            this.startTime = null;
         }
 
+        this.saveState();
         this.updateDisplay();
         this.updateButtons();
     }
@@ -177,24 +198,36 @@ class PomodoroTimer {
 
             if (response.ok) {
                 const data = await response.json();
-                this.currentSessionId = data.session_id;
+                this.currentSessionId = data.session?.id || data.session_id;
+                console.log('Session started:', this.currentSessionId);
             }
         } catch (error) {
             console.error('Failed to start session:', error);
         }
     }
 
-    async completeSession() {
-        if (!this.currentSessionId) return;
+    async completeSession(duration) {
+        if (!this.currentSessionId) {
+            console.warn('No session ID to complete');
+            return;
+        }
 
         try {
-            await fetch(`/decision-os/pomodoro/${this.currentSessionId}/complete`, {
+            const response = await fetch(`/decision-os/pomodoro/${this.currentSessionId}/complete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
+                },
+                body: JSON.stringify({
+                    status: 'completed',
+                    duration: duration || this.workDuration
+                })
             });
+
+            if (response.ok) {
+                console.log('Session completed successfully');
+            }
 
             this.currentSessionId = null;
             this.updateTodayStats();
@@ -286,60 +319,161 @@ class PomodoroTimer {
     }
 
     playNotificationSound() {
-        try {
-            // محاولة تشغيل ملف الصوت إذا كان موجوداً
-            const audio = new Audio('/assets/sounds/notification.mp3');
-            audio.volume = 0.7;
-            audio.play().catch(() => {
-                // إذا فشل، استخدم Web Audio API لتوليد صوت تنبيه
-                this.playBeepSound();
-            });
-        } catch (e) {
-            // بديل: توليد صوت بسيط
-            this.playBeepSound();
-        }
+        // استخدم Web Audio API مباشرة لأن ملف الصوت غير موجود
+        this.playBeepSound();
     }
 
     playBeepSound() {
         try {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            oscillator.frequency.value = 800; // تردد الصوت
-            oscillator.type = 'sine'; // نوع الموجة
-
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.5);
-
-            // صوت ثاني للتأكيد
-            setTimeout(() => {
-                const osc2 = audioContext.createOscillator();
-                const gain2 = audioContext.createGain();
-                osc2.connect(gain2);
-                gain2.connect(audioContext.destination);
-                osc2.frequency.value = 1000;
-                osc2.type = 'sine';
-                gain2.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                osc2.start(audioContext.currentTime);
-                osc2.stop(audioContext.currentTime + 0.5);
-            }, 200);
+            // تشغيل 3 أصوات متتالية للتنبيه
+            this.playTone(audioContext, 800, 0, 0.3);
+            this.playTone(audioContext, 1000, 0.3, 0.3);
+            this.playTone(audioContext, 1200, 0.6, 0.4);
         } catch (e) {
-            console.log('Could not play notification sound');
+            console.log('Could not play notification sound:', e);
         }
+    }
+
+    playTone(audioContext, frequency, startDelay, duration) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = frequency;
+        oscillator.type = 'sine';
+
+        const startTime = audioContext.currentTime + startDelay;
+        gainNode.gain.setValueAtTime(0.5, startTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+        oscillator.start(startTime);
+        oscillator.stop(startTime + duration);
     }
 
     showNotification(title, body) {
         if ('Notification' in window && Notification.permission === 'granted') {
             new Notification(title, { body, icon: '/assets/images/logo-sm.png' });
         }
+    }
+
+    // حفظ الحالة في localStorage
+    saveState() {
+        const state = {
+            timeRemaining: this.timeRemaining,
+            isRunning: this.isRunning,
+            isBreak: this.isBreak,
+            sessionsCompleted: this.sessionsCompleted,
+            currentSessionId: this.currentSessionId,
+            startTime: this.startTime,
+            lastSaved: Date.now()
+        };
+        localStorage.setItem('pomodoroState', JSON.stringify(state));
+    }
+
+    // استعادة الحالة من localStorage
+    loadState() {
+        try {
+            const saved = localStorage.getItem('pomodoroState');
+            if (!saved) return;
+
+            const state = JSON.parse(saved);
+            const timeSinceLastSave = Date.now() - state.lastSaved;
+
+            // إذا مر أقل من ساعة، استعد الحالة
+            if (timeSinceLastSave < 3600000) {
+                this.timeRemaining = state.timeRemaining;
+                this.isBreak = state.isBreak;
+                this.sessionsCompleted = state.sessionsCompleted;
+                this.currentSessionId = state.currentSessionId;
+                this.startTime = state.startTime;
+
+                // إذا كانت الجلسة جارية، احسب الوقت المنقضي
+                if (state.isRunning && state.startTime) {
+                    const elapsed = Math.floor(timeSinceLastSave / 1000);
+                    this.timeRemaining = Math.max(0, state.timeRemaining - elapsed);
+
+                    // استمر تلقائياً
+                    this.start();
+                }
+            } else {
+                // امسح الحالة القديمة
+                localStorage.removeItem('pomodoroState');
+            }
+        } catch (e) {
+            console.error('Failed to load state:', e);
+        }
+    }
+
+    // حفظ الإعدادات
+    saveSettings() {
+        const settings = {
+            workDuration: this.workDuration,
+            breakDuration: this.breakDuration,
+            longBreakDuration: this.longBreakDuration,
+            longBreakInterval: this.longBreakInterval,
+            soundEnabled: this.soundEnabled
+        };
+        localStorage.setItem('pomodoroSettings', JSON.stringify(settings));
+    }
+
+    // تحميل الإعدادات
+    loadSettings() {
+        try {
+            const saved = localStorage.getItem('pomodoroSettings');
+            return saved ? JSON.parse(saved) : {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    // إعداد modal الإعدادات
+    setupSettingsModal() {
+        const settingsBtn = document.getElementById('pomodoro-settings-btn');
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => this.openSettingsModal());
+        }
+    }
+
+    // فتح modal الإعدادات
+    openSettingsModal() {
+        const modal = document.getElementById('pomodoroSettingsModal');
+        if (modal) {
+            // تعبئة القيم الحالية
+            document.getElementById('setting-work-duration').value = this.workDuration / 60;
+            document.getElementById('setting-break-duration').value = this.breakDuration / 60;
+            document.getElementById('setting-long-break-duration').value = this.longBreakDuration / 60;
+            document.getElementById('setting-long-break-interval').value = this.longBreakInterval;
+            document.getElementById('setting-sound-enabled').checked = this.soundEnabled;
+
+            const bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+        }
+    }
+
+    // تحديث الإعدادات
+    updateSettings(settings) {
+        if (settings.workDuration) this.workDuration = settings.workDuration * 60;
+        if (settings.breakDuration) this.breakDuration = settings.breakDuration * 60;
+        if (settings.longBreakDuration) this.longBreakDuration = settings.longBreakDuration * 60;
+        if (settings.longBreakInterval) this.longBreakInterval = settings.longBreakInterval;
+        if (settings.soundEnabled !== undefined) this.soundEnabled = settings.soundEnabled;
+
+        this.saveSettings();
+        this.reset();
+    }
+
+    // ابدأ الاستراحة
+    startBreak() {
+        this.isBreak = true;
+        this.timeRemaining = this.getBreakDuration();
+        this.startTime = null;
+        this.saveState();
+        this.updateDisplay();
+        this.start();
     }
 }
 
@@ -354,3 +488,22 @@ document.addEventListener('DOMContentLoaded', () => {
         window.pomodoroTimer = new PomodoroTimer();
     }
 });
+
+// حفظ إعدادات البومودورو
+function savePomodoroSettings() {
+    const settings = {
+        workDuration: parseInt(document.getElementById('setting-work-duration').value) || 25,
+        breakDuration: parseInt(document.getElementById('setting-break-duration').value) || 5,
+        longBreakDuration: parseInt(document.getElementById('setting-long-break-duration').value) || 15,
+        longBreakInterval: parseInt(document.getElementById('setting-long-break-interval').value) || 4,
+        soundEnabled: document.getElementById('setting-sound-enabled').checked
+    };
+
+    if (window.pomodoroTimer) {
+        window.pomodoroTimer.updateSettings(settings);
+    }
+
+    // إغلاق modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('pomodoroSettingsModal'));
+    if (modal) modal.hide();
+}
